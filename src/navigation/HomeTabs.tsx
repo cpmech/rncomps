@@ -2,9 +2,7 @@ import React from 'react';
 import { createStackNavigator } from 'react-navigation-stack';
 import { createBottomTabNavigator } from 'react-navigation-tabs';
 import { BaseIcon } from '../components';
-import { HomeScreen } from '../screens/HomeScreen';
-import { BaseInfoTextScreenSample } from '../screens/BaseInfoTextScreenSample';
-import { BaseSpinnerScreenSample } from '../screens/BaseSpinnerScreenSample';
+import { HomeScreen, InfoTextScreenSample, SpinnerScreenSample } from '../screens';
 
 const tabIcon = (name: string) => ({ focused }) => (
   <BaseIcon name={name} size={26} color={focused ? '#2f95dc' : '#ccc'} />
@@ -13,9 +11,9 @@ const tabIcon = (name: string) => ({ focused }) => (
 // HomeStack /////////////////////////////////////////////////////////////////
 
 const HomeStack = createStackNavigator({
-  Home: HomeScreen,
-  BaseInfoTextScreenSample,
-  BaseSpinnerScreenSample,
+  Home: HomeScreen as React.ComponentClass<any, any>,
+  InfoTextScreen: InfoTextScreenSample as React.ComponentClass<any, any>,
+  SpinnerScreen: SpinnerScreenSample as React.ComponentClass<any, any>,
 });
 
 HomeStack.navigationOptions = {

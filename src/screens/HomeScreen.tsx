@@ -244,14 +244,14 @@ const Comp: React.FC<IProps> = ({ navigation }) => {
 
       <Text style={s.text}>BaseInfoTextScreen</Text>
       <BaseLink
-        message="Check out BaseInfoTextScreen"
-        onPress={() => navigation.navigate('BaseInfoTextScreenSample')}
+        message="Check out InfoTextScreen"
+        onPress={() => navigation.navigate('InfoTextScreen')}
       />
 
       <Text style={s.text}>BaseSpinnerScreen</Text>
       <BaseLink
-        message="Check out BaseSpinnerScreen"
-        onPress={() => navigation.navigate('BaseSpinnerScreenSample')}
+        message="Check out SpinnerScreen"
+        onPress={() => navigation.navigate('SpinnerScreen')}
       />
     </View>
   );
