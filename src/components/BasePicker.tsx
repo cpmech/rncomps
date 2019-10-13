@@ -74,32 +74,42 @@ export const BasePicker: React.FC<IProps> = ({
   const [visible, setVisible] = useState(false);
   const selected = data.find((d: IPickerData) => d.value === selectedValue);
 
-  const renderSelectedText = () => (
-    <Text
-      style={{
-        color: selectedColor,
-        fontSize: selectedFontSize,
-        fontFamily: selectedFontFamily,
-      }}
-    >
-      {selected.label}
-    </Text>
-  );
-
-  const renderSelectedWithImage = () => (
-    <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center' }}>
-      <Image
-        source={selected.image}
+  const renderSelectedText = () => {
+    if (!selected) {
+      return;
+    }
+    return (
+      <Text
         style={{
-          width: imageSize ? imageSize : itemsFontSize + 7,
-          height: imageSize ? imageSize : itemsFontSize + 7,
-          marginRight: imageGap,
+          color: selectedColor,
+          fontSize: selectedFontSize,
+          fontFamily: selectedFontFamily,
         }}
-        resizeMode="contain"
-      />
-      {renderSelectedText()}
-    </View>
-  );
+      >
+        {selected.label}
+      </Text>
+    );
+  };
+
+  const renderSelectedWithImage = () => {
+    if (!selected || !selected.image) {
+      return;
+    }
+    return (
+      <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center' }}>
+        <Image
+          source={selected.image}
+          style={{
+            width: imageSize ? imageSize : itemsFontSize + 7,
+            height: imageSize ? imageSize : itemsFontSize + 7,
+            marginRight: imageGap,
+          }}
+          resizeMode="contain"
+        />
+        {renderSelectedText()}
+      </View>
+    );
+  };
 
   const renderItemText = (d: IPickerData) => (
     <Text
@@ -114,20 +124,25 @@ export const BasePicker: React.FC<IProps> = ({
     </Text>
   );
 
-  const renderItemWithImage = (d: IPickerData) => (
-    <View key={d.value} style={{ flex: 1, flexDirection: 'row', alignItems: 'center' }}>
-      <Image
-        source={d.image}
-        style={{
-          width: imageSize ? imageSize : itemsFontSize + 7,
-          height: imageSize ? imageSize : itemsFontSize + 7,
-          marginRight: imageGap,
-        }}
-        resizeMode="contain"
-      />
-      {renderItemText(d)}
-    </View>
-  );
+  const renderItemWithImage = (d: IPickerData) => {
+    if (!d.image) {
+      return;
+    }
+    return (
+      <View key={d.value} style={{ flex: 1, flexDirection: 'row', alignItems: 'center' }}>
+        <Image
+          source={d.image}
+          style={{
+            width: imageSize ? imageSize : itemsFontSize + 7,
+            height: imageSize ? imageSize : itemsFontSize + 7,
+            marginRight: imageGap,
+          }}
+          resizeMode="contain"
+        />
+        {renderItemText(d)}
+      </View>
+    );
+  };
 
   return (
     <>
@@ -144,7 +159,9 @@ export const BasePicker: React.FC<IProps> = ({
             paddingRight,
           }}
         >
-          {selected.image && !selectedHideImage ? renderSelectedWithImage() : renderSelectedText()}
+          {selected && selected.image && !selectedHideImage
+            ? renderSelectedWithImage()
+            : renderSelectedText()}
           <BaseIcon
             color={selectedColor}
             size={iconSize ? iconSize : selectedFontSize + 5}
