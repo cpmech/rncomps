@@ -6,7 +6,8 @@ import { AppNavigator } from './src/navigation/AppNavigator';
 ///////// TODO: Remove this when react-navigation is updated ////////
 /////////////////////////////////////////////////////////////////////
 import { YellowBox } from 'react-native';
-YellowBox.ignoreWarnings(['Warning: componentWillMount is deprecated']);
+YellowBox.ignoreWarnings(['Warning: componentWillMount']);
+YellowBox.ignoreWarnings(['Warning: AsyncStorage']);
 /////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////
 

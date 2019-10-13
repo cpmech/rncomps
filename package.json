@@ -15,7 +15,7 @@
     "build": "rm -rf dist && mkdir -p dist/assets && cp -rf src/components/assets/icon* dist/assets/ && cp -rf src/components/*.* README.md package.json dist/",
     "dist": "yarn build && cd dist/ && yarn publish --access=public",
     "postpublish": "mv package.json ../ && git add ../package.json && git commit -m 'version update' && git push && git push --tags && echo && echo 'IGNORE THE NEXT ERROR MESSAGE (cannot prevent npm running git)' && echo",
-    "sb": "start-storybook -p 7007"
+    "sb": "adb reverse tcp:7007 tcp:7007 && start-storybook -p 7007"
   },
   "description": "Base components for React Native projects",
   "keywords": [
@@ -34,7 +34,9 @@
     "@babel/core": "^7.6.4",
     "@react-native-community/eslint-config": "^0.0.5",
     "@storybook/addon-actions": "^5.2.3",
+    "@storybook/addon-knobs": "^5.2.3",
     "@storybook/addon-links": "^5.2.3",
+    "@storybook/addon-ondevice-knobs": "^5.2.3",
     "@storybook/addons": "^5.2.3",
     "@storybook/react-native": "^5.2.3",
     "@storybook/react-native-server": "^5.2.3",
