@@ -15,7 +15,9 @@
     "build": "rm -rf dist && mkdir -p dist/assets && cp -rf src/components/assets/icon* dist/assets/ && cp -rf src/components/*.* README.md package.json dist/",
     "dist": "yarn build && cd dist/ && yarn publish --access=public",
     "postpublish": "mv package.json ../ && git add ../package.json && git commit -m 'version update' && git push && git push --tags && echo && echo 'IGNORE THE NEXT ERROR MESSAGE (cannot prevent npm running git)' && echo",
-    "sb": "adb reverse tcp:7007 tcp:7007 && start-storybook -p 7007"
+    "sb": "adb reverse tcp:7007 tcp:7007 && start-storybook -p 7007",
+    "storybook": "watch rnstl ./src --wait=100 | storybook start | yarn start --projectRoot storybook --watchFolders $PWD",
+    "gen:stories-list": "yarn rnstl"
   },
   "description": "Base components for React Native projects",
   "keywords": [
@@ -36,7 +38,6 @@
     "@storybook/addon-actions": "^5.2.3",
     "@storybook/addon-knobs": "^5.2.3",
     "@storybook/addon-links": "^5.2.3",
-    "@storybook/addon-ondevice-knobs": "^5.2.3",
     "@storybook/addons": "^5.2.3",
     "@storybook/react-native": "^5.2.3",
     "@storybook/react-native-server": "^5.2.3",
@@ -50,6 +51,7 @@
     "react-native-gesture-handler": "^1.4.1",
     "react-native-reanimated": "^1.3.0",
     "react-native-screens": "^2.0.0-alpha.3",
+    "react-native-storybook-loader": "^1.8.1",
     "react-navigation": "^4.0.10",
     "react-navigation-stack": "^1.9.4",
     "react-navigation-tabs": "^2.5.6",
@@ -58,5 +60,14 @@
     "tslint-config-prettier": "^1.18.0",
     "tslint-react": "^4.1.0",
     "typescript": "^3.6.4"
+  },
+  "config": {
+    "react-native-storybook-loader": {
+      "searchDir": [
+        "./src"
+      ],
+      "pattern": "**/*.stories.tsx",
+      "outputFile": "./storybook/storyLoader.js"
+    }
   }
 }
