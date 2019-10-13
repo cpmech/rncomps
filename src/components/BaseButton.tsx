@@ -49,7 +49,13 @@ export const BaseButton: React.FC<IProps> = ({
   paddingHorizontal = 10,
 }) => (
   <TouchableHighlight
-    onPress={disabled ? null : onPress}
+    onPress={
+      disabled
+        ? () => {
+            /*nada*/
+          }
+        : onPress
+    }
     underlayColor={fg}
     style={{ borderRadius }}
   >

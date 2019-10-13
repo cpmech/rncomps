@@ -118,7 +118,7 @@ export const BaseModal: React.FC<IProps> = ({
         <TouchableHighlight
           onPress={onClose}
           style={Platform.select({ ios: s.touchIos, android: null })}
-          underlayColor={Platform.select({ ios: colors.hover, android: null })}
+          underlayColor={Platform.select({ ios: colors.hover, android: undefined })}
           disabled={okDisabled}
         >
           <View

@@ -39,7 +39,13 @@ export const BaseCircleButton: React.FC<IProps> = ({
   iconTopPadding = 0,
 }) => (
   <TouchableHighlight
-    onPress={disabled ? null : onPress}
+    onPress={
+      disabled
+        ? () => {
+            /*nada*/
+          }
+        : onPress
+    }
     underlayColor={fg}
     style={{ borderRadius: width / 2 }}
   >
