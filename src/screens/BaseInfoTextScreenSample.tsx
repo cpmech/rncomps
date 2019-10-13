@@ -1,9 +1,9 @@
 import React from 'react';
-import { BaseInfoTextScreen, IBaseInfoContent, withNavTitle } from '@pedrosolabs/rnbasecomps';
+import { BaseInfoTextScreen, IBaseInfoContent, withNavTitle } from '../components';
 
 const content: IBaseInfoContent[] = [
   {
-    title: 'First Section',
+    title: 'Hello',
     paras: [
       'first paragraph of first section',
       'second paragraph of first section',
@@ -12,25 +12,15 @@ const content: IBaseInfoContent[] = [
     ],
   },
   {
-    title: 'Second Section',
+    title: 'World',
     paras: [
       'first paragraph of second section',
       'second paragraph of second section',
       'third paragraph of second section',
     ],
   },
-  {
-    title: 'Third Section',
-    paras: [
-      'first paragraph of third section',
-      'second paragraph of third section',
-      'third paragraph of third section',
-      'fourth paragraph of third section',
-      'fifth paragraph of third section',
-    ],
-  },
 ];
 
 export const Comp: React.FC = () => <BaseInfoTextScreen content={content} />;
 
-export const AboutScreen = withNavTitle(Comp, 'About');
+export const BaseInfoTextScreenSample = withNavTitle(Comp, 'BaseInfoTextScreen');

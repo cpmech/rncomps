@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { NavigationScreenProp } from 'react-navigation';
-import { BaseSpinnerScreen } from '@pedrosolabs/rnbasecomps';
+import { BaseSpinnerScreen } from '../components';
 
 interface IProps {
   navigation: NavigationScreenProp<any, any>;
