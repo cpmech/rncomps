@@ -40,7 +40,7 @@ const s: IStyles = {
 };
 
 // tslint:disable-next-line: no-var-requires
-const img = require('../components/assets/mb-eclass.png');
+const img = require('../assets/others/mb-eclass.png');
 
 const pickerData = [
   { value: 'fry', label: 'Philip J. Fry', image: require('../assets/fry.png') },
