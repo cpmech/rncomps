@@ -3,10 +3,10 @@ import { View, TouchableHighlight, Image, Text } from 'react-native';
 import { IStyles } from './types';
 
 // tslint:disable-next-line: no-var-requires
-const iconChecked = require('./assets/icon_checkbox_checked.png');
+const iconChecked = require('../assets/icon_checkbox_checked.png');
 
 // tslint:disable-next-line: no-var-requires
-const iconUnchecked = require('./assets/icon_checkbox_unchecked.png');
+const iconUnchecked = require('../assets/icon_checkbox_unchecked.png');
 
 const s: IStyles = {
   root: {

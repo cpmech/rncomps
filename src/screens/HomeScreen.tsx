@@ -15,6 +15,7 @@ import {
   BasePicker,
   IStyles,
 } from '../components';
+import { fmaPickerData } from './fmaPickerData';
 
 const iconNames = [
   'cube',
@@ -40,40 +41,7 @@ const s: IStyles = {
 };
 
 // tslint:disable-next-line: no-var-requires
-const img = require('../assets/others/mb-eclass.png');
-
-const pickerData = [
-  { value: 'fry', label: 'Philip J. Fry', image: require('../assets/fry.png') },
-  { value: 'leela', label: 'Turanga Leela', image: require('../assets/leela.png') },
-  { value: 'bender', label: 'Bender Bending Rodriguez', image: require('../assets/bender.png') },
-  { value: 'prof', label: 'Professor Hubert J. Farnsworth', image: require('../assets/prof.png') },
-  { value: 'amy', label: 'Amy Wong', image: require('../assets/amy.png') },
-  { value: 'hermes', label: 'Hermes Conrad', image: require('../assets/hermes.png') },
-  { value: 'zoidberg', label: 'Dr. John A. Zoidberg', image: require('../assets/zoidberg.png') },
-  { value: 'zapp', label: 'Zapp Brannigan', image: require('../assets/zapp.png') },
-  { value: 'kif', label: 'Kif Kroker', image: require('../assets/kif.png') },
-  { value: 'mom', label: 'Mom', image: require('../assets/mom.png') },
-  { value: 'walt', label: 'Walt', image: require('../assets/walt.png') },
-  { value: 'igner', label: 'Igner', image: require('../assets/igner.png') },
-  { value: 'larry', label: 'Larry', image: require('../assets/larry.png') },
-  { value: 'roberto', label: 'Roberto', image: require('../assets/roberto.png') },
-  { value: 'nibbler', label: 'Nibbler', image: require('../assets/nibbler.png') },
-  { value: 'scruffy', label: 'Scruffy', image: require('../assets/scruffy.png') },
-  { value: 'url', label: 'URL', image: require('../assets/url.png') },
-  { value: 'smitty', label: 'Smitty', image: require('../assets/smitty.png') },
-  { value: 'elzar', label: 'Elzar', image: require('../assets/elzar.png') },
-  { value: 'labarbara', label: 'LaBarbara Conrad', image: require('../assets/labarbara.png') },
-  { value: 'hgblob', label: 'Horrible Gelatinous Blob', image: require('../assets/hgblob.png') },
-  { value: 'calculon', label: 'Calculon', image: require('../assets/calculon.png') },
-  { value: 'hedonismbot', label: 'Hedonismbot', image: require('../assets/hedonismbot.png') },
-  { value: 'clamps', label: 'Clamps', image: require('../assets/clamps.png') },
-  { value: 'donbot', label: 'Donbot', image: require('../assets/donbot.png') },
-  { value: 'fanny', label: 'Fanny', image: require('../assets/fanny.png') },
-  { value: 'lrrr', label: 'Lrrr', image: require('../assets/lrrr.png') },
-  { value: 'ndnd', label: 'Ndnd', image: require('../assets/ndnd.png') },
-  { value: 'santa', label: 'Robot Santa Claus', image: require('../assets/santa.png') },
-  { value: 'flexo', label: 'Flexo', image: require('../assets/flexo.png') },
-];
+const img = require('./img/mb-eclass.png');
 
 interface IProps {
   navigation: NavigationScreenProp<any, any>;
@@ -149,7 +117,7 @@ const Comp: React.FC<IProps> = ({ navigation }) => {
       <Text style={s.text}>BasePicker</Text>
       <BasePicker
         prompt="What's your favorite character?"
-        data={pickerData}
+        data={fmaPickerData}
         selectedValue={pickerSelected}
         onValueChange={(value: string) => {
           console.log(`selecting ${value}`);
