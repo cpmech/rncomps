@@ -1,6 +1,6 @@
 {
   "name": "@cpmech/rncomps",
-  "version": "1.6.1",
+  "version": "1.6.2",
   "license": "MIT",
   "author": {
     "name": "Dorival Pedroso",
@@ -16,7 +16,7 @@
     "storybook": "watch rnstl ./src --wait=100 | storybook start | yarn start --projectRoot storybook --watchFolders $PWD",
     "gen:stories-list": "yarn rnstl",
     "build": "rm -rf dist && rollup --config rollup.config-rlib.js",
-    "dist": "yarn build && cp package.rlib.json dist/package.json && cd dist/ && yarn publish --access=public && cd .. && rm -rf dist/"
+    "dist": "yarn build && cp package.rlib.json dist/package.json && cd dist/ && yarn publish --access=public || true && cd .. && rm -rf dist/"
   },
   "description": "Base components for React Native projects",
   "keywords": [
