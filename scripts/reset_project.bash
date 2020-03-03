@@ -8,6 +8,4 @@ rm -rf node_modules
 rm -rf android/app/build
 watchman watch-del-all
 yarn cache clean
-yarn install
-yarn start --reset-cache
 
