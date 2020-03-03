@@ -2,13 +2,6 @@ import React from 'react';
 import { TouchableHighlight, View, Text, GestureResponderEvent } from 'react-native';
 import { BaseIcon } from './BaseIcon';
 
-const colors = {
-  fg: '#ffffff',
-  bg: '#2f95dc',
-  fgDisabled: '#a4a4a4',
-  bgDisabled: '#dfdfdf',
-};
-
 interface IProps {
   onPress: (event: GestureResponderEvent) => void;
   text?: string;
@@ -23,6 +16,7 @@ interface IProps {
   fontSize?: number;
   iconDeltaSize?: number;
   iconGap?: number;
+  height?: number;
   width?: number;
   borderRadius?: number;
   paddingVertical?: number;
@@ -35,36 +29,28 @@ export const BaseButton: React.FC<IProps> = ({
   iconName,
   disabled,
   outline,
-  fg = colors.fg,
-  bg = colors.bg,
-  fgDisabled = colors.fgDisabled,
-  bgDisabled = colors.bgDisabled,
+  fg = '#ffffff',
+  bg = '#2f95dc',
+  fgDisabled = '#a4a4a4',
+  bgDisabled = '#dfdfdf',
   fontFamily,
   fontSize = 24,
   iconDeltaSize = 5,
   iconGap = 10,
+  height = 45,
   width,
-  borderRadius = 5,
+  borderRadius = 600,
   paddingVertical = 10,
   paddingHorizontal = 10,
 }) => (
   <TouchableHighlight
-    onPress={
-      disabled
-        ? () => {
-            /*nada*/
-          }
-        : onPress
-    }
+    onPress={disabled ? () => {} : onPress}
     underlayColor={fg}
     style={{ borderRadius }}
   >
     <View
       style={{
-        flex: 1,
-        flexDirection: 'row',
-        alignItems: 'center',
-        justifyContent: 'center',
+        height,
         width,
         borderRadius,
         backgroundColor: outline ? 'transparent' : disabled ? bgDisabled : bg,
@@ -74,29 +60,38 @@ export const BaseButton: React.FC<IProps> = ({
         paddingHorizontal,
       }}
     >
-      {iconName && (
-        <BaseIcon
-          name={iconName}
-          style={{
-            alignItems: 'center',
-            justifyContent: 'center',
-            marginRight: iconGap,
-          }}
-          color={outline ? bg : disabled ? fgDisabled : fg}
-          size={fontSize + iconDeltaSize}
-        />
-      )}
-      {text && (
-        <Text
-          style={{
-            color: outline ? bg : disabled ? fgDisabled : fg,
-            fontFamily,
-            fontSize,
-          }}
-        >
-          {text}
-        </Text>
-      )}
+      <View
+        style={{
+          flex: 1,
+          flexDirection: 'row',
+          alignItems: 'center',
+          justifyContent: 'center',
+        }}
+      >
+        {iconName && (
+          <BaseIcon
+            name={iconName}
+            style={{
+              alignItems: 'center',
+              justifyContent: 'center',
+              marginRight: iconGap,
+            }}
+            color={outline ? bg : disabled ? fgDisabled : fg}
+            size={fontSize + iconDeltaSize}
+          />
+        )}
+        {text && (
+          <Text
+            style={{
+              color: outline ? bg : disabled ? fgDisabled : fg,
+              fontFamily,
+              fontSize,
+            }}
+          >
+            {text}
+          </Text>
+        )}
+      </View>
     </View>
   </TouchableHighlight>
 );

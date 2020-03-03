@@ -5,9 +5,9 @@ import { AppNavigator } from './src/navigation/AppNavigator';
 /////////////////////////////////////////////////////////////////////
 ///////// TODO: Remove this when react-navigation is updated ////////
 /////////////////////////////////////////////////////////////////////
-import { YellowBox } from 'react-native';
-YellowBox.ignoreWarnings(['Warning: componentWillMount']);
-YellowBox.ignoreWarnings(['Warning: AsyncStorage']);
+// import { YellowBox } from 'react-native';
+// YellowBox.ignoreWarnings(['Warning: componentWillMount']);
+// YellowBox.ignoreWarnings(['Warning: AsyncStorage']);
 /////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////
 
