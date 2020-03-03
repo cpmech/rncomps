@@ -11,10 +11,10 @@
   "scripts": {
     "rn": "react-native",
     "start": "rm -rf dist && react-native start",
+    "start:reset": "rm -rf dist && react-native start --reset-cache",
     "test": "echo \"jest does not work with navigation and TS\"",
-    "sb": "adb reverse tcp:7007 tcp:7007 && start-storybook -p 7007",
-    "storybook": "watch rnstl ./src --wait=100 | storybook start | yarn start --projectRoot storybook --watchFolders $PWD",
-    "gen:stories-list": "yarn rnstl",
+    "sb:start": "(adb reverse tcp:7007 tcp:7007 || true) && start-storybook",
+    "sb:gen": "yarn rnstl",
     "build": "rm -rf dist && rollup --config rollup.config-rlib.js && cp -rf src/assets dist/",
     "dist": "yarn build && cp package.rlib.json dist/package.json && cd dist/ && yarn publish --access=public || true && cd .. && rm -rf dist/"
   },
@@ -45,8 +45,6 @@
   "devDependencies": {
     "@babel/core": "^7.8.6",
     "@react-native-community/eslint-config": "^0.0.7",
-    "@storybook/addon-actions": "^5.3.14",
-    "@storybook/addon-knobs": "^5.3.14",
     "@storybook/addon-links": "^5.3.14",
     "@storybook/addons": "^5.3.14",
     "@storybook/react-native": "^5.3.14",
