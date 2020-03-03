@@ -7,4 +7,6 @@ configure(() => {
   loadStories();
 }, module);
 
-export const Storybook = getStorybookUI({});
+export const Storybook = getStorybookUI({
+  asyncStorage: null,
+});
