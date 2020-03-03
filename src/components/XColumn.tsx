@@ -5,15 +5,15 @@ interface IProps {
   bgColor?: string;
 }
 
-export const XCentered: React.FC<IProps> = ({ bgColor, children }) => {
+export const XColumn: React.FC<IProps> = ({ bgColor, children }) => {
   return (
     <View
       style={{
         flex: 1,
-        flexDirection: 'row',
+        flexDirection: 'column',
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: bgColor || '#fff4ff',
+        backgroundColor: bgColor || '#e8f4ff',
       }}
     >
       {children}

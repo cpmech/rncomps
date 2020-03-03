@@ -19,3 +19,5 @@ export * from './withNTSV';
 export * from './withScrollView';
 export * from './types';
 export * from './XCentered';
+export * from './XColumn';
+export * from './InputTypeA';
