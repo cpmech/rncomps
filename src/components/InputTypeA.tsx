@@ -1,13 +1,12 @@
-import React, { ReactNode, useState, useRef, useEffect } from 'react';
-import { Animated, View, Text, TransformsStyle } from 'react-native';
-import { TextInput } from 'react-native-gesture-handler';
+import React, { ReactNode, useState, useRef } from 'react';
+import { View, Text, TextInput, TouchableWithoutFeedback } from 'react-native';
 import { IStyles } from './types';
-import { useAnimation } from './helpers';
+import { MoveAndScale } from './helpers';
 
 interface IProps {
+  label: string;
   value: string;
   onChange: (value: string) => void;
-  label: string;
   password?: boolean;
   suffix?: ReactNode;
   suffixPaddingRight?: number;
@@ -38,113 +37,34 @@ interface IProps {
   darkMode?: boolean;
 
   error?: boolean | string;
+
+  factorFontsize2width?: number;
+  durationMS?: number;
 }
-
-export interface IMotionProps {
-  startX: number;
-  startY: number;
-  endX: number;
-  endY: number;
-  width: number;
-  height: number;
-  scale: number;
-  enabled?: boolean;
-}
-
-export const Motion: React.FC<IMotionProps> = ({
-  startX,
-  startY,
-  endX,
-  endY,
-  width,
-  height,
-  scale,
-  enabled = false,
-  children,
-}) => {
-  const animation = useAnimation(enabled, 500);
-
-  /*
-  const doScale = {
-    transform: [
-      {
-        scale: animation.interpolate({
-          inputRange: [0, 1],
-          outputRange: [2, 1],
-        }),
-      },
-    ],
-  };
-
-  const position = {
-    transform: [
-      {
-        translateX: animation.interpolate({
-          inputRange: [0, 1],
-          outputRange: [startX - width / 2 - (width * initialScale) / 2, endX],
-        }),
-      },
-      {
-        translateY: animation.interpolate({
-          inputRange: [0, 1],
-          outputRange: [startY - height / 2 - (height * initialScale) / 2, endY],
-        }),
-      },
-    ],
-  };
-  */
-
-  return (
-    <Animated.View
-      style={{
-        transform: [
-          {
-            scaleX: animation.interpolate({
-              inputRange: [0, 1],
-              outputRange: [1, scale],
-            }),
-            translateX: animation.interpolate({
-              inputRange: [0, 1],
-              outputRange: [0, 0],
-            }),
-            /*
-            translateY: animation.interpolate({
-              inputRange: [0, 1],
-              outputRange: [0, deltaY],
-            }),
-            */
-          },
-        ],
-      }}
-    >
-      {children}
-    </Animated.View>
-  );
-};
 
 export const InputTypeA: React.FC<IProps> = ({
+  label,
   value,
   onChange,
-  label,
   password,
   suffix,
   suffixPaddingRight,
   readOnly = false,
   textMode = false,
 
-  height = 200,
+  height = 50,
   width = '100%',
   paddingHoriz = 20,
   marginVert,
 
-  borderRadius = 100,
+  borderRadius = 1000,
   borderWidth = 1,
 
   flatLeft = false,
   flatRight = false,
 
-  fontSize = 40,
-  labelScale = 0.5,
+  fontSize = 18,
+  labelScale = 0.8,
   labelXgap = 5,
 
   color = '#484848',
@@ -156,26 +76,13 @@ export const InputTypeA: React.FC<IProps> = ({
   darkMode = false,
 
   error = false,
+
+  factorFontsize2width = 0.65,
+  durationMS = 300,
 }) => {
   const hasValue = !!value;
-  const radius = borderRadius > height / 2 ? height / 2 : borderRadius;
-  const scaledLabelFZ = labelScale * fontSize;
-  const labelDy = scaledLabelFZ / 2 - fontSize / 2 + height / 2;
-  const marginTop = marginVert || scaledLabelFZ / 2;
-
-  const [anim, setAnim] = useState({
-    // deltaX: labelDx,
-    // deltaY: -labelDy,
-    // scale: labelScale,
-    startX: 0,
-    startY: 0,
-    endX: 0,
-    endY: 100,
-    width: 100,
-    height: 50,
-    scale: 1.0,
-    enabled: true,
-  });
+  const refInput = useRef<TextInput>(null);
+  const [anim, setAnim] = useState({ steady: hasValue, enabled: hasValue });
 
   if (darkMode) {
     color = 'white';
@@ -190,22 +97,125 @@ export const InputTypeA: React.FC<IProps> = ({
     borderColor = errorColor;
   }
 
-  const border = {
-    borderColor,
-    borderWidth,
-    borderTopLeftRadius: flatLeft ? 0 : radius,
-    borderBottomLeftRadius: flatLeft ? 0 : radius,
-    borderTopRightRadius: flatRight ? 0 : radius,
-    borderBottomRightRadius: flatRight ? 0 : radius,
+  const radius = borderRadius > height / 2 ? height / 2 : borderRadius;
+
+  const labelHeightBefore = fontSize;
+  const labelWidthBefore = fontSize * label.length * factorFontsize2width;
+  const labelHeightAfter = fontSize * labelScale;
+
+  const marginTop = marginVert || labelHeightAfter / 2;
+
+  const dx = +height / 2 - paddingHoriz;
+  const dy = -height / 2;
+
+  const styles: IStyles = {
+    root: {
+      width,
+      height: height + marginTop,
+    },
+
+    container: {
+      position: 'absolute',
+      top: marginTop,
+      width: '100%',
+    },
+
+    input: {
+      height,
+      borderColor,
+      borderWidth,
+      borderTopLeftRadius: flatLeft ? 0 : radius,
+      borderBottomLeftRadius: flatLeft ? 0 : radius,
+      borderTopRightRadius: flatRight ? 0 : radius,
+      borderBottomRightRadius: flatRight ? 0 : radius,
+      fontSize,
+      paddingLeft: paddingHoriz,
+      color: textMode ? mutedColor : color,
+      backgroundColor: bgColor,
+    },
+
+    animationWrapper: {
+      position: 'absolute',
+      top: height / 2 - labelHeightBefore / 2,
+      left: paddingHoriz,
+    },
+
+    labelWrapper: {
+      width: labelWidthBefore,
+      height: labelHeightBefore,
+      flex: 1,
+      alignItems: 'center',
+      justifyContent: 'center',
+      backgroundColor: bgColor,
+    },
+
+    label: {
+      fontSize,
+    },
   };
 
-  const h = fontSize;
-  const w = 140; // label.length * fontSize * 0.7;
+  const onFocus = () => {
+    if (hasValue) {
+      return;
+    }
+    setAnim({ steady: false, enabled: true });
+  };
 
+  const onBlur = () => {
+    if (!hasValue) {
+      setAnim({ steady: false, enabled: false });
+    }
+  };
+
+  const onPress = () => {
+    if (refInput.current?.isFocused()) {
+      return;
+    }
+    if (!hasValue) {
+      refInput.current?.focus();
+      setAnim({ steady: false, enabled: true });
+    }
+  };
+
+  return (
+    <View style={styles.root}>
+      <View style={styles.container}>
+        <TextInput
+          ref={refInput}
+          value={value}
+          style={styles.input}
+          onChangeText={onChange}
+          onFocus={onFocus}
+          onBlur={onBlur}
+          underlineColorAndroid="transparent"
+        />
+        <View style={styles.animationWrapper}>
+          <MoveAndScale
+            dx={dx}
+            dy={dy}
+            width={labelWidthBefore}
+            sFactor={labelScale}
+            durationMS={durationMS}
+            {...anim}
+          >
+            <TouchableWithoutFeedback onPress={onPress}>
+              <View style={styles.labelWrapper}>
+                <Text style={styles.label} numberOfLines={1}>
+                  {label}
+                </Text>
+              </View>
+            </TouchableWithoutFeedback>
+          </MoveAndScale>
+        </View>
+      </View>
+    </View>
+  );
+};
+
+/*
   const css: IStyles = {
     root: {
-      height: height + marginTop, //marginTop,
-      // backgroundColor: 'red',
+      height: height + marginTop,
     },
     input: {
       ...border,
@@ -241,93 +251,4 @@ export const InputTypeA: React.FC<IProps> = ({
       marginRight: labelXgap,
     },
   };
-
-  const dx = -w / 2;
-  const dy = -h / 2;
-  const dz = 0;
-
-  // prettier-ignore
-  const I = [
-    1, 0, 0, 0,
-    0, 1, 0, 0,
-    0, 0, 1, 0,
-    0, 0, 0, 1,
-  ];
-
-  // prettier-ignore
-  const T = [
-    1, 0, 0, 0,
-    0, 1, 0, 0,
-    0, 0, 1, 0,
-    dx, dy, dz, 1,
-  ];
-
-  // prettier-ignore
-  const U = [
-    1, 0, 0, 0,
-    0, 1, 0, 0,
-    0, 0, 1, 0,
-    -dx, -dy, -dz, 1,
-  ];
-
-  const s = 0.7;
-
-  const transform: TransformsStyle = {
-    transform: [
-      {
-        translateX: dx,
-      },
-      {
-        translateY: h,
-      },
-      {
-        scaleX: s,
-      },
-      {
-        translateX: -dx + (s * w) / 2,
-      },
-      // {
-      //   translateY: 0,
-      // },
-    ],
-    // transform: [{ matrix: T }],
-  };
-
-  return (
-    <View style={transform as TransformsStyle}>
-      <View style={css.labelBox}>
-        <Text style={{ fontSize }}>TESTE</Text>
-      </View>
-    </View>
-  );
-
-  return (
-    <View style={css.root}>
-      <TextInput
-        style={css.input}
-        value={value}
-        onChangeText={text => onChange(text)}
-        onFocus={() => {
-          setAnim({ ...anim, enabled: true });
-        }}
-        onBlur={() => {
-          if (!value) {
-            setAnim({ ...anim, enabled: false });
-          }
-        }}
-        underlineColorAndroid="transparent"
-      />
-      <View style={{ ...css.labelBox, backgroundColor: 'blue' }}>
-        <Text style={css.label}>{label}</Text>
-      </View>
-      {/* <Motion {...anim}> */}
-      {/* <Text>{labelSize.width}</Text> */}
-      <View style={transform as TransformsStyle}>
-        <View style={css.labelBox} collapsable={false}>
-          <Text style={css.label}>{label}</Text>
-        </View>
-      </View>
-      {/* </Motion> */}
-    </View>
-  );
-};
+  */

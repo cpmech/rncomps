@@ -1,5 +1,16 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { Animated, View, Text } from 'react-native';
+import {
+  Animated,
+  View,
+  Text,
+  KeyboardAvoidingView,
+  SafeAreaView,
+  Keyboard,
+  Platform,
+  TouchableWithoutFeedback,
+  Button,
+  StyleSheet,
+} from 'react-native';
 import { storiesOf } from '@storybook/react-native';
 import { XCentered } from '../XCentered';
 import { XColumn } from '../XColumn';
@@ -11,28 +22,22 @@ const stories = storiesOf('InputTypeA', module);
 
 const paddingHoriz = 20;
 
-const hhInput = 100;
-const hInput = hhInput / 2;
+const HInput = 100;
+const hInput = HInput / 2;
 
-const hhBox = 300;
-const wwBox = 300;
+const HBox = 300;
+const WBox = 300;
 
-const hhLabel = 40;
-const wwLabel = 140;
-const hLabel = hhLabel / 2;
-const wLabel = wwLabel / 2;
+const HLabel = 40;
+const WLabel = 140;
+const hLabel = HLabel / 2;
 
-const s = 0.3;
-
-const Test: React.FC = () => {
+const TestLabel: React.FC = () => {
   const animation = useAnimation(true, 500);
-  const dx0 = 0;
-  const dy0 = 0;
   const dx1 = hInput - paddingHoriz;
   const dy1 = -hInput;
-  const s = 0.3;
-  const w = wwLabel;
-  const h = hhLabel;
+  const s = 0.7;
+  const w = WLabel;
   const scale = {
     transform: [
       {
@@ -49,15 +54,13 @@ const Test: React.FC = () => {
       {
         translateX: animation.interpolate({
           inputRange: [0, 1],
-          // outputRange: [dx0, dx1 - w / 2 - (w * s) / 2],
-          outputRange: [dx0, dx1 - w / 2 + (w * s) / 2],
+          outputRange: [0, dx1 - w / 2 + (w * s) / 2],
         }),
       },
       {
         translateY: animation.interpolate({
           inputRange: [0, 1],
-          // outputRange: [dy0, dy1 - h / 2 + (h * s) / 2],
-          outputRange: [dy0, dy1],
+          outputRange: [0, dy1],
         }),
       },
     ],
@@ -65,8 +68,8 @@ const Test: React.FC = () => {
 
   const css = {
     backgroundColor: 'red',
-    width: wwLabel,
-    height: hhLabel,
+    width: WLabel,
+    height: HLabel,
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
@@ -75,109 +78,126 @@ const Test: React.FC = () => {
   return (
     <Animated.View style={position}>
       <Animated.View style={[scale, css]}>
-        <Text style={{ fontSize: 40 }}>2</Text>
+        <Text style={{ fontSize: HLabel }}>2</Text>
       </Animated.View>
     </Animated.View>
   );
 };
 
-const Default = () => {
-  const animation = useAnimation(true, 500);
-  const [value, setValue] = useState('');
-  return (
+const Test = () => (
+  <View
+    style={{
+      flex: 1,
+      backgroundColor: 'yellow',
+      justifyContent: 'center',
+      alignItems: 'center',
+      height: '100%',
+      width: '100%',
+    }}
+  >
     <View
       style={{
-        flex: 1,
-        backgroundColor: 'yellow',
-        justifyContent: 'center',
-        alignItems: 'center',
-        height: '100%',
-        width: '100%',
+        backgroundColor: '#cecece',
+        height: HBox,
+        width: WBox,
       }}
     >
+      <View style={{ position: 'absolute', top: 0, width: '100%' }}>
+        <TextInput
+          style={{
+            height: 100,
+            borderWidth: 1,
+            borderRadius: 50,
+          }}
+        />
+      </View>
       <View
         style={{
-          backgroundColor: '#cecece',
-          height: hhBox,
-          width: wwBox,
+          backgroundColor: 'blue',
+          position: 'absolute',
+          top: hInput - hLabel,
+          left: paddingHoriz,
+          height: HLabel,
+          width: WLabel,
+          flex: 1,
+          alignItems: 'center',
+          justifyContent: 'center',
         }}
       >
-        <View style={{ position: 'absolute', top: 0, width: '100%' }}>
-          <TextInput
-            style={{
-              height: 100,
-              borderWidth: 1,
-              borderRadius: 50,
-            }}
-          />
-        </View>
-        <View
-          style={{
-            backgroundColor: 'blue',
-            position: 'absolute',
-            // top: halfHeightBox - halfHeighLabel,
-            // left: halfHeightBox - halfWidthLabel,
-            top: hInput - hLabel,
-            left: paddingHoriz,
-            height: hhLabel,
-            width: wwLabel,
-            flex: 1,
-            alignItems: 'center',
-            justifyContent: 'center',
-          }}
-        >
-          <Text style={{ fontSize: 40 }}>1</Text>
-        </View>
-        <View
-          style={{
-            position: 'absolute',
-            // top: halfHeightBox - halfHeighLabel,
-            // left: halfHeightBox - halfWidthLabel,
-            top: hInput - hLabel,
-            left: paddingHoriz,
-          }}
-        >
-          <Test />
-          {/* <Animated.View
-            style={{
-              backgroundColor: 'red',
-              width: wwLabel,
-              height: hhLabel,
-              transform: [
-                {
-                  translateX: animation.interpolate({
-                    inputRange: [0, 1],
-                    // outputRange: [0, 0 + (wLabel + wLabel * s)],
-                    // outputRange: [0, -(wLabel + wLabel * s)],
-                    // outputRange: [0, 0],
-                    outputRange: [0, -wLabel / 2],
-                  }),
-                },
-                {
-                  scale: animation.interpolate({
-                    inputRange: [0, 1],
-                    outputRange: [1, s],
-                  }),
-                },
-                {
-                  translateX: animation.interpolate({
-                    inputRange: [0, 1],
-                    // outputRange: [0, +(wLabel + wLabel * s)],
-                    // outputRange: [0, 0],
-                    outputRange: [0, +wLabel / 2],
-                  }),
-                },
-              ],
-              flex: 1,
-              alignItems: 'center',
-              justifyContent: 'center',
-            }}
-          >
-            <Text style={{ fontSize: 40 }}>2</Text>
-          </Animated.View> */}
-        </View>
+        <Text style={{ fontSize: 40 }}>1</Text>
+      </View>
+      <View
+        style={{
+          position: 'absolute',
+          top: hInput - hLabel,
+          left: paddingHoriz,
+        }}
+      >
+        <TestLabel />
       </View>
     </View>
+  </View>
+);
+
+// stories.add('test', () => <Test />);
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
+  inner: {
+    padding: 24,
+    flex: 1,
+    justifyContent: 'flex-start',
+  },
+  header: {
+    fontSize: 36,
+    marginBottom: 48,
+  },
+  input: {
+    height: 40,
+    borderColor: '#000000',
+    borderBottomWidth: 1,
+    marginBottom: 36,
+  },
+  btnContainer: {
+    backgroundColor: 'white',
+    marginTop: 12,
+  },
+});
+
+const Default = () => {
+  const [values, setValues] = useState({
+    email: 'me@example.com',
+    password: '',
+  });
+  return (
+    <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : null} style={{ flex: 1 }}>
+      <SafeAreaView style={styles.container}>
+        <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+          <View style={styles.inner}>
+            {/* <Text style={styles.header}>Header</Text>
+            <TextInput placeholder="Username" style={styles.input} />
+            <TextInput placeholder="Password" style={styles.input} />
+            <TextInput placeholder="Confrim Password" style={styles.input} />
+            <View style={styles.btnContainer}>
+              <Button title="Submit" onPress={() => null} />
+            </View>
+            <View style={{ flex: 1 }} /> */}
+            <InputTypeA
+              label="Email"
+              value={values.email}
+              onChange={v => setValues({ ...values, email: v })}
+            />
+            <InputTypeA
+              label="Password"
+              value={values.password}
+              onChange={v => setValues({ ...values, password: v })}
+            />
+          </View>
+        </TouchableWithoutFeedback>
+      </SafeAreaView>
+    </KeyboardAvoidingView>
   );
 };
 
