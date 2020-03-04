@@ -7,10 +7,9 @@ export interface ITypeAProps {
   flatRight?: boolean;
   width?: string;
   fontSize?: number;
-  labelFontSize?: number;
-  scaleLabel?: number;
+  labelScale?: number;
   paddingHoriz?: number;
-  labelPaddingHoriz?: number;
+  labelXgap?: number;
   mutedColor?: string;
   bgColor?: string;
   borderColor?: string;
@@ -20,7 +19,6 @@ export interface ITypeAProps {
   color?: string;
   hlColor?: string;
   colorError?: string;
-  transTime?: string;
   marginVert?: number;
   extraDeltaLabel?: number; // to account for weird fonts, because all the computations here are precise
 }
@@ -30,16 +28,15 @@ export const getTypeAcss = (
   hasValue: boolean,
   pickerMode: boolean,
   {
-    height = 50,
-    borderRadius = 300,
+    height = 200,
+    borderRadius = 100,
     flatLeft = false,
     flatRight = false,
     width = '100%',
-    fontSize = 18,
-    labelFontSize = 18,
-    scaleLabel = 0.8,
+    fontSize = 40,
+    labelScale = 0.5,
     paddingHoriz = 20,
-    labelPaddingHoriz = 5,
+    labelXgap = 5,
     mutedColor = '#898989',
     bgColor = '#ffffff',
     borderColor = '#cccccc',
@@ -49,14 +46,14 @@ export const getTypeAcss = (
     color = '#484848',
     hlColor = '#1ca086',
     colorError = '#e62739',
-    transTime = '300ms',
     extraDeltaLabel = 0,
     marginVert,
   }: ITypeAProps,
-): IStyles => {
-  const deltaLabel = height / 2 + labelFontSize / 2 + extraDeltaLabel;
-  const deltaLine = height / 2;
-  const marginTop = marginVert || (scaleLabel * labelFontSize) / 2;
+): { css: IStyles; labelDx: number; labelDy: number; labelScale: number } => {
+  const radius = borderRadius > height / 2 ? height / 2 : borderRadius;
+  const scaledLabelFZ = labelScale * fontSize;
+  const labelDy = scaledLabelFZ / 2 - fontSize / 2 + height / 2;
+  const marginTop = marginVert || scaledLabelFZ / 2;
 
   if (darkMode) {
     color = 'white';
@@ -74,44 +71,74 @@ export const getTypeAcss = (
   const border = {
     borderColor,
     borderWidth,
-    borderTopLeftRadius: flatLeft ? 0 : borderRadius,
-    borderBottomLeftRadius: flatLeft ? 0 : borderRadius,
-    borderTopRightRadius: flatRight ? 0 : borderRadius,
-    borderBottomRightRadius: flatRight ? 0 : borderRadius,
+    borderTopLeftRadius: flatLeft ? 0 : radius,
+    borderBottomLeftRadius: flatLeft ? 0 : radius,
+    borderTopRightRadius: flatRight ? 0 : radius,
+    borderBottomRightRadius: flatRight ? 0 : radius,
   };
 
   return {
-    root: {
-      height: height + marginTop,
-      // backgroundColor: 'red',
+    css: {
+      root: {
+        height: height + marginTop, //marginTop,
+        // backgroundColor: 'red',
+      },
+      input: {
+        ...border,
+        height,
+        width,
+        paddingLeft: paddingHoriz + labelXgap,
+        paddingRight: paddingHoriz,
+        color: textMode ? mutedColor : color,
+        backgroundColor: bgColor,
+        fontSize: fontSize,
+        position: 'absolute',
+        top: marginTop,
+      },
+      labelBox: {
+        flex: 1,
+        justifyContent: 'center',
+        position: 'absolute',
+        height: fontSize,
+        // backgroundColor: bgColor,
+        backgroundColor: 'red',
+        left: paddingHoriz,
+        top: labelDy,
+      },
+      label: {
+        color,
+        fontSize,
+        marginLeft: labelXgap,
+        marginRight: labelXgap,
+      },
+      /*
+      label: hasValue
+        ? {
+            fontSize: scaledLabelFZ,
+            position: 'absolute',
+            backgroundColor: bgColor,
+            // left: borderWidth === 0 ? 0 : labelPaddingHoriz,
+            // marginLeft: borderWidth === 0 ? 0 : paddingHoriz + labelPaddingHoriz,
+            // paddingLeft: borderWidth === 0 ? 0 : labelPaddingHoriz,
+            // paddingRight: borderWidth === 0 ? 0 : labelPaddingHoriz,
+          }
+        : {
+            // textAlign: 'center',
+            // height: labelFontSize,
+            // lineHeight: labelFontSize,
+            fontSize: labelFontSize,
+            paddingLeft: paddingHoriz,
+            // paddingRight: labelPaddingHoriz,
+            // position: 'absolute',
+            // left: paddingHoriz + 50,
+            // top: marginTop,
+            // backgroundColor: 'red',
+          },
+          */
     },
-    input: {
-      ...border,
-      height,
-      width,
-      paddingLeft: paddingHoriz,
-      paddingRight: paddingHoriz,
-      color: textMode ? mutedColor : color,
-      backgroundColor: bgColor,
-      fontSize: fontSize,
-      position: 'absolute',
-      top: marginTop,
-    },
-    label: hasValue
-      ? {
-          fontSize: labelFontSize * scaleLabel,
-          position: 'absolute',
-          backgroundColor: bgColor,
-          // left: borderWidth === 0 ? 0 : labelPaddingHoriz,
-          marginLeft: borderWidth === 0 ? 0 : paddingHoriz + labelPaddingHoriz,
-          paddingLeft: borderWidth === 0 ? 0 : labelPaddingHoriz,
-          paddingRight: borderWidth === 0 ? 0 : labelPaddingHoriz,
-        }
-      : {
-          fontSize: labelFontSize,
-          paddingLeft: labelPaddingHoriz,
-          paddingRight: labelPaddingHoriz,
-        },
+    labelDx: radius - paddingHoriz,
+    labelDy,
+    labelScale,
   };
 
   /*
