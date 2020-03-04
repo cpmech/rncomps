@@ -20,6 +20,9 @@ export const BaseIcon: React.FC<IProps> = ({
   kind = 'ion',
 }) => {
   let n = Platform.select({ ios: `ios-${name}`, android: `md-${name}` });
+  if (n === undefined) {
+    n = 'happy-outline';
+  }
   if (name === 'logo-tux' || name === 'logo-game-controller-b') {
     n = name;
   }

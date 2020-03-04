@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState } from 'react';
 import {
   Animated,
   View,
@@ -8,14 +8,15 @@ import {
   Keyboard,
   Platform,
   TouchableWithoutFeedback,
-  Button,
   StyleSheet,
+  TextInput,
+  TouchableHighlight,
 } from 'react-native';
 import { storiesOf } from '@storybook/react-native';
 import { XCentered } from '../XCentered';
 import { XColumn } from '../XColumn';
+import { BaseIcon } from '../BaseIcon';
 import { InputTypeA } from '../InputTypeA';
-import { TextInput } from 'react-native-gesture-handler';
 import { useAnimation } from '../helpers';
 
 const stories = storiesOf('InputTypeA', module);
@@ -174,6 +175,14 @@ const Default = () => {
     age: '',
     sex: 'male',
   });
+  const [showPassword, setShowPassword] = useState(false);
+
+  const renderIcon = (
+    <TouchableHighlight onPress={() => setShowPassword(!showPassword)}>
+      {showPassword ? <BaseIcon name="eye" size={20} /> : <BaseIcon name="eye-off" size={20} />}
+    </TouchableHighlight>
+  );
+
   return (
     <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : null} style={{ flex: 1 }}>
       <SafeAreaView style={styles.container}>
@@ -209,6 +218,8 @@ const Default = () => {
               onChangeText={v => setValues({ ...values, password: v })}
               autoCorrect={false}
               textContentType="password"
+              secureTextEntry={!showPassword}
+              suffix={renderIcon}
             />
             <View style={{ flex: 1, flexDirection: 'row' }}>
               <InputTypeA

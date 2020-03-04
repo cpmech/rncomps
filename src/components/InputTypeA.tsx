@@ -49,7 +49,7 @@ export const InputTypeA: React.FC<IInputTypeAProps> = ({
   onChangeText,
   password,
   suffix,
-  suffixPaddingRight,
+  suffixPaddingRight = 20,
   readOnly = false,
   textMode = false,
 
@@ -194,6 +194,18 @@ export const InputTypeA: React.FC<IInputTypeAProps> = ({
     // }
   };
 
+  const renderSuffix = () => (
+    <View
+      style={{
+        position: 'absolute',
+        top: height / 2 - fontSize / 2,
+        right: suffixPaddingRight,
+      }}
+    >
+      {suffix}
+    </View>
+  );
+
   return (
     <View style={styles.root}>
       <View style={styles.container}>
@@ -207,6 +219,7 @@ export const InputTypeA: React.FC<IInputTypeAProps> = ({
           underlineColorAndroid="transparent"
           {...rest}
         />
+        {suffix && renderSuffix()}
         <View style={styles.animationWrapper}>
           <MoveAndScale
             dx={dx}
