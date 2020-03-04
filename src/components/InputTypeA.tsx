@@ -16,6 +16,7 @@ interface IProps {
   height?: number;
   width?: string;
   paddingHoriz?: number;
+  gapXflatLeft?: number;
   marginVert?: number;
 
   borderRadius?: number;
@@ -54,6 +55,7 @@ export const InputTypeA: React.FC<IProps> = ({
   height = 50,
   width = '100%',
   paddingHoriz = 20,
+  gapXflatLeft = 8,
   marginVert,
 
   borderRadius = 1000,
@@ -107,7 +109,7 @@ export const InputTypeA: React.FC<IProps> = ({
 
   const marginTop = marginVert || labelHeightAfter / 2;
 
-  const dx = +height / 2 - paddingHoriz;
+  const dx = -paddingHoriz + (flatLeft ? gapXflatLeft : radius);
   const dy = -height / 2;
 
   const styles: IStyles = {
