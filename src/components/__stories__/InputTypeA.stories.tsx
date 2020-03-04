@@ -171,6 +171,8 @@ const Default = () => {
     fullname: 'My here',
     email: 'me@example.com',
     password: '',
+    age: '',
+    sex: 'male',
   });
   return (
     <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : null} style={{ flex: 1 }}>
@@ -200,6 +202,23 @@ const Default = () => {
               value={values.password}
               onChange={v => setValues({ ...values, password: v })}
             />
+            <View style={{ flex: 1, flexDirection: 'row' }}>
+              <InputTypeA
+                label="Age"
+                value={values.age}
+                onChange={v => setValues({ ...values, age: v })}
+                width="50%"
+                flatRight={true}
+              />
+              <InputTypeA
+                label="Sex"
+                value={values.sex}
+                onChange={v => setValues({ ...values, sex: v })}
+                width="50%"
+                flatLeft={true}
+                noBorderLeft={true}
+              />
+            </View>
           </View>
         </TouchableWithoutFeedback>
       </SafeAreaView>

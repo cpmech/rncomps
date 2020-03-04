@@ -24,6 +24,7 @@ interface IProps {
 
   flatLeft?: boolean;
   flatRight?: boolean;
+  noBorderLeft?: boolean;
 
   fontSize?: number;
   labelScale?: number;
@@ -63,6 +64,7 @@ export const InputTypeA: React.FC<IProps> = ({
 
   flatLeft = false,
   flatRight = false,
+  noBorderLeft = false,
 
   fontSize = 18,
   labelScale = 0.8,
@@ -127,7 +129,10 @@ export const InputTypeA: React.FC<IProps> = ({
     input: {
       height,
       borderColor: colors.border,
-      borderWidth,
+      borderLeftWidth: noBorderLeft ? undefined : borderWidth,
+      borderRightWidth: borderWidth,
+      borderTopWidth: borderWidth,
+      borderBottomWidth: borderWidth,
       borderTopLeftRadius: flatLeft ? 0 : radius,
       borderBottomLeftRadius: flatLeft ? 0 : radius,
       borderTopRightRadius: flatRight ? 0 : radius,
