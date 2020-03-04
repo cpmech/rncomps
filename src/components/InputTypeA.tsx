@@ -1,86 +1,58 @@
 import React, { ReactNode, useState, useRef } from 'react';
 import { View, Text, TextInput, TouchableWithoutFeedback, TextInputProps } from 'react-native';
 import { IStyles } from './types';
-import { MoveAndScale } from './helpers';
+import { ITypeAProps, typeAdefault, MoveAndScale } from './helpers';
 
-interface IInputTypeAProps extends TextInputProps {
+interface IInputTypeAProps extends ITypeAProps, TextInputProps {
   label: string;
   value: string;
   onChangeText: (value: string) => void;
-  password?: boolean;
+
   suffix?: ReactNode;
-  suffixPaddingRight?: number;
+  password?: boolean;
   readOnly?: boolean;
   textMode?: boolean;
-
-  height?: number;
-  width?: string;
-  paddingHoriz?: number;
-  gapXflatLeft?: number;
-  marginVert?: number;
-
-  borderRadius?: number;
-  borderWidth?: number;
-
-  flatLeft?: boolean;
-  flatRight?: boolean;
-  noBorderLeft?: boolean;
-
-  fontSize?: number;
-  labelScale?: number;
-
-  color?: string;
-  bgColor?: string;
-  hlColor?: string;
-  errorColor?: string;
-  mutedColor?: string;
-  borderColor?: string;
-  darkMode?: boolean;
-
   error?: boolean | string;
-
-  factorFontsize2width?: number;
-  durationMS?: number;
 }
 
 export const InputTypeA: React.FC<IInputTypeAProps> = ({
   label,
   value,
   onChangeText,
-  password,
+
   suffix,
-  suffixPaddingRight = 20,
+  password,
   readOnly = false,
   textMode = false,
-
-  height = 50,
-  width = '100%',
-  paddingHoriz = 20,
-  gapXflatLeft = 8,
-  marginVert,
-
-  borderRadius = 1000,
-  borderWidth = 1,
-
-  flatLeft = false,
-  flatRight = false,
-  noBorderLeft = false,
-
-  fontSize = 18,
-  labelScale = 0.8,
-
-  color = '#484848',
-  bgColor = '#ffffff',
-  hlColor = '#1ca086',
-  errorColor = '#e62739',
-  mutedColor = '#898989',
-  borderColor = '#cccccc',
-  darkMode = false,
-
   error = false,
 
-  factorFontsize2width = 0.65,
-  durationMS = 300,
+  // dimensions
+  height = typeAdefault.height,
+  width = typeAdefault.width,
+  paddingHoriz = typeAdefault.paddingHoriz,
+  gapXflatLeft = typeAdefault.gapXflatLeft,
+  suffixPaddingRight = typeAdefault.suffixPaddingRight,
+  marginVert = typeAdefault.marginVert,
+  fontSize = typeAdefault.fontSize,
+  labelScale = typeAdefault.labelScale,
+  factorFontsize2width = typeAdefault.factorFontsize2width,
+  durationMS = typeAdefault.durationMS,
+
+  // border
+  borderRadius = typeAdefault.borderRadius,
+  borderWidth = typeAdefault.borderWidth,
+  flatLeft = typeAdefault.flatLeft,
+  flatRight = typeAdefault.flatRight,
+  noBorderLeft = typeAdefault.noBorderLeft,
+
+  // colors
+  color = typeAdefault.color,
+  bgColor = typeAdefault.bgColor,
+  hlColor = typeAdefault.hlColor,
+  errorColor = typeAdefault.errorColor,
+  mutedColor = typeAdefault.mutedColor,
+  borderColor = typeAdefault.borderColor,
+  darkMode = typeAdefault.darkMode,
 
   ...rest
 }) => {

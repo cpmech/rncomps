@@ -1,0 +1,85 @@
+import React, { useState } from 'react';
+import {
+  Animated,
+  View,
+  Text,
+  KeyboardAvoidingView,
+  SafeAreaView,
+  Keyboard,
+  Platform,
+  TouchableWithoutFeedback,
+  StyleSheet,
+  TextPicker,
+  TouchableHighlight,
+} from 'react-native';
+import { storiesOf } from '@storybook/react-native';
+import { BaseIcon } from '../BaseIcon';
+import { PickerTypeA } from '../PickerTypeA';
+
+const stories = storiesOf('PickerTypeA', module);
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
+  inner: {
+    padding: 24,
+    flex: 1,
+    justifyContent: 'flex-start',
+  },
+  header: {
+    fontSize: 36,
+    marginBottom: 48,
+  },
+  input: {
+    height: 40,
+    borderColor: '#000000',
+    borderBottomWidth: 1,
+    marginBottom: 36,
+  },
+  btnContainer: {
+    backgroundColor: 'white',
+    marginTop: 12,
+  },
+});
+
+const Default = () => {
+  return (
+    <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : null} style={{ flex: 1 }}>
+      <SafeAreaView style={styles.container}>
+        <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+          <View style={styles.inner}>
+            <PickerTypeA
+              label="Fullname"
+              value={values.fullname}
+              onChangeText={v => setValues({ ...values, fullname: v })}
+              autoCorrect={false}
+            />
+            <View style={{ flex: 1, flexDirection: 'row' }}>
+              <PickerTypeA
+                label="Age"
+                value={values.age}
+                onChangeText={v => setValues({ ...values, age: v })}
+                width="50%"
+                flatRight={true}
+                keyboardType="numeric"
+                autoCorrect={false}
+              />
+              <PickerTypeA
+                label="Sex"
+                value={values.sex}
+                onChangeText={v => setValues({ ...values, sex: v })}
+                width="50%"
+                flatLeft={true}
+                noBorderLeft={true}
+                editable={false}
+              />
+            </View>
+          </View>
+        </TouchableWithoutFeedback>
+      </SafeAreaView>
+    </KeyboardAvoidingView>
+  );
+};
+
+stories.add('default', () => <Default />);
