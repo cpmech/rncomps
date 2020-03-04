@@ -7,7 +7,6 @@ interface IInputTypeAProps extends TextInputProps {
   label: string;
   value: string;
   onChangeText: (value: string) => void;
-  // '(e: NativeSyntheticEvent<TextInputChangeEventData>) => void'
   password?: boolean;
   suffix?: ReactNode;
   suffixPaddingRight?: number;
@@ -82,6 +81,8 @@ export const InputTypeA: React.FC<IInputTypeAProps> = ({
 
   factorFontsize2width = 0.65,
   durationMS = 300,
+
+  ...rest
 }) => {
   const hasValue = !!value;
   const refInput = useRef<TextInput>(null);
@@ -204,6 +205,7 @@ export const InputTypeA: React.FC<IInputTypeAProps> = ({
           onFocus={onFocus}
           onBlur={onBlur}
           underlineColorAndroid="transparent"
+          {...rest}
         />
         <View style={styles.animationWrapper}>
           <MoveAndScale

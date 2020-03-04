@@ -190,33 +190,44 @@ const Default = () => {
             <InputTypeA
               label="Fullname"
               value={values.fullname}
-              onChange={v => setValues({ ...values, fullname: v })}
+              onChangeText={v => setValues({ ...values, fullname: v })}
+              autoCorrect={false}
             />
             <InputTypeA
               label="Email"
               value={values.email}
-              onChange={v => setValues({ ...values, email: v })}
+              onChangeText={v => setValues({ ...values, email: v })}
+              autoCompleteType="email"
+              keyboardType="email-address"
+              autoCapitalize="none"
+              autoCorrect={false}
+              textContentType="emailAddress"
             />
             <InputTypeA
               label="Password"
               value={values.password}
-              onChange={v => setValues({ ...values, password: v })}
+              onChangeText={v => setValues({ ...values, password: v })}
+              autoCorrect={false}
+              textContentType="password"
             />
             <View style={{ flex: 1, flexDirection: 'row' }}>
               <InputTypeA
                 label="Age"
                 value={values.age}
-                onChange={v => setValues({ ...values, age: v })}
+                onChangeText={v => setValues({ ...values, age: v })}
                 width="50%"
                 flatRight={true}
+                keyboardType="numeric"
+                autoCorrect={false}
               />
               <InputTypeA
                 label="Sex"
                 value={values.sex}
-                onChange={v => setValues({ ...values, sex: v })}
+                onChangeText={v => setValues({ ...values, sex: v })}
                 width="50%"
                 flatLeft={true}
                 noBorderLeft={true}
+                editable={false}
               />
             </View>
           </View>
