@@ -1,12 +1,13 @@
 import React, { ReactNode, useState, useRef } from 'react';
-import { View, Text, TextInput, TouchableWithoutFeedback } from 'react-native';
+import { View, Text, TextInput, TouchableWithoutFeedback, TextInputProps } from 'react-native';
 import { IStyles } from './types';
 import { MoveAndScale } from './helpers';
 
-interface IProps {
+interface IInputTypeAProps extends TextInputProps {
   label: string;
   value: string;
-  onChange: (value: string) => void;
+  onChangeText: (value: string) => void;
+  // '(e: NativeSyntheticEvent<TextInputChangeEventData>) => void'
   password?: boolean;
   suffix?: ReactNode;
   suffixPaddingRight?: number;
@@ -43,10 +44,10 @@ interface IProps {
   durationMS?: number;
 }
 
-export const InputTypeA: React.FC<IProps> = ({
+export const InputTypeA: React.FC<IInputTypeAProps> = ({
   label,
   value,
-  onChange,
+  onChangeText,
   password,
   suffix,
   suffixPaddingRight,
@@ -114,6 +115,8 @@ export const InputTypeA: React.FC<IProps> = ({
   const dx = -paddingHoriz + (flatLeft ? gapXflatLeft : radius);
   const dy = -height / 2;
 
+  const selBorderWidth = colors.border === borderColor ? undefined : borderWidth;
+
   const styles: IStyles = {
     root: {
       width,
@@ -129,7 +132,7 @@ export const InputTypeA: React.FC<IProps> = ({
     input: {
       height,
       borderColor: colors.border,
-      borderLeftWidth: noBorderLeft ? undefined : borderWidth,
+      borderLeftWidth: noBorderLeft ? selBorderWidth : borderWidth,
       borderRightWidth: borderWidth,
       borderTopWidth: borderWidth,
       borderBottomWidth: borderWidth,
@@ -197,7 +200,7 @@ export const InputTypeA: React.FC<IProps> = ({
           ref={refInput}
           value={value}
           style={styles.input}
-          onChangeText={onChange}
+          onChangeText={onChangeText}
           onFocus={onFocus}
           onBlur={onBlur}
           underlineColorAndroid="transparent"
