@@ -27,6 +27,7 @@ interface IProps {
   data: IPickerData[];
   selectedValue: string;
   onValueChange: (value: string) => void;
+  width?: string;
   selectedHeight?: number;
   selectedColor?: string;
   selectedBGcolor?: string;
@@ -52,10 +53,11 @@ export const BasePicker: React.FC<IProps> = ({
   data,
   selectedValue,
   onValueChange,
+  width = '100%',
   selectedHeight = 50,
   selectedColor = colors.default,
   selectedBGcolor = colors.white,
-  selectedFontSize = 16,
+  selectedFontSize = 18,
   selectedFontFamily,
   itemsMaxHeight = 300,
   itemsColor = colors.default,
@@ -144,29 +146,38 @@ export const BasePicker: React.FC<IProps> = ({
     );
   };
 
+  const height = imageSize ? Math.max(selectedHeight, imageSize + 7) : selectedHeight;
+
   return (
-    <>
-      <TouchableHighlight onPress={() => setVisible(true)} underlayColor={selectedBGcolor}>
-        <View
-          style={{
-            flex: 1,
-            flexDirection: 'row',
-            justifyContent: 'space-between',
-            alignItems: 'center',
-            backgroundColor: selectedBGcolor,
-            height: imageSize ? Math.max(selectedHeight, imageSize + 7) : selectedHeight,
-            paddingLeft,
-            paddingRight,
-          }}
-        >
-          {selected && selected.image && !selectedHideImage
-            ? renderSelectedWithImage()
-            : renderSelectedText()}
-          <BaseIcon
-            color={selectedColor}
-            size={iconSize ? iconSize : selectedFontSize + 5}
-            name={'arrow-picker'}
-          />
+    <React.Fragment>
+      <TouchableHighlight
+        onPress={() => {
+          console.log('here');
+          setVisible(true);
+        }}
+        underlayColor={selectedBGcolor}
+      >
+        <View style={{ height }}>
+          <View
+            style={{
+              flex: 1,
+              flexDirection: 'row',
+              justifyContent: 'space-between',
+              alignItems: 'center',
+              backgroundColor: selectedBGcolor,
+              paddingLeft,
+              paddingRight,
+            }}
+          >
+            {selected && selected.image && !selectedHideImage
+              ? renderSelectedWithImage()
+              : renderSelectedText()}
+            <BaseIcon
+              color={selectedColor}
+              size={iconSize ? iconSize : selectedFontSize + 5}
+              name={'arrow-picker'}
+            />
+          </View>
         </View>
       </TouchableHighlight>
 
@@ -192,6 +203,6 @@ export const BasePicker: React.FC<IProps> = ({
           </ScrollView>
         )}
       />
-    </>
+    </React.Fragment>
   );
 };
