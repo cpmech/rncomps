@@ -26,7 +26,6 @@ interface IProps {
 
   fontSize?: number;
   labelScale?: number;
-  labelXgap?: number;
 
   color?: string;
   bgColor?: string;
@@ -65,7 +64,6 @@ export const InputTypeA: React.FC<IProps> = ({
 
   fontSize = 18,
   labelScale = 0.8,
-  labelXgap = 5,
 
   color = '#484848',
   bgColor = '#ffffff',
@@ -83,6 +81,10 @@ export const InputTypeA: React.FC<IProps> = ({
   const hasValue = !!value;
   const refInput = useRef<TextInput>(null);
   const [anim, setAnim] = useState({ steady: hasValue, enabled: hasValue });
+  const [colors, setColors] = useState({
+    border: borderColor,
+    label: mutedColor,
+  });
 
   if (darkMode) {
     color = 'white';
@@ -122,7 +124,7 @@ export const InputTypeA: React.FC<IProps> = ({
 
     input: {
       height,
-      borderColor,
+      borderColor: colors.border,
       borderWidth,
       borderTopLeftRadius: flatLeft ? 0 : radius,
       borderBottomLeftRadius: flatLeft ? 0 : radius,
@@ -151,10 +153,12 @@ export const InputTypeA: React.FC<IProps> = ({
 
     label: {
       fontSize,
+      color: colors.label,
     },
   };
 
   const onFocus = () => {
+    setColors({ border: hlColor, label: hlColor });
     if (hasValue) {
       return;
     }
@@ -162,6 +166,7 @@ export const InputTypeA: React.FC<IProps> = ({
   };
 
   const onBlur = () => {
+    setColors({ border: borderColor, label: mutedColor });
     if (!hasValue) {
       setAnim({ steady: false, enabled: false });
     }
@@ -171,10 +176,11 @@ export const InputTypeA: React.FC<IProps> = ({
     if (refInput.current?.isFocused()) {
       return;
     }
-    if (!hasValue) {
-      refInput.current?.focus();
-      setAnim({ steady: false, enabled: true });
-    }
+    refInput.current?.focus(); // => this will trigger the animation
+    // if (!hasValue) {
+    // refInput.current?.focus();
+    // setAnim({ steady: false, enabled: true });
+    // }
   };
 
   return (
@@ -211,44 +217,3 @@ export const InputTypeA: React.FC<IProps> = ({
     </View>
   );
 };
-
-/*
-  const css: IStyles = {
-    root: {
-      height: height + marginTop,
-    },
-    input: {
-      ...border,
-      height,
-      width,
-      paddingLeft: paddingHoriz + labelXgap,
-      paddingRight: paddingHoriz,
-      color: textMode ? mutedColor : color,
-      backgroundColor: bgColor,
-      fontSize: fontSize,
-      position: 'absolute',
-      top: marginTop,
-    },
-    labelBox: {
-      flex: 1,
-      justifyContent: 'center',
-      alignItems: 'center',
-      position: 'absolute',
-      height: h,
-      width: w,
-      // backgroundColor: bgColor,
-      backgroundColor: 'red',
-      // top: labelDy,
-      // left: paddingHoriz,
-      top: 0,
-      left: 0,
-      opacity: 1,
-    },
-    label: {
-      color,
-      fontSize,
-      marginLeft: labelXgap,
-      marginRight: labelXgap,
-    },
-  };
-  */

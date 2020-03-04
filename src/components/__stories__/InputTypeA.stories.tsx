@@ -168,6 +168,7 @@ const styles = StyleSheet.create({
 
 const Default = () => {
   const [values, setValues] = useState({
+    fullname: 'My here',
     email: 'me@example.com',
     password: '',
   });
@@ -184,6 +185,11 @@ const Default = () => {
               <Button title="Submit" onPress={() => null} />
             </View>
             <View style={{ flex: 1 }} /> */}
+            <InputTypeA
+              label="Fullname"
+              value={values.fullname}
+              onChange={v => setValues({ ...values, fullname: v })}
+            />
             <InputTypeA
               label="Email"
               value={values.email}
@@ -202,142 +208,3 @@ const Default = () => {
 };
 
 stories.add('default', () => <Default />);
-
-/*
-const MyComponent: React.FC = () => {
-  const ref = useRef<View>(null);
-  // componentDidMount() {
-  //   this.refs.myView.measure((x, y, width, height) => {
-  //     console.log('shit =', x, y, width, height);
-  //   });
-  // }
-  useEffect(() => {
-    if (ref.current) {
-      ref.current.measure((x, y, w, h, px, py) => {
-        console.log({ x, y, w, h, px, py });
-      });
-    }
-  }, [ref]);
-  return (
-    <View ref={ref} style={{ opacity: 1 }} collapsable={false}>
-      <Text>TESTING</Text>
-    </View>
-  );
-};
-
-stories.add('test', () => <MyComponent />);
-*/
-
-/*
-stories.add('default (smaller)', () => (
-  <XCentered>
-    <XColumn>
-      <InputTypeA
-        label="Email"
-        value="testing@example.com"
-        onChange={v => console.log(v)}
-        height={32}
-        fontSize={14}
-        labelFontSize={14}
-      />
-      <InputTypeA
-        label="Email"
-        value="dorival.pedroso@gmail.com"
-        onChange={v => console.log(v)}
-        height={32}
-        fontSize={14}
-        labelFontSize={14}
-      />
-    </XColumn>
-  </XCentered>
-));
-
-stories.add('error', () => (
-  <XCentered>
-    <XColumn>
-      <InputTypeA
-        label="Email"
-        value="dorival.pedroso@gmail.com"
-        onChange={v => console.log(v)}
-        error="Please, enter a valid email"
-      />
-      <InputTypeA
-        label="Email"
-        value="dorival.pedroso@gmail.com"
-        onChange={v => console.log(v)}
-        error=""
-      />
-      <InputTypeA
-        label="Email"
-        value="dorival.pedroso@gmail.com"
-        onChange={v => console.log(v)}
-        error={true}
-      />
-      <InputTypeA
-        label="Email"
-        value="dorival.pedroso@gmail.com"
-        onChange={v => console.log(v)}
-        error={false}
-      />
-    </XColumn>
-  </XCentered>
-));
-
-stories.add('stacked', () => (
-  <View
-    style={
-      {
-        // flex: 1,
-        // flexDirection: 'column',
-      }
-    }
-  >
-    <InputTypeA onChange={v => console.log(v)} label="Name" value="Hello World!" />
-    <InputTypeA value="dorival.pedroso@gmail.com" onChange={v => console.log(v)} label="Email" />
-    <InputTypeA
-      value="dorival.pedroso@gmail.com"
-      onChange={v => console.log(v)}
-      label="Password"
-      password={true}
-    />
-  </View>
-));
-
-stories.add('on row', () => (
-  <View
-    style={{
-      flex: 1,
-      flexDirection: 'row',
-    }}
-  >
-    <InputTypeA label="Name" onChange={v => console.log(v)} value="Hello World!" flatRight={true} />
-    <InputTypeA
-      label="Email"
-      value="dorival.pedroso@gmail.com"
-      onChange={v => console.log(v)}
-      flatLeft={true}
-      flatRight={true}
-    />
-    <InputTypeA
-      label="Password"
-      value="Senha"
-      onChange={v => console.log(v)}
-      password={true}
-      flatLeft={true}
-    />
-  </View>
-));
-
-export const Controlled = () => {
-  const [email, setEmail] = useState('doriv4l@gmail.com');
-  return <InputTypeA label="Email" value={email} onChange={value => setEmail(value)} />;
-};
-
-stories.add('controlled', () => {
-  return (
-    <XCentered>
-      <Controlled />
-    </XCentered>
-  );
-});
-*/
