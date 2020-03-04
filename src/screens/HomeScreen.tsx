@@ -123,10 +123,10 @@ const Comp: React.FC<IProps> = ({ navigation }) => {
           console.log(`selecting ${value}`);
           setPickerSelected(value);
         }}
-        selectedColor="#355C7D"
-        selectedBGcolor="#F8B195"
-        selectedFontSize={18}
-        selectedFontFamily={Platform.OS === 'android' ? 'monospace' : 'Courier New'}
+        color="#355C7D"
+        bgColor="#F8B195"
+        fontSize={18}
+        fontFamily={Platform.OS === 'android' ? 'monospace' : 'Courier New'}
         iconSize={40}
         itemsColor="#0000ff"
         itemsBGcolor="#cecece"

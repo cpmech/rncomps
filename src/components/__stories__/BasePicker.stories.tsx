@@ -12,21 +12,18 @@ const Default = () => {
 
   return (
     <XCentered>
-      <View style={{ backgroundColor: 'blue', width: '100%' }}>
+      <View style={{ width: '100%' }}>
         <BasePicker
           prompt="What's your favorite character?"
           data={fmaPickerData}
           selectedValue={pickerSelected}
-          onValueChange={(value: string) => {
-            console.log(`selecting ${value}`);
-            setPickerSelected(value);
-          }}
+          onValueChange={v => setPickerSelected(v)}
           // selectedColor="#355C7D"
           // selectedBGcolor="#F8B195"
           // selectedFontSize={18}
           // selectedFontFamily={Platform.OS === 'android' ? 'monospace' : 'Courier New'}
           // iconSize={40}
-          itemsColor="#0000ff"
+          // itemsColor="#0000ff"
           // itemsBGcolor="#cecece"
           // itemsFontSize={18}
           // itemsMaxHeight={240}

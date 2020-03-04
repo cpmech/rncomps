@@ -22,17 +22,17 @@ export interface IPickerData {
   image?: ImageSourcePropType;
 }
 
-interface IProps {
+interface IBasePickerProps {
   prompt: string;
   data: IPickerData[];
   selectedValue: string;
   onValueChange: (value: string) => void;
-  width?: string;
-  selectedHeight?: number;
-  selectedColor?: string;
-  selectedBGcolor?: string;
-  selectedFontSize?: number;
-  selectedFontFamily?: string;
+  width?: string | number; // if string, use percentage, otherwise, no units
+  height?: number;
+  color?: string;
+  bgColor?: string;
+  fontSize?: number;
+  fontFamily?: string;
   itemsMaxHeight?: number;
   itemsColor?: string;
   itemsBGcolor?: string;
@@ -48,17 +48,17 @@ interface IProps {
   itemsHideImage?: boolean;
 }
 
-export const BasePicker: React.FC<IProps> = ({
+export const BasePicker: React.FC<IBasePickerProps> = ({
   prompt,
   data,
   selectedValue,
   onValueChange,
   width = '100%',
-  selectedHeight = 50,
-  selectedColor = colors.default,
-  selectedBGcolor = colors.white,
-  selectedFontSize = 18,
-  selectedFontFamily,
+  height = 50,
+  color = colors.default,
+  bgColor = colors.white,
+  fontSize = 18,
+  fontFamily,
   itemsMaxHeight = 300,
   itemsColor = colors.default,
   itemsBGcolor = colors.white,
@@ -83,9 +83,9 @@ export const BasePicker: React.FC<IProps> = ({
     return (
       <Text
         style={{
-          color: selectedColor,
-          fontSize: selectedFontSize,
-          fontFamily: selectedFontFamily,
+          color: color,
+          fontSize: fontSize,
+          fontFamily: fontFamily,
         }}
       >
         {selected.label}
@@ -146,7 +146,7 @@ export const BasePicker: React.FC<IProps> = ({
     );
   };
 
-  const height = imageSize ? Math.max(selectedHeight, imageSize + 7) : selectedHeight;
+  const heightFinal = imageSize ? Math.max(height, imageSize + 7) : height;
 
   return (
     <React.Fragment>
@@ -155,16 +155,16 @@ export const BasePicker: React.FC<IProps> = ({
           console.log('here');
           setVisible(true);
         }}
-        underlayColor={selectedBGcolor}
+        underlayColor={bgColor}
       >
-        <View style={{ height }}>
+        <View style={{ height: heightFinal, width }}>
           <View
             style={{
               flex: 1,
               flexDirection: 'row',
               justifyContent: 'space-between',
               alignItems: 'center',
-              backgroundColor: selectedBGcolor,
+              backgroundColor: bgColor,
               paddingLeft,
               paddingRight,
             }}
@@ -173,8 +173,8 @@ export const BasePicker: React.FC<IProps> = ({
               ? renderSelectedWithImage()
               : renderSelectedText()}
             <BaseIcon
-              color={selectedColor}
-              size={iconSize ? iconSize : selectedFontSize + 5}
+              color={color}
+              size={iconSize ? iconSize : fontSize + 5}
               name={'arrow-picker'}
             />
           </View>
