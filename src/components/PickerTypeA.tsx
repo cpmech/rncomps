@@ -7,12 +7,13 @@ import { BaseModal } from './BaseModal';
 import { IPickerData } from './BasePicker';
 
 interface IPickerTypeAProps extends ITypeAProps {
-  label: string;
+  label?: string;
   prompt: string;
   selectedValue: string;
   onValueChange: (value: string) => void;
   data: IPickerData[];
 
+  noSelectedText?: boolean;
   textMaxWidth?: number;
 
   itemsMaxWidth?: number;
@@ -29,6 +30,7 @@ interface IPickerTypeAProps extends ITypeAProps {
   imageVertGap?: number;
 
   iconSize?: number;
+  iconColor?: string;
 }
 
 export const PickerTypeA: React.FC<IPickerTypeAProps> = ({
@@ -38,6 +40,7 @@ export const PickerTypeA: React.FC<IPickerTypeAProps> = ({
   onValueChange,
   data,
 
+  noSelectedText,
   textMaxWidth: textMaxWidth,
 
   itemsMaxWidth,
@@ -54,6 +57,7 @@ export const PickerTypeA: React.FC<IPickerTypeAProps> = ({
   imageVertGap = 0,
 
   iconSize,
+  iconColor,
 
   // dimensions
   height = typeAdefault.height,
@@ -92,17 +96,17 @@ export const PickerTypeA: React.FC<IPickerTypeAProps> = ({
   height += 2 * imageVertGap;
   const radius = borderRadius > height / 2 ? height / 2 : borderRadius;
 
-  const labelHeightBefore = fontSize;
-  const labelWidthBefore = fontSize * label.length * factorFontsize2width;
-  const labelHeightAfter = fontSize * labelScale;
+  const labelHeightBefore = label ? fontSize : 0;
+  const labelWidthBefore = label ? fontSize * label.length * factorFontsize2width : 0;
+  const labelHeightAfter = label ? fontSize * labelScale : 0;
 
   const marginTop = marginVert || labelHeightAfter / 2;
-  const iconHeight = iconSize ? iconSize : fontSize + 5;
+  const iconHeight = iconSize ? iconSize : fontSize;
 
   const styles: IStyles = {
     root: {
       width,
-      height: height + marginTop,
+      height: height + (label ? marginTop : 0),
     },
 
     container: {
@@ -193,7 +197,7 @@ export const PickerTypeA: React.FC<IPickerTypeAProps> = ({
       <View style={styles.input}>
         <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center' }}>
           <Image source={selected.image} style={styleImage} resizeMode="contain" />
-          {selected && <Text style={styles.inputText}>{selected.label}</Text>}
+          {selected && !noSelectedText && <Text style={styles.inputText}>{selected.label}</Text>}
         </View>
       </View>
     );
@@ -217,6 +221,21 @@ export const PickerTypeA: React.FC<IPickerTypeAProps> = ({
     );
   };
 
+  const renderLabel = () => {
+    if (!label) {
+      return null;
+    }
+    return (
+      <View style={styles.animationWrapper}>
+        <View style={styles.labelWrapper}>
+          <Text style={styles.label} numberOfLines={1}>
+            {label}
+          </Text>
+        </View>
+      </View>
+    );
+  };
+
   return (
     <React.Fragment>
       <View style={styles.root}>
@@ -228,16 +247,10 @@ export const PickerTypeA: React.FC<IPickerTypeAProps> = ({
           </TouchableHighlight>
           <View style={styles.suffix}>
             <TouchableHighlight onPress={() => setShowModal(true)} underlayColor={bgColor}>
-              <BaseIcon color={color} size={iconHeight} name={'arrow-picker'} />
+              <BaseIcon color={iconColor || mutedColor} size={iconHeight} name={'arrow-picker'} />
             </TouchableHighlight>
           </View>
-          <View style={styles.animationWrapper}>
-            <View style={styles.labelWrapper}>
-              <Text style={styles.label} numberOfLines={1}>
-                {label}
-              </Text>
-            </View>
-          </View>
+          {renderLabel()}
         </View>
       </View>
 
