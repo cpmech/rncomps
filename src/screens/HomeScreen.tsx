@@ -225,4 +225,4 @@ const Comp: React.FC<IProps> = ({ navigation }) => {
   );
 };
 
-export const HomeScreen = withNTSV(Comp, 'Base Components');
+export const HomeScreen = withNTSV(Comp, { title: 'Base Components' });

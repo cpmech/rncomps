@@ -3,4 +3,4 @@ import { BaseSpinnerScreen, withNavTitle } from '../components';
 
 const Comp: React.FC = () => <BaseSpinnerScreen />;
 
-export const SpinnerScreenSample = withNavTitle(Comp, 'SpinnerScreen');
+export const SpinnerScreenSample = withNavTitle(Comp, { title: 'SpinnerScreen' });
