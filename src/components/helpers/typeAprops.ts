@@ -42,7 +42,7 @@ export const typeAdefault = {
   durationMS: 300,
 
   // border
-  borderRadius: 1000,
+  borderRadius: 2000,
   borderWidth: 1,
   flatLeft: false,
   flatRight: false,
