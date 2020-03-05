@@ -85,8 +85,8 @@ export const InputTypeA: React.FC<IInputTypeAProps> = ({
 
   const marginTop = marginVert || labelHeightAfter / 2;
 
-  const dx = -paddingHoriz + (flatLeft ? gapXflatLeft : radius);
-  const dy = -height / 2;
+  const labelDx = -paddingHoriz + (flatLeft ? gapXflatLeft : radius);
+  const labelDy = -height / 2;
 
   const selBorderWidth = colors.border === borderColor ? undefined : borderWidth;
 
@@ -138,6 +138,12 @@ export const InputTypeA: React.FC<IInputTypeAProps> = ({
       fontSize,
       color: colors.label,
     },
+
+    suffix: {
+      position: 'absolute',
+      top: height / 2 - fontSize / 2,
+      right: suffixPaddingRight,
+    },
   };
 
   const onFocus = () => {
@@ -160,23 +166,7 @@ export const InputTypeA: React.FC<IInputTypeAProps> = ({
       return;
     }
     refInput.current?.focus(); // => this will trigger the animation
-    // if (!hasValue) {
-    // refInput.current?.focus();
-    // setAnim({ steady: false, enabled: true });
-    // }
   };
-
-  const renderSuffix = () => (
-    <View
-      style={{
-        position: 'absolute',
-        top: height / 2 - fontSize / 2,
-        right: suffixPaddingRight,
-      }}
-    >
-      {suffix}
-    </View>
-  );
 
   return (
     <View style={styles.root}>
@@ -191,11 +181,11 @@ export const InputTypeA: React.FC<IInputTypeAProps> = ({
           underlineColorAndroid="transparent"
           {...rest}
         />
-        {suffix && renderSuffix()}
+        {suffix && <View style={styles.suffix}>{suffix}</View>}
         <View style={styles.animationWrapper}>
           <MoveAndScale
-            dx={dx}
-            dy={dy}
+            dx={labelDx}
+            dy={labelDy}
             width={labelWidthBefore}
             sFactor={labelScale}
             durationMS={durationMS}
