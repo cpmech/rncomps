@@ -11,11 +11,12 @@ import {
   BaseIcon,
   BaseImage,
   BaseInput,
-  BaseSpacer,
   BasePicker,
   IStyles,
 } from '../components';
 import { fmaPickerData } from './fmaPickerData';
+
+const VSpace = () => <View style={{ height: 20 }} />;
 
 const iconNames = [
   'cube',
@@ -64,9 +65,9 @@ const Comp: React.FC<IProps> = ({ navigation }) => {
           <View style={{ marginLeft: 10 }}>
             <Text>Hello, People!</Text>
             <Text>This is a Modal window</Text>
-            <BaseSpacer />
+            <VSpace />
             <BaseImage image={img} />
-            <BaseSpacer />
+            <VSpace />
             <ScrollView style={{ height: 200 }}>
               <Text>Line 01</Text>
               <Text>Line 02</Text>
@@ -139,23 +140,23 @@ const Comp: React.FC<IProps> = ({ navigation }) => {
 
       <Text style={s.text}>BaseButton</Text>
       <BaseButton text="Press Me" onPress={() => console.log('1 button pressed')} />
-      <BaseSpacer />
+      <VSpace />
       <BaseButton text="Press Me" onPress={() => console.log('2 button pressed')} disabled={true} />
-      <BaseSpacer />
+      <VSpace />
       <BaseButton
         text="Press Me"
         onPress={() => console.log('3 button pressed')}
         iconName="planet"
       />
-      <BaseSpacer />
+      <VSpace />
       <BaseButton text="Press Me" onPress={() => console.log('4 button pressed')} outline={true} />
-      <BaseSpacer />
+      <VSpace />
       <BaseButton
         text="Press Me"
         onPress={() => console.log('5 button pressed')}
         fontSize={40}
         iconName="cube"
-        bg="#ffbe88"
+        backgroundColor="#ffbe88"
       />
 
       <Text style={s.text}>BaseCheckbox</Text>
@@ -164,7 +165,7 @@ const Comp: React.FC<IProps> = ({ navigation }) => {
         onPress={() => setCheckboxChecked(!checkboxChecked)}
         message="Check me"
       />
-      <BaseSpacer />
+      <VSpace />
       <BaseCheckbox
         checked={checkboxChecked2}
         onPress={() => setCheckboxChecked2(!checkboxChecked2)}

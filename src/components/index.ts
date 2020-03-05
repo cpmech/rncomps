@@ -9,7 +9,6 @@ export * from './BaseInput';
 export * from './BaseLink';
 export * from './BaseModal';
 export * from './BasePicker';
-export * from './BaseSpacer';
 export * from './BaseSpinnerOverlay';
 export * from './BaseSpinnerScreen';
 export * from './BaseSpinner';

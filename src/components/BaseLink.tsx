@@ -1,40 +1,42 @@
 import React from 'react';
 import { View, Text, TouchableHighlight, GestureResponderEvent } from 'react-native';
-import { IStyles } from './types';
-
-const colors = {
-  default: '#2296f3',
-  hover: '#efefef',
-};
-
-const s: IStyles = {
-  root: {
-    justifyContent: 'center',
-    alignItems: 'center',
-    height: 60,
-  },
-  text: {
-    color: colors.default,
-  },
-  textDark: {
-    color: '#ffffff',
-    fontWeight: '900',
-  },
-};
+import { FontWeight } from './types';
 
 interface IProps {
   onPress: (event: GestureResponderEvent) => void;
   message: string;
+  fontSize?: number;
+  fontWeight?: FontWeight;
+  colorDefault?: string;
+  colorHover?: string;
+  colorDark?: string;
   darkBackground?: boolean;
 }
 
-export const BaseLink: React.FC<IProps> = ({ onPress, message, darkBackground }) => (
-  <View style={s.root}>
+export const BaseLink: React.FC<IProps> = ({
+  onPress,
+  message,
+  fontSize = 18,
+  fontWeight = 'normal',
+  colorDefault = '#2296f3',
+  colorHover = '#efefef',
+  colorDark = '#ffffff',
+  darkBackground,
+}) => (
+  <View>
     <TouchableHighlight
       onPress={onPress}
-      underlayColor={darkBackground ? 'transparent' : colors.hover}
+      underlayColor={darkBackground ? 'transparent' : colorHover}
     >
-      <Text style={darkBackground ? s.textDark : s.text}>{message}</Text>
+      <Text
+        style={{
+          fontSize,
+          color: darkBackground ? colorDark : colorDefault,
+          fontWeight,
+        }}
+      >
+        {message}
+      </Text>
     </TouchableHighlight>
   </View>
 );

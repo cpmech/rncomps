@@ -8,8 +8,8 @@ interface IProps {
   iconName?: string;
   disabled?: boolean;
   outline?: boolean;
-  fg?: string;
-  bg?: string;
+  color?: string;
+  backgroundColor?: string;
   fgDisabled?: string;
   bgDisabled?: string;
   fontFamily?: string;
@@ -29,8 +29,8 @@ export const BaseButton: React.FC<IProps> = ({
   iconName,
   disabled,
   outline,
-  fg = '#ffffff',
-  bg = '#2f95dc',
+  color = '#ffffff',
+  backgroundColor = '#2f95dc',
   fgDisabled = '#a4a4a4',
   bgDisabled = '#dfdfdf',
   fontFamily,
@@ -45,7 +45,7 @@ export const BaseButton: React.FC<IProps> = ({
 }) => (
   <TouchableHighlight
     onPress={disabled ? () => {} : onPress}
-    underlayColor={fg}
+    underlayColor={color}
     style={{ borderRadius }}
   >
     <View
@@ -53,9 +53,9 @@ export const BaseButton: React.FC<IProps> = ({
         height,
         width,
         borderRadius,
-        backgroundColor: outline ? 'transparent' : disabled ? bgDisabled : bg,
+        backgroundColor: outline ? 'transparent' : disabled ? bgDisabled : backgroundColor,
         borderWidth: outline ? 1 : 0,
-        borderColor: outline ? bg : 'transparent',
+        borderColor: outline ? backgroundColor : 'transparent',
         paddingVertical,
         paddingHorizontal,
       }}
@@ -76,14 +76,14 @@ export const BaseButton: React.FC<IProps> = ({
               justifyContent: 'center',
               marginRight: iconGap,
             }}
-            color={outline ? bg : disabled ? fgDisabled : fg}
+            color={outline ? backgroundColor : disabled ? fgDisabled : color}
             size={fontSize + iconDeltaSize}
           />
         )}
         {text && (
           <Text
             style={{
-              color: outline ? bg : disabled ? fgDisabled : fg,
+              color: outline ? backgroundColor : disabled ? fgDisabled : color,
               fontFamily,
               fontSize,
             }}
