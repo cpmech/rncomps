@@ -56,7 +56,10 @@ const Default = () => {
               onValueChange={v => setCharacter(v)}
               data={fmaPickerData}
               factorFontsize2width={0.5}
-              // imageSize={100}
+              imageSize={150}
+              imageVertGap={10}
+              textMaxWidth={120}
+              itemsMaxWidth={100}
             />
             <PickerTypeA
               label="Preferred character"

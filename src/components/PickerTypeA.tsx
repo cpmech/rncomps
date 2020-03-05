@@ -13,6 +13,9 @@ interface IPickerTypeAProps extends ITypeAProps {
   onValueChange: (value: string) => void;
   data: IPickerData[];
 
+  textMaxWidth?: number;
+
+  itemsMaxWidth?: number;
   itemsMaxHeight?: number;
   itemsColor?: string;
   itemsBGcolor?: string;
@@ -35,6 +38,9 @@ export const PickerTypeA: React.FC<IPickerTypeAProps> = ({
   onValueChange,
   data,
 
+  textMaxWidth: textMaxWidth,
+
+  itemsMaxWidth,
   itemsMaxHeight = 350,
   itemsColor = '#343434',
   itemsBGcolor = '#ffffff',
@@ -116,12 +122,17 @@ export const PickerTypeA: React.FC<IPickerTypeAProps> = ({
       borderBottomLeftRadius: flatLeft ? 0 : radius,
       borderTopRightRadius: flatRight ? 0 : radius,
       borderBottomRightRadius: flatRight ? 0 : radius,
-      fontSize,
       paddingLeft: paddingHoriz,
       backgroundColor: bgColor,
       flex: 1,
       flexDirection: 'column',
       justifyContent: 'center',
+    },
+
+    inputText: {
+      color,
+      fontSize,
+      maxWidth: textMaxWidth,
     },
 
     animationWrapper: {
@@ -149,6 +160,18 @@ export const PickerTypeA: React.FC<IPickerTypeAProps> = ({
       top: height / 2 - iconHeight / 2,
       right: suffixPaddingRight,
     },
+
+    item: {
+      color: itemsColor,
+      fontSize: itemsFontSize,
+      maxWidth: itemsMaxWidth,
+    },
+  };
+
+  const styleImage = {
+    width: imageSize ? imageSize : itemsFontSize + 7,
+    height: imageSize ? imageSize : itemsFontSize + 7,
+    marginRight: imageHorizGap,
   };
 
   const renderSelectedText = () => {
@@ -157,7 +180,7 @@ export const PickerTypeA: React.FC<IPickerTypeAProps> = ({
     }
     return (
       <View style={styles.input}>
-        <Text style={{ color, fontSize }}>{selected.label}</Text>
+        <Text style={styles.inputText}>{selected.label}</Text>
       </View>
     );
   };
@@ -169,23 +192,15 @@ export const PickerTypeA: React.FC<IPickerTypeAProps> = ({
     return (
       <View style={styles.input}>
         <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center' }}>
-          <Image
-            source={selected.image}
-            style={{
-              width: imageSize ? imageSize : itemsFontSize + 7,
-              height: imageSize ? imageSize : itemsFontSize + 7,
-              marginRight: imageHorizGap,
-            }}
-            resizeMode="contain"
-          />
-          {selected && <Text style={{ color, fontSize }}>{selected.label}</Text>}
+          <Image source={selected.image} style={styleImage} resizeMode="contain" />
+          {selected && <Text style={styles.inputText}>{selected.label}</Text>}
         </View>
       </View>
     );
   };
 
   const renderItemText = (d: IPickerData) => (
-    <Text key={d.value} style={{ color: itemsColor, fontSize: itemsFontSize }}>
+    <Text key={d.value} style={styles.item}>
       {d.label}
     </Text>
   );
@@ -196,15 +211,7 @@ export const PickerTypeA: React.FC<IPickerTypeAProps> = ({
     }
     return (
       <View key={d.value} style={{ flex: 1, flexDirection: 'row', alignItems: 'center' }}>
-        <Image
-          source={d.image}
-          style={{
-            width: imageSize ? imageSize : itemsFontSize + 7,
-            height: imageSize ? imageSize : itemsFontSize + 7,
-            marginRight: imageHorizGap,
-          }}
-          resizeMode="contain"
-        />
+        <Image source={d.image} style={styleImage} resizeMode="contain" />
         {renderItemText(d)}
       </View>
     );
