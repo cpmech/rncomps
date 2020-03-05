@@ -1,6 +1,6 @@
 import React from 'react';
 import { Modal, View, Text, TouchableHighlight, Platform } from 'react-native';
-import { IStyles } from './types';
+import { IStyles, FontWeight } from './types';
 
 interface IButtonData {
   text: string;
@@ -11,9 +11,12 @@ interface IButtonData {
 interface IProps {
   title: string;
   visible: boolean;
-  onClose: () => void;
+  onClose?: () => void;
   buttons?: IButtonData[];
   okDisabled?: boolean;
+
+  fontSizeTitle?: number;
+  fontWeightTitle?: FontWeight;
 
   colorRootBackground?: string;
   colorBackground?: string;
@@ -31,13 +34,16 @@ export const BaseModal: React.FC<IProps> = ({
   buttons,
   okDisabled,
 
+  fontSizeTitle = 20,
+  fontWeightTitle,
+
   colorRootBackground = '#00000090',
   colorBackground = '#fff',
   colorSeparator = '#efefef',
   colorHover = '#efefef',
   colorButton = '#2f95dc',
   colorButtonDisabled = '#cecece',
-  colorTitle: colorText = '#343434',
+  colorTitle = '#343434',
 
   children,
 }) => {
@@ -82,8 +88,9 @@ export const BaseModal: React.FC<IProps> = ({
       marginBottom: 10,
     },
     title: {
-      color: colorText,
-      fontSize: 22,
+      color: colorTitle,
+      fontSize: fontSizeTitle,
+      fontWeight: fontWeightTitle,
     },
     link: {
       marginVertical: 10,
@@ -122,23 +129,27 @@ export const BaseModal: React.FC<IProps> = ({
               ))}
           </View>
           <View style={Platform.select({ ios: s.separator, android: null })} />
-          <TouchableHighlight
-            onPress={onClose}
-            style={Platform.select({ ios: s.touchIos, android: null })}
-            underlayColor={Platform.select({ ios: colorHover, android: undefined })}
-            disabled={okDisabled}
-          >
-            <View
-              style={Platform.select({
-                ios: s.buttonViewIos,
-                android: s.buttonViewAndroid,
-              })}
+          {onClose && (
+            <TouchableHighlight
+              onPress={onClose}
+              style={Platform.select({ ios: s.touchIos, android: null })}
+              underlayColor={Platform.select({ ios: colorHover, android: undefined })}
+              disabled={okDisabled}
             >
-              <Text style={{ ...s.button, color: okDisabled ? colorButtonDisabled : colorButton }}>
-                OK
-              </Text>
-            </View>
-          </TouchableHighlight>
+              <View
+                style={Platform.select({
+                  ios: s.buttonViewIos,
+                  android: s.buttonViewAndroid,
+                })}
+              >
+                <Text
+                  style={{ ...s.button, color: okDisabled ? colorButtonDisabled : colorButton }}
+                >
+                  OK
+                </Text>
+              </View>
+            </TouchableHighlight>
+          )}
         </View>
       </View>
     </Modal>
