@@ -254,28 +254,23 @@ export const PickerTypeA: React.FC<IPickerTypeAProps> = ({
         </View>
       </View>
 
-      <BaseModal
-        visible={showModal}
-        title={prompt}
-        onClose={() => setShowModal(false)}
-        renderContent={() => (
-          <ScrollView style={{ maxHeight: itemsMaxHeight, backgroundColor: itemsBGcolor }}>
-            {data.map((d, i) => (
-              <TouchableOpacity
-                key={d.label}
-                onPress={() => {
-                  setShowModal(false);
-                  onValueChange(d.value);
-                }}
-              >
-                <View style={{ marginTop: i === 0 ? itemsVertGap : 0, marginBottom: itemsVertGap }}>
-                  {d.image && !itemsHideImage ? renderItemWithImage(d) : renderItemText(d)}
-                </View>
-              </TouchableOpacity>
-            ))}
-          </ScrollView>
-        )}
-      />
+      <BaseModal visible={showModal} title={prompt} onClose={() => setShowModal(false)}>
+        <ScrollView style={{ maxHeight: itemsMaxHeight, backgroundColor: itemsBGcolor }}>
+          {data.map((d, i) => (
+            <TouchableOpacity
+              key={d.label}
+              onPress={() => {
+                setShowModal(false);
+                onValueChange(d.value);
+              }}
+            >
+              <View style={{ marginTop: i === 0 ? itemsVertGap : 0, marginBottom: itemsVertGap }}>
+                {d.image && !itemsHideImage ? renderItemWithImage(d) : renderItemText(d)}
+              </View>
+            </TouchableOpacity>
+          ))}
+        </ScrollView>
+      </BaseModal>
     </React.Fragment>
   );
 };

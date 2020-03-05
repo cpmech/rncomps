@@ -181,28 +181,23 @@ export const BasePicker: React.FC<IBasePickerProps> = ({
         </View>
       </TouchableHighlight>
 
-      <BaseModal
-        visible={visible}
-        title={prompt}
-        onClose={() => setVisible(false)}
-        renderContent={() => (
-          <ScrollView style={{ maxHeight: itemsMaxHeight, backgroundColor: itemsBGcolor }}>
-            {data.map((d, i) => (
-              <TouchableOpacity
-                key={d.label}
-                onPress={() => {
-                  setVisible(false);
-                  onValueChange(d.value);
-                }}
-              >
-                <View style={{ marginTop: i === 0 ? itemsGap : 0, marginBottom: itemsGap }}>
-                  {d.image && !itemsHideImage ? renderItemWithImage(d) : renderItemText(d)}
-                </View>
-              </TouchableOpacity>
-            ))}
-          </ScrollView>
-        )}
-      />
+      <BaseModal visible={visible} title={prompt} onClose={() => setVisible(false)}>
+        <ScrollView style={{ maxHeight: itemsMaxHeight, backgroundColor: itemsBGcolor }}>
+          {data.map((d, i) => (
+            <TouchableOpacity
+              key={d.label}
+              onPress={() => {
+                setVisible(false);
+                onValueChange(d.value);
+              }}
+            >
+              <View style={{ marginTop: i === 0 ? itemsGap : 0, marginBottom: itemsGap }}>
+                {d.image && !itemsHideImage ? renderItemWithImage(d) : renderItemText(d)}
+              </View>
+            </TouchableOpacity>
+          ))}
+        </ScrollView>
+      </BaseModal>
     </React.Fragment>
   );
 };
