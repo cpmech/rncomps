@@ -140,7 +140,7 @@ const Test = () => (
   </View>
 );
 
-// stories.add('test', () => <Test />);
+stories.add('test', () => <Test />);
 
 const styles = StyleSheet.create({
   container: {
