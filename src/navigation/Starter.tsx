@@ -8,7 +8,7 @@ interface IProps {
 
 export const Starter: React.FC<IProps> = ({ navigation }) => {
   useEffect(() => {
-    const to = setTimeout(() => navigation.navigate('Main'), 100);
+    const to = setTimeout(() => navigation.navigate('Storybook'), 100);
     return function cleanup() {
       clearTimeout(to);
     };

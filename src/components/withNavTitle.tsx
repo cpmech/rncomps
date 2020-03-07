@@ -2,11 +2,19 @@ import React from 'react';
 
 export const withNavTitle = <P extends object>(
   Comp: React.ComponentType<P>,
-  title: string,
-  headerColor?: string,
-  headerBackgroundColor?: string,
-  headerIsFlat?: boolean,
-  headerTitleIsBold?: boolean,
+  {
+    title,
+    headerColor,
+    headerBackgroundColor,
+    headerIsFlat,
+    headerTitleIsBold,
+  }: {
+    title: string;
+    headerColor?: string;
+    headerBackgroundColor?: string;
+    headerIsFlat?: boolean;
+    headerTitleIsBold?: boolean;
+  },
 ) =>
   class WithNavTitleScreen extends React.Component<P> {
     static navigationOptions = {

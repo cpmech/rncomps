@@ -23,4 +23,4 @@ const content: IBaseInfoContent[] = [
 
 const Comp: React.FC = () => <BaseInfoTextScreen content={content} />;
 
-export const InfoTextScreenSample = withNavTitle(Comp, 'InfoTextScreen');
+export const InfoTextScreenSample = withNavTitle(Comp, { title: 'InfoTextScreen' });

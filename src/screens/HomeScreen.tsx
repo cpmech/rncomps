@@ -11,11 +11,12 @@ import {
   BaseIcon,
   BaseImage,
   BaseInput,
-  BaseSpacer,
   BasePicker,
   IStyles,
 } from '../components';
 import { fmaPickerData } from './fmaPickerData';
+
+const VSpace = () => <View style={{ height: 20 }} />;
 
 const iconNames = [
   'cube',
@@ -60,58 +61,58 @@ const Comp: React.FC<IProps> = ({ navigation }) => {
         title="My Modal Window"
         visible={dialogVisible}
         onClose={() => setDialogVisible(false)}
-        renderContent={() => (
-          <View style={{ marginLeft: 10 }}>
-            <Text>Hello, People!</Text>
-            <Text>This is a Modal window</Text>
-            <BaseSpacer />
-            <BaseImage image={img} />
-            <BaseSpacer />
-            <ScrollView style={{ height: 200 }}>
-              <Text>Line 01</Text>
-              <Text>Line 02</Text>
-              <Text>Line 03</Text>
-              <Text>Line 04</Text>
-              <Text>Line 05</Text>
-              <Text>Line 06</Text>
-              <Text>Line 07</Text>
-              <Text>Line 08</Text>
-              <Text>Line 09</Text>
-              <Text>Line 10</Text>
-              <Text>Line 11</Text>
-              <Text>Line 12</Text>
-              <Text>Line 13</Text>
-              <Text>Line 14</Text>
-              <Text>Line 15</Text>
-              <Text>Line 16</Text>
-              <Text>Line 17</Text>
-              <Text>Line 18</Text>
-              <Text>Line 19</Text>
-              <Text>Line 20</Text>
-              <Text>Line 21</Text>
-              <Text>Line 22</Text>
-              <Text>Line 23</Text>
-              <Text>Line 24</Text>
-              <Text>Line 25</Text>
-              <Text>Line 26</Text>
-              <Text>Line 27</Text>
-              <Text>Line 28</Text>
-              <Text>Line 29</Text>
-              <Text>Line 30</Text>
-              <Text>Line 31</Text>
-              <Text>Line 32</Text>
-              <Text>Line 33</Text>
-              <Text>Line 34</Text>
-              <Text>Line 35</Text>
-              <Text>Line 36</Text>
-              <Text>Line 37</Text>
-              <Text>Line 38</Text>
-              <Text>Line 39</Text>
-              <Text>Line 40</Text>
-            </ScrollView>
-          </View>
-        )}
-      />
+      >
+        <View style={{ marginLeft: 10 }}>
+          <Text>Hello, People!</Text>
+          <Text>This is a Modal window</Text>
+          <VSpace />
+          <BaseImage image={img} />
+          <VSpace />
+          <ScrollView style={{ height: 200 }}>
+            <Text>Line 01</Text>
+            <Text>Line 02</Text>
+            <Text>Line 03</Text>
+            <Text>Line 04</Text>
+            <Text>Line 05</Text>
+            <Text>Line 06</Text>
+            <Text>Line 07</Text>
+            <Text>Line 08</Text>
+            <Text>Line 09</Text>
+            <Text>Line 10</Text>
+            <Text>Line 11</Text>
+            <Text>Line 12</Text>
+            <Text>Line 13</Text>
+            <Text>Line 14</Text>
+            <Text>Line 15</Text>
+            <Text>Line 16</Text>
+            <Text>Line 17</Text>
+            <Text>Line 18</Text>
+            <Text>Line 19</Text>
+            <Text>Line 20</Text>
+            <Text>Line 21</Text>
+            <Text>Line 22</Text>
+            <Text>Line 23</Text>
+            <Text>Line 24</Text>
+            <Text>Line 25</Text>
+            <Text>Line 26</Text>
+            <Text>Line 27</Text>
+            <Text>Line 28</Text>
+            <Text>Line 29</Text>
+            <Text>Line 30</Text>
+            <Text>Line 31</Text>
+            <Text>Line 32</Text>
+            <Text>Line 33</Text>
+            <Text>Line 34</Text>
+            <Text>Line 35</Text>
+            <Text>Line 36</Text>
+            <Text>Line 37</Text>
+            <Text>Line 38</Text>
+            <Text>Line 39</Text>
+            <Text>Line 40</Text>
+          </ScrollView>
+        </View>
+      </BaseModal>
+
       <BaseButton text="Show Dialog" onPress={() => setDialogVisible(true)} />
 
       <Text style={s.text}>BasePicker</Text>
@@ -123,10 +124,10 @@ const Comp: React.FC<IProps> = ({ navigation }) => {
           console.log(`selecting ${value}`);
           setPickerSelected(value);
         }}
-        selectedColor="#355C7D"
-        selectedBGcolor="#F8B195"
-        selectedFontSize={18}
-        selectedFontFamily={Platform.OS === 'android' ? 'monospace' : 'Courier New'}
+        color="#355C7D"
+        bgColor="#F8B195"
+        fontSize={18}
+        fontFamily={Platform.OS === 'android' ? 'monospace' : 'Courier New'}
         iconSize={40}
         itemsColor="#0000ff"
         itemsBGcolor="#cecece"
@@ -139,23 +140,23 @@ const Comp: React.FC<IProps> = ({ navigation }) => {
 
       <Text style={s.text}>BaseButton</Text>
       <BaseButton text="Press Me" onPress={() => console.log('1 button pressed')} />
-      <BaseSpacer />
+      <VSpace />
       <BaseButton text="Press Me" onPress={() => console.log('2 button pressed')} disabled={true} />
-      <BaseSpacer />
+      <VSpace />
       <BaseButton
         text="Press Me"
         onPress={() => console.log('3 button pressed')}
         iconName="planet"
       />
-      <BaseSpacer />
+      <VSpace />
       <BaseButton text="Press Me" onPress={() => console.log('4 button pressed')} outline={true} />
-      <BaseSpacer />
+      <VSpace />
       <BaseButton
         text="Press Me"
         onPress={() => console.log('5 button pressed')}
         fontSize={40}
         iconName="cube"
-        bg="#ffbe88"
+        backgroundColor="#ffbe88"
       />
 
       <Text style={s.text}>BaseCheckbox</Text>
@@ -164,7 +165,7 @@ const Comp: React.FC<IProps> = ({ navigation }) => {
         onPress={() => setCheckboxChecked(!checkboxChecked)}
         message="Check me"
       />
-      <BaseSpacer />
+      <VSpace />
       <BaseCheckbox
         checked={checkboxChecked2}
         onPress={() => setCheckboxChecked2(!checkboxChecked2)}
@@ -225,4 +226,4 @@ const Comp: React.FC<IProps> = ({ navigation }) => {
   );
 };
 
-export const HomeScreen = withNTSV(Comp, 'Base Components');
+export const HomeScreen = withNTSV(Comp, { title: 'Base Components' });

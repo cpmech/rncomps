@@ -1,40 +1,37 @@
 import React from 'react';
 import { View, Text, TouchableHighlight, GestureResponderEvent } from 'react-native';
-import { IStyles } from './types';
+import { defaultStyleLink, IStyleLink } from './helpers';
 
-const colors = {
-  default: '#2296f3',
-  hover: '#efefef',
-};
-
-const s: IStyles = {
-  root: {
-    justifyContent: 'center',
-    alignItems: 'center',
-    height: 60,
-  },
-  text: {
-    color: colors.default,
-  },
-  textDark: {
-    color: '#ffffff',
-    fontWeight: '900',
-  },
-};
-
-interface IProps {
+interface IProps extends IStyleLink {
   onPress: (event: GestureResponderEvent) => void;
   message: string;
-  darkBackground?: boolean;
 }
 
-export const BaseLink: React.FC<IProps> = ({ onPress, message, darkBackground }) => (
-  <View style={s.root}>
+export const BaseLink: React.FC<IProps> = ({
+  onPress,
+  message,
+  fontSize = defaultStyleLink.fontSize,
+  fontWeight = defaultStyleLink.fontWeight,
+  color = defaultStyleLink.color,
+  colorHover = defaultStyleLink.colorHover,
+  darkBackground = defaultStyleLink.darkBackground,
+  textDecorationLine = defaultStyleLink.textDecorationLine,
+}) => (
+  <View>
     <TouchableHighlight
       onPress={onPress}
-      underlayColor={darkBackground ? 'transparent' : colors.hover}
+      underlayColor={darkBackground ? 'transparent' : colorHover}
     >
-      <Text style={darkBackground ? s.textDark : s.text}>{message}</Text>
+      <Text
+        style={{
+          fontSize,
+          color,
+          fontWeight,
+          textDecorationLine,
+        }}
+      >
+        {message}
+      </Text>
     </TouchableHighlight>
   </View>
 );

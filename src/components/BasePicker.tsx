@@ -22,16 +22,17 @@ export interface IPickerData {
   image?: ImageSourcePropType;
 }
 
-interface IProps {
+interface IBasePickerProps {
   prompt: string;
   data: IPickerData[];
   selectedValue: string;
   onValueChange: (value: string) => void;
-  selectedHeight?: number;
-  selectedColor?: string;
-  selectedBGcolor?: string;
-  selectedFontSize?: number;
-  selectedFontFamily?: string;
+  width?: string | number; // if string, use percentage, otherwise, no units
+  height?: number;
+  color?: string;
+  bgColor?: string;
+  fontSize?: number;
+  fontFamily?: string;
   itemsMaxHeight?: number;
   itemsColor?: string;
   itemsBGcolor?: string;
@@ -47,16 +48,17 @@ interface IProps {
   itemsHideImage?: boolean;
 }
 
-export const BasePicker: React.FC<IProps> = ({
+export const BasePicker: React.FC<IBasePickerProps> = ({
   prompt,
   data,
   selectedValue,
   onValueChange,
-  selectedHeight = 50,
-  selectedColor = colors.default,
-  selectedBGcolor = colors.white,
-  selectedFontSize = 16,
-  selectedFontFamily,
+  width = '100%',
+  height = 50,
+  color = colors.default,
+  bgColor = colors.white,
+  fontSize = 18,
+  fontFamily,
   itemsMaxHeight = 300,
   itemsColor = colors.default,
   itemsBGcolor = colors.white,
@@ -81,9 +83,9 @@ export const BasePicker: React.FC<IProps> = ({
     return (
       <Text
         style={{
-          color: selectedColor,
-          fontSize: selectedFontSize,
-          fontFamily: selectedFontFamily,
+          color: color,
+          fontSize: fontSize,
+          fontFamily: fontFamily,
         }}
       >
         {selected.label}
@@ -144,54 +146,58 @@ export const BasePicker: React.FC<IProps> = ({
     );
   };
 
+  const heightFinal = imageSize ? Math.max(height, imageSize + 7) : height;
+
   return (
-    <>
-      <TouchableHighlight onPress={() => setVisible(true)} underlayColor={selectedBGcolor}>
-        <View
-          style={{
-            flex: 1,
-            flexDirection: 'row',
-            justifyContent: 'space-between',
-            alignItems: 'center',
-            backgroundColor: selectedBGcolor,
-            height: imageSize ? Math.max(selectedHeight, imageSize + 7) : selectedHeight,
-            paddingLeft,
-            paddingRight,
-          }}
-        >
-          {selected && selected.image && !selectedHideImage
-            ? renderSelectedWithImage()
-            : renderSelectedText()}
-          <BaseIcon
-            color={selectedColor}
-            size={iconSize ? iconSize : selectedFontSize + 5}
-            name={'arrow-picker'}
-          />
+    <React.Fragment>
+      <TouchableHighlight
+        onPress={() => {
+          console.log('here');
+          setVisible(true);
+        }}
+        underlayColor={bgColor}
+      >
+        <View style={{ height: heightFinal, width }}>
+          <View
+            style={{
+              flex: 1,
+              flexDirection: 'row',
+              justifyContent: 'space-between',
+              alignItems: 'center',
+              backgroundColor: bgColor,
+              paddingLeft,
+              paddingRight,
+            }}
+          >
+            {selected && selected.image && !selectedHideImage
+              ? renderSelectedWithImage()
+              : renderSelectedText()}
+            <BaseIcon
+              color={color}
+              size={iconSize ? iconSize : fontSize + 5}
+              name={'arrow-picker'}
+            />
+          </View>
         </View>
       </TouchableHighlight>
 
-      <BaseModal
-        visible={visible}
-        title={prompt}
-        onClose={() => setVisible(false)}
-        renderContent={() => (
-          <ScrollView style={{ maxHeight: itemsMaxHeight, backgroundColor: itemsBGcolor }}>
-            {data.map((d, i) => (
-              <TouchableOpacity
-                key={d.label}
-                onPress={() => {
-                  setVisible(false);
-                  onValueChange(d.value);
-                }}
-              >
-                <View style={{ marginTop: i === 0 ? itemsGap : 0, marginBottom: itemsGap }}>
-                  {d.image && !itemsHideImage ? renderItemWithImage(d) : renderItemText(d)}
-                </View>
-              </TouchableOpacity>
-            ))}
-          </ScrollView>
-        )}
-      />
-    </>
+      <BaseModal visible={visible} title={prompt} onClose={() => setVisible(false)}>
+        <ScrollView style={{ maxHeight: itemsMaxHeight, backgroundColor: itemsBGcolor }}>
+          {data.map((d, i) => (
+            <TouchableOpacity
+              key={d.label}
+              onPress={() => {
+                setVisible(false);
+                onValueChange(d.value);
+              }}
+            >
+              <View style={{ marginTop: i === 0 ? itemsGap : 0, marginBottom: itemsGap }}>
+                {d.image && !itemsHideImage ? renderItemWithImage(d) : renderItemText(d)}
+              </View>
+            </TouchableOpacity>
+          ))}
+        </ScrollView>
+      </BaseModal>
+    </React.Fragment>
   );
 };

@@ -5,12 +5,21 @@ import { svStyles } from './withScrollView';
 // with NavTitle and ScrollView (NTSV)
 export const withNTSV = <P extends object>(
   Comp: React.ComponentType<P>,
-  title: string,
-  backgroundColor?: string,
-  headerColor?: string,
-  headerBackgroundColor?: string,
-  headerIsFlat?: boolean,
-  headerTitleIsBold?: boolean,
+  {
+    title,
+    backgroundColor,
+    headerColor,
+    headerBackgroundColor,
+    headerIsFlat,
+    headerTitleIsBold,
+  }: {
+    title: string;
+    backgroundColor?: string;
+    headerColor?: string;
+    headerBackgroundColor?: string;
+    headerIsFlat?: boolean;
+    headerTitleIsBold?: boolean;
+  },
 ) =>
   class WithNavTitleScreen extends React.Component<P> {
     static navigationOptions = {

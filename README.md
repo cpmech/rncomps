@@ -14,7 +14,6 @@ Components:
 - BaseLink -- Link
 - BaseModal -- Modal window
 - BasePicker -- Selection of items
-- BaseSpacer -- Screen spacer
 - BaseSpinnerScreen -- Screen showing spinner centered
 - BaseSpinner -- Spinner (activity indicator)
 
