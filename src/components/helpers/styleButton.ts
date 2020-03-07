@@ -19,7 +19,7 @@ export interface IStyleButton {
   paddingHorizontal?: number;
 }
 
-export const defaultStyleButton: IStyleButton = {
+export const defaultStyleButton = {
   disabled: false,
   outline: false,
   color: '#ffffff',
