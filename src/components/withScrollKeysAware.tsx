@@ -8,12 +8,21 @@ import { ScrollView } from 'react-native-gesture-handler';
 
 export const withScrollKeysAware = <P extends object>(
   Comp: React.ComponentType<P>,
-  paddingTop?: number,
-  paddingHoriz?: number,
-  backgroundColor?: string,
-  minHeight = 800,
-  maxHeight = 500,
-  maxWidth = 340,
+  {
+    minHeight, // e.g. 800
+    contentMaxHeight, // e.g. 500
+    contentMaxWidth, // e.g. 340
+    backgroundColor,
+    paddingTop,
+    paddingHoriz,
+  }: {
+    minHeight: number;
+    contentMaxHeight: number;
+    contentMaxWidth: number;
+    backgroundColor: string;
+    paddingTop: number;
+    paddingHoriz: number;
+  },
   kasvProps?: KeyboardAwareScrollViewProps,
 ): React.FC<P> => ({ ...props }) => (
   <KeyboardAwareScrollView {...kasvProps}>
@@ -41,8 +50,8 @@ export const withScrollKeysAware = <P extends object>(
               flex: 1,
               flexDirection: 'column',
               justifyContent: 'space-between',
-              maxHeight,
-              maxWidth,
+              maxHeight: contentMaxHeight,
+              maxWidth: contentMaxWidth,
             }}
           >
             <Comp {...(props as P)} />
