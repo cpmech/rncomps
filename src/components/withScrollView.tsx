@@ -17,10 +17,11 @@ export const svStyles: IStyles = {
   },
 };
 
-export const withScrollView = <P extends object>(Comp: React.ComponentType<P>): React.FC<P> => ({
-  ...props
-}) => (
-  <ScrollView>
+export const withScrollView = <P extends object>(
+  Comp: React.ComponentType<P>,
+  backgroundColor?: string,
+): React.FC<P> => ({ ...props }) => (
+  <ScrollView style={{ backgroundColor }}>
     <View style={svStyles.root}>
       <View style={svStyles.content}>
         <Comp {...(props as P)} />
