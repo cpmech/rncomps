@@ -18,3 +18,5 @@ export type FontWeight =
   | '700'
   | '800'
   | '900';
+
+export type TextDecorationLine = 'none' | 'underline' | 'line-through' | 'underline line-through';

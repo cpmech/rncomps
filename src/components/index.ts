@@ -24,5 +24,6 @@ export * from './withBanner';
 export * from './withNavTitle';
 export * from './withNTSV';
 export * from './withScrollView';
+export * from './withScrollKeysAware';
 export * from './XCentered';
 export * from './XColumn';
