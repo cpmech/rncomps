@@ -1,3 +1,4 @@
+export * from './helpers';
 export * from './BaseButton';
 export * from './BaseCheckbox';
 export * from './BaseCircleButton';

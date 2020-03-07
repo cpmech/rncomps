@@ -1,4 +1,4 @@
-export interface ITypeAProps {
+export interface IStyleTypeA {
   // dimensions
   height?: number;
   width?: string;
@@ -27,7 +27,7 @@ export interface ITypeAProps {
   borderColor?: string;
 }
 
-export const typeAdefault = {
+export const defaultStyleTypeA = {
   // dimensions
   height: 50,
   width: '100%',

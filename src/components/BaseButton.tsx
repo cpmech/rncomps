@@ -1,47 +1,34 @@
 import React from 'react';
 import { TouchableHighlight, View, Text, GestureResponderEvent } from 'react-native';
 import { BaseIcon } from './BaseIcon';
+import { IStyleButton, defaultStyleButton } from './helpers';
 
-interface IProps {
+export interface IBaseButtonProps extends IStyleButton {
   onPress: (event: GestureResponderEvent) => void;
   text?: string;
   iconName?: string;
-  disabled?: boolean;
-  outline?: boolean;
-  color?: string;
-  backgroundColor?: string;
-  fgDisabled?: string;
-  bgDisabled?: string;
-  fontFamily?: string;
-  fontSize?: number;
-  iconDeltaSize?: number;
-  iconGap?: number;
-  height?: number;
-  width?: number;
-  borderRadius?: number;
-  paddingVertical?: number;
-  paddingHorizontal?: number;
 }
 
-export const BaseButton: React.FC<IProps> = ({
+export const BaseButton: React.FC<IBaseButtonProps> = ({
   onPress,
   text,
   iconName,
-  disabled,
-  outline,
-  color = '#ffffff',
-  backgroundColor = '#2f95dc',
-  fgDisabled = '#a4a4a4',
-  bgDisabled = '#dfdfdf',
-  fontFamily,
-  fontSize = 24,
-  iconDeltaSize = 5,
-  iconGap = 10,
-  height = 45,
-  width,
-  borderRadius = 600,
-  paddingVertical = 10,
-  paddingHorizontal = 10,
+  disabled = defaultStyleButton.disabled,
+  outline = defaultStyleButton.outline,
+  color = defaultStyleButton.color,
+  backgroundColor = defaultStyleButton.backgroundColor,
+  fgDisabled = defaultStyleButton.fgDisabled,
+  bgDisabled = defaultStyleButton.bgDisabled,
+  fontFamily = defaultStyleButton.fontFamily,
+  fontWeight = defaultStyleButton.fontWeight,
+  fontSize = defaultStyleButton.fontSize,
+  iconDeltaSize = defaultStyleButton.iconDeltaSize,
+  iconGap = defaultStyleButton.iconGap,
+  height = defaultStyleButton.height,
+  width = defaultStyleButton.width,
+  borderRadius = defaultStyleButton.borderRadius,
+  paddingVertical = defaultStyleButton.paddingVertical,
+  paddingHorizontal = defaultStyleButton.paddingHorizontal,
 }) => (
   <TouchableHighlight
     onPress={disabled ? () => {} : onPress}
@@ -85,6 +72,7 @@ export const BaseButton: React.FC<IProps> = ({
             style={{
               color: outline ? backgroundColor : disabled ? fgDisabled : color,
               fontFamily,
+              fontWeight,
               fontSize,
             }}
           >

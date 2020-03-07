@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import { View, Text, ScrollView, TouchableOpacity, Image, TouchableHighlight } from 'react-native';
 import { IStyles } from './types';
-import { ITypeAProps, typeAdefault } from './helpers';
+import { IStyleTypeA, defaultStyleTypeA } from './helpers';
 import { BaseIcon } from './BaseIcon';
 import { BaseModal } from './BaseModal';
 import { IPickerData } from './BasePicker';
 
-interface IPickerTypeAProps extends ITypeAProps {
+interface IPickerTypeAProps extends IStyleTypeA {
   label?: string;
   prompt: string;
   selectedValue: string;
@@ -60,37 +60,31 @@ export const PickerTypeA: React.FC<IPickerTypeAProps> = ({
   iconColor,
 
   // dimensions
-  height = typeAdefault.height,
-  width = typeAdefault.width,
-  paddingHoriz = typeAdefault.paddingHoriz,
-  gapXflatLeft = typeAdefault.gapXflatLeft,
-  suffixPaddingRight = typeAdefault.suffixPaddingRight,
-  marginVert = typeAdefault.marginVert,
-  fontSize = typeAdefault.fontSize,
-  labelScale = typeAdefault.labelScale,
-  factorFontsize2width = typeAdefault.factorFontsize2width,
+  height = defaultStyleTypeA.height,
+  width = defaultStyleTypeA.width,
+  paddingHoriz = defaultStyleTypeA.paddingHoriz,
+  gapXflatLeft = defaultStyleTypeA.gapXflatLeft,
+  suffixPaddingRight = defaultStyleTypeA.suffixPaddingRight,
+  marginVert = defaultStyleTypeA.marginVert,
+  fontSize = defaultStyleTypeA.fontSize,
+  labelScale = defaultStyleTypeA.labelScale,
+  factorFontsize2width = defaultStyleTypeA.factorFontsize2width,
 
   // border
-  borderRadius = typeAdefault.borderRadius,
-  borderWidth = typeAdefault.borderWidth,
-  flatLeft = typeAdefault.flatLeft,
-  flatRight = typeAdefault.flatRight,
-  noBorderLeft = typeAdefault.noBorderLeft,
+  borderRadius = defaultStyleTypeA.borderRadius,
+  borderWidth = defaultStyleTypeA.borderWidth,
+  flatLeft = defaultStyleTypeA.flatLeft,
+  flatRight = defaultStyleTypeA.flatRight,
+  noBorderLeft = defaultStyleTypeA.noBorderLeft,
 
   // colors
-  color = typeAdefault.color,
-  bgColor = typeAdefault.bgColor,
-  mutedColor = typeAdefault.mutedColor,
-  borderColor = typeAdefault.borderColor,
-  darkMode = typeAdefault.darkMode,
+  color = defaultStyleTypeA.color,
+  bgColor = defaultStyleTypeA.bgColor,
+  mutedColor = defaultStyleTypeA.mutedColor,
+  borderColor = defaultStyleTypeA.borderColor,
 }) => {
   const [showModal, setShowModal] = useState(false);
   const selected = data.find(d => d.value === selectedValue);
-
-  if (darkMode) {
-    color = 'white';
-    mutedColor = '#cccccc';
-  }
 
   height = imageSize ? Math.max(height, imageSize + 7) : height;
   height += 2 * imageVertGap;

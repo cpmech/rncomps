@@ -1,9 +1,9 @@
 import React, { ReactNode, useState, useRef } from 'react';
 import { View, Text, TextInput, TouchableWithoutFeedback, TextInputProps } from 'react-native';
 import { IStyles } from './types';
-import { ITypeAProps, typeAdefault, MoveAndScale } from './helpers';
+import { IStyleTypeA, defaultStyleTypeA, MoveAndScale } from './helpers';
 
-interface IInputTypeAProps extends ITypeAProps, TextInputProps {
+interface IInputTypeAProps extends IStyleTypeA, TextInputProps {
   label: string;
   value: string;
   onChangeText: (value: string) => void;
@@ -25,31 +25,31 @@ export const InputTypeA: React.FC<IInputTypeAProps> = ({
   error = false,
 
   // dimensions
-  height = typeAdefault.height,
-  width = typeAdefault.width,
-  paddingHoriz = typeAdefault.paddingHoriz,
-  gapXflatLeft = typeAdefault.gapXflatLeft,
-  suffixPaddingRight = typeAdefault.suffixPaddingRight,
-  marginVert = typeAdefault.marginVert,
-  fontSize = typeAdefault.fontSize,
-  labelScale = typeAdefault.labelScale,
-  factorFontsize2width = typeAdefault.factorFontsize2width,
-  durationMS = typeAdefault.durationMS,
+  height = defaultStyleTypeA.height,
+  width = defaultStyleTypeA.width,
+  paddingHoriz = defaultStyleTypeA.paddingHoriz,
+  gapXflatLeft = defaultStyleTypeA.gapXflatLeft,
+  suffixPaddingRight = defaultStyleTypeA.suffixPaddingRight,
+  marginVert = defaultStyleTypeA.marginVert,
+  fontSize = defaultStyleTypeA.fontSize,
+  labelScale = defaultStyleTypeA.labelScale,
+  factorFontsize2width = defaultStyleTypeA.factorFontsize2width,
+  durationMS = defaultStyleTypeA.durationMS,
 
   // border
-  borderRadius = typeAdefault.borderRadius,
-  borderWidth = typeAdefault.borderWidth,
-  flatLeft = typeAdefault.flatLeft,
-  flatRight = typeAdefault.flatRight,
-  noBorderLeft = typeAdefault.noBorderLeft,
+  borderRadius = defaultStyleTypeA.borderRadius,
+  borderWidth = defaultStyleTypeA.borderWidth,
+  flatLeft = defaultStyleTypeA.flatLeft,
+  flatRight = defaultStyleTypeA.flatRight,
+  noBorderLeft = defaultStyleTypeA.noBorderLeft,
 
   // colors
-  color = typeAdefault.color,
-  bgColor = typeAdefault.bgColor,
-  hlColor = typeAdefault.hlColor,
-  errorColor = typeAdefault.errorColor,
-  mutedColor = typeAdefault.mutedColor,
-  borderColor = typeAdefault.borderColor,
+  color = defaultStyleTypeA.color,
+  bgColor = defaultStyleTypeA.bgColor,
+  hlColor = defaultStyleTypeA.hlColor,
+  errorColor = defaultStyleTypeA.errorColor,
+  mutedColor = defaultStyleTypeA.mutedColor,
+  borderColor = defaultStyleTypeA.borderColor,
 
   ...rest
 }) => {
