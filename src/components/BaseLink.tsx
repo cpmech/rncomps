@@ -1,27 +1,21 @@
 import React from 'react';
 import { View, Text, TouchableHighlight, GestureResponderEvent } from 'react-native';
-import { FontWeight } from './types';
+import { defaultStyleLink, IStyleLink } from './helpers';
 
-interface IProps {
+interface IProps extends IStyleLink {
   onPress: (event: GestureResponderEvent) => void;
   message: string;
-  fontSize?: number;
-  fontWeight?: FontWeight;
-  colorDefault?: string;
-  colorHover?: string;
-  colorDark?: string;
-  darkBackground?: boolean;
 }
 
 export const BaseLink: React.FC<IProps> = ({
   onPress,
   message,
-  fontSize = 18,
-  fontWeight = 'normal',
-  colorDefault = '#2296f3',
-  colorHover = '#efefef',
-  colorDark = '#ffffff',
-  darkBackground,
+  fontSize = defaultStyleLink.fontSize,
+  fontWeight = defaultStyleLink.fontWeight,
+  color = defaultStyleLink.color,
+  colorHover = defaultStyleLink.colorHover,
+  darkBackground = defaultStyleLink.darkBackground,
+  textDecorationLine = defaultStyleLink.textDecorationLine,
 }) => (
   <View>
     <TouchableHighlight
@@ -31,8 +25,9 @@ export const BaseLink: React.FC<IProps> = ({
       <Text
         style={{
           fontSize,
-          color: darkBackground ? colorDark : colorDefault,
+          color,
           fontWeight,
+          textDecorationLine,
         }}
       >
         {message}
