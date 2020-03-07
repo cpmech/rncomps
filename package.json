@@ -58,7 +58,7 @@
     "prettier": "^1.19.1",
     "react-native-storybook-loader": "^1.8.1",
     "react-test-renderer": "16.9.0",
-    "rollup": "^1.32.0",
+    "rollup": "^2.0.2",
     "rollup-plugin-node-resolve": "^5.2.0",
     "rollup-plugin-terser": "^5.2.0",
     "rollup-plugin-typescript2": "^0.26.0",
