@@ -50,10 +50,16 @@ export const InputTypeA: React.FC<IInputTypeAProps> = ({
   errorColor = typeAdefault.errorColor,
   mutedColor = typeAdefault.mutedColor,
   borderColor = typeAdefault.borderColor,
-  darkMode = typeAdefault.darkMode,
 
   ...rest
 }) => {
+  if (error) {
+    color = errorColor;
+    hlColor = errorColor;
+    mutedColor = errorColor;
+    borderColor = errorColor;
+  }
+
   const hasValue = !!value;
   const refInput = useRef<TextInput>(null);
   const [anim, setAnim] = useState({ steady: hasValue, enabled: hasValue });
@@ -61,19 +67,6 @@ export const InputTypeA: React.FC<IInputTypeAProps> = ({
     border: borderColor,
     label: mutedColor,
   });
-
-  if (darkMode) {
-    color = 'white';
-    hlColor = 'white';
-    mutedColor = '#cccccc';
-  }
-
-  if (error) {
-    color = errorColor;
-    hlColor = errorColor;
-    mutedColor = errorColor;
-    borderColor = errorColor;
-  }
 
   const radius = borderRadius > height / 2 ? height / 2 : borderRadius;
 

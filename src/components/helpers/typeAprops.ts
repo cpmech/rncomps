@@ -25,7 +25,6 @@ export interface ITypeAProps {
   errorColor?: string;
   mutedColor?: string;
   borderColor?: string;
-  darkMode?: boolean;
 }
 
 export const typeAdefault = {
@@ -55,5 +54,4 @@ export const typeAdefault = {
   errorColor: '#e62739',
   mutedColor: '#898989',
   borderColor: '#cccccc',
-  darkMode: false,
 };
