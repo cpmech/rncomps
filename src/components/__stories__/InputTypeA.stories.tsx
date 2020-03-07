@@ -179,7 +179,7 @@ const Default = () => {
 
   const renderIcon = (
     <TouchableHighlight onPress={() => setShowPassword(!showPassword)}>
-      {showPassword ? <BaseIcon name="eye" size={20} /> : <BaseIcon name="eye-off" size={20} />}
+      {showPassword ? <BaseIcon name="eye-off" size={20} /> : <BaseIcon name="eye" size={20} />}
     </TouchableHighlight>
   );
 
