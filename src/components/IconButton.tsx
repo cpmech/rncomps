@@ -27,7 +27,6 @@ export const IconButton: React.FC<IIconButtonProps> = ({
         justifyContent: 'center',
         paddingLeft,
         paddingRight,
-        backgroundColor: 'red',
       }}
     >
       <BaseIcon
