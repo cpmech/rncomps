@@ -1,24 +1,14 @@
 import React, { useState } from 'react';
-import {
-  View,
-  KeyboardAvoidingView,
-  SafeAreaView,
-  Keyboard,
-  Platform,
-  TouchableWithoutFeedback,
-  StyleSheet,
-} from 'react-native';
+import { View, Keyboard, TouchableWithoutFeedback, StyleSheet } from 'react-native';
 import { storiesOf } from '@storybook/react-native';
 import { PickerTypeA } from '../PickerTypeA';
 import { fmaPickerData } from '../../screens/fmaPickerData';
-import { typeAdefault } from '../helpers';
+import { defaultStyleTypeA } from '../helpers';
+import { ScrollView } from 'react-native-gesture-handler';
 
 const stories = storiesOf('PickerTypeA', module);
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
   inner: {
     padding: 24,
     flex: 1,
@@ -46,120 +36,118 @@ const Default = () => {
   const [sex, setSex] = useState('female');
 
   return (
-    <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : null} style={{ flex: 1 }}>
-      <SafeAreaView style={styles.container}>
-        <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-          <View style={styles.inner}>
-            <PickerTypeA
-              label="Preferred character"
-              prompt="Who is your preferred character?"
-              selectedValue={character}
-              onValueChange={v => setCharacter(v)}
-              data={fmaPickerData}
-              factorFontsize2width={0.5}
-              imageSize={150}
-              imageVertGap={10}
-              textMaxWidth={120}
-              itemsMaxWidth={100}
-              borderRadius={16}
-            />
-            <PickerTypeA
-              label="Preferred character"
-              prompt="Who is your preferred character?"
-              selectedValue={character}
-              onValueChange={v => setCharacter(v)}
-              data={fmaPickerData}
-              factorFontsize2width={0.5}
-            />
-            <PickerTypeA
-              label="Preferred character"
-              prompt="Who is your preferred character?"
-              selectedValue={character}
-              onValueChange={v => setCharacter(v)}
-              data={fmaPickerData}
-              factorFontsize2width={0.5}
-              imageHideSelected={true}
-            />
+    <ScrollView>
+      <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+        <View style={styles.inner}>
+          <PickerTypeA
+            label="Preferred character"
+            prompt="Who is your preferred character?"
+            selectedValue={character}
+            onValueChange={v => setCharacter(v)}
+            data={fmaPickerData}
+            factorFontsize2width={0.5}
+            imageSize={150}
+            imageVertGap={10}
+            textMaxWidth={120}
+            itemsMaxWidth={100}
+            borderRadius={16}
+          />
+          <PickerTypeA
+            label="Preferred character"
+            prompt="Who is your preferred character?"
+            selectedValue={character}
+            onValueChange={v => setCharacter(v)}
+            data={fmaPickerData}
+            factorFontsize2width={0.5}
+          />
+          <PickerTypeA
+            label="Preferred character"
+            prompt="Who is your preferred character?"
+            selectedValue={character}
+            onValueChange={v => setCharacter(v)}
+            data={fmaPickerData}
+            factorFontsize2width={0.5}
+            imageHideSelected={true}
+          />
+          <View
+            style={{
+              height: 60 + (defaultStyleTypeA.fontSize * defaultStyleTypeA.labelScale) / 2 + 2,
+            }}
+          >
             <View
               style={{
-                height: 60 + (typeAdefault.fontSize * typeAdefault.labelScale) / 2 + 2,
+                flex: 1,
+                flexDirection: 'row',
               }}
             >
-              <View
-                style={{
-                  flex: 1,
-                  flexDirection: 'row',
-                }}
-              >
-                <PickerTypeA
-                  prompt="Who is your preferred character?"
-                  selectedValue={character}
-                  onValueChange={v => setCharacter(v)}
-                  data={fmaPickerData}
-                  factorFontsize2width={0.5}
-                  imageSize={60}
-                  width="33.33333333333%"
-                  noSelectedText={true}
-                  borderRadius={8}
-                />
-                <PickerTypeA
-                  prompt="Who is your preferred character?"
-                  selectedValue={character}
-                  onValueChange={v => setCharacter(v)}
-                  data={fmaPickerData}
-                  factorFontsize2width={0.5}
-                  imageSize={60}
-                  width="33.33333333333%"
-                  noSelectedText={true}
-                  borderRadius={8}
-                />
-                <PickerTypeA
-                  prompt="Who is your preferred character?"
-                  selectedValue={character}
-                  onValueChange={v => setCharacter(v)}
-                  data={fmaPickerData}
-                  factorFontsize2width={0.5}
-                  imageSize={60}
-                  width="33.33333333333%"
-                  noSelectedText={true}
-                  borderRadius={8}
-                />
-              </View>
-            </View>
-            <View>
-              <View style={{ flex: 1, flexDirection: 'row' }}>
-                <PickerTypeA
-                  label="Age"
-                  prompt="Please select one"
-                  selectedValue={age}
-                  onValueChange={v => setAge(v)}
-                  data={[
-                    { value: '18', label: '18 - 34' },
-                    { value: '35', label: '35 - 54' },
-                    { value: '55', label: 'over 55' },
-                  ]}
-                  width="50%"
-                  flatRight={true}
-                />
-                <PickerTypeA
-                  label="Sex"
-                  prompt="Please select one"
-                  selectedValue={sex}
-                  onValueChange={v => setSex(v)}
-                  data={[
-                    { value: 'male', label: 'male' },
-                    { value: 'female', label: 'female' },
-                  ]}
-                  width="50%"
-                  flatLeft={true}
-                  noBorderLeft={true}
-                />
-              </View>
+              <PickerTypeA
+                prompt="Who is your preferred character?"
+                selectedValue={character}
+                onValueChange={v => setCharacter(v)}
+                data={fmaPickerData}
+                factorFontsize2width={0.5}
+                imageSize={60}
+                width="33.33333333333%"
+                noSelectedText={true}
+                borderRadius={8}
+              />
+              <PickerTypeA
+                prompt="Who is your preferred character?"
+                selectedValue={character}
+                onValueChange={v => setCharacter(v)}
+                data={fmaPickerData}
+                factorFontsize2width={0.5}
+                imageSize={60}
+                width="33.33333333333%"
+                noSelectedText={true}
+                borderRadius={8}
+              />
+              <PickerTypeA
+                prompt="Who is your preferred character?"
+                selectedValue={character}
+                onValueChange={v => setCharacter(v)}
+                data={fmaPickerData}
+                factorFontsize2width={0.5}
+                imageSize={60}
+                width="33.33333333333%"
+                noSelectedText={true}
+                borderRadius={8}
+              />
             </View>
           </View>
-        </TouchableWithoutFeedback>
-      </SafeAreaView>
-    </KeyboardAvoidingView>
+          <View>
+            <View style={{ flex: 1, flexDirection: 'row' }}>
+              <PickerTypeA
+                label="Age"
+                prompt="Please select one"
+                selectedValue={age}
+                onValueChange={v => setAge(v)}
+                data={[
+                  { value: '18', label: '18 - 34' },
+                  { value: '35', label: '35 - 54' },
+                  { value: '55', label: 'over 55' },
+                ]}
+                width="50%"
+                flatRight={true}
+              />
+              <PickerTypeA
+                label="Sex"
+                prompt="Please select one"
+                selectedValue={sex}
+                onValueChange={v => setSex(v)}
+                data={[
+                  { value: 'male', label: 'male' },
+                  { value: 'female', label: 'female' },
+                ]}
+                width="50%"
+                flatLeft={true}
+                noBorderLeft={true}
+              />
+            </View>
+          </View>
+        </View>
+      </TouchableWithoutFeedback>
+    </ScrollView>
   );
 };
 
