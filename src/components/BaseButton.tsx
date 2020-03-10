@@ -26,6 +26,7 @@ export const BaseButton: React.FC<IBaseButtonProps> = ({
   iconGap = defaultStyleButton.iconGap,
   height = defaultStyleButton.height,
   width = defaultStyleButton.width,
+  minWidth = defaultStyleButton.minWidth,
   borderRadius = defaultStyleButton.borderRadius,
   paddingVertical = defaultStyleButton.paddingVertical,
   paddingHorizontal = defaultStyleButton.paddingHorizontal,
@@ -39,6 +40,7 @@ export const BaseButton: React.FC<IBaseButtonProps> = ({
       style={{
         height,
         width,
+        minWidth,
         borderRadius,
         backgroundColor: outline ? 'transparent' : disabled ? bgDisabled : backgroundColor,
         borderWidth: outline ? 1 : 0,
