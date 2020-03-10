@@ -14,6 +14,7 @@ export interface IStyleButton {
   iconGap?: number;
   height?: number;
   width?: number;
+  minWidth?: number;
   borderRadius?: number;
   paddingVertical?: number;
   paddingHorizontal?: number;
@@ -33,6 +34,7 @@ export const defaultStyleButton = {
   iconGap: 10,
   height: 45,
   width: undefined,
+  minWidth: undefined,
   borderRadius: 600,
   paddingVertical: 10,
   paddingHorizontal: 10,
