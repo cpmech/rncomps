@@ -6,7 +6,7 @@ import { BaseIcon } from './BaseIcon';
 import { BaseModal } from './BaseModal';
 import { IPickerData } from './BasePicker';
 
-interface IPickerTypeAProps extends IStyleTypeA {
+export interface IPickerTypeAProps extends IStyleTypeA {
   label?: string;
   prompt: string;
   selectedValue: string;

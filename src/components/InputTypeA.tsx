@@ -3,7 +3,7 @@ import { View, Text, TextInput, TouchableWithoutFeedback, TextInputProps } from 
 import { IStyles } from './types';
 import { IStyleTypeA, defaultStyleTypeA, MoveAndScale } from './helpers';
 
-interface IInputTypeAProps extends IStyleTypeA, TextInputProps {
+export interface IInputTypeAProps extends IStyleTypeA, TextInputProps {
   label: string;
   value: string;
   onChangeText: (value: string) => void;
