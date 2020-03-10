@@ -14,26 +14,20 @@ export const BaseLink: React.FC<IProps> = ({
   fontSize = defaultStyleLink.fontSize,
   fontFamily = defaultStyleLink.fontFamily,
   fontWeight = defaultStyleLink.fontWeight,
-  colorHover = defaultStyleLink.colorHover,
-  darkBackground = defaultStyleLink.darkBackground,
+  underlayColor = defaultStyleLink.underlayColor,
   textDecorationLine = defaultStyleLink.textDecorationLine,
 }) => (
-  <View>
-    <TouchableHighlight
-      onPress={onPress}
-      underlayColor={darkBackground ? 'transparent' : colorHover}
+  <TouchableHighlight onPress={onPress} underlayColor={underlayColor}>
+    <Text
+      style={{
+        color,
+        fontSize,
+        fontWeight,
+        fontFamily,
+        textDecorationLine,
+      }}
     >
-      <Text
-        style={{
-          color,
-          fontSize,
-          fontWeight,
-          fontFamily,
-          textDecorationLine,
-        }}
-      >
-        {message}
-      </Text>
-    </TouchableHighlight>
-  </View>
+      {message}
+    </Text>
+  </TouchableHighlight>
 );

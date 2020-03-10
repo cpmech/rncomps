@@ -5,8 +5,7 @@ export interface IStyleLink {
   fontFamily?: string;
   fontWeight?: FontWeight;
   color?: string;
-  colorHover?: string;
-  darkBackground?: boolean;
+  underlayColor?: string;
   textDecorationLine?: TextDecorationLine;
 }
 
@@ -15,7 +14,6 @@ export const defaultStyleLink = {
   fontFamily: undefined,
   fontWeight: undefined,
   color: '#2296f3',
-  colorHover: '#efefef',
-  darkBackground: undefined,
+  underlayColor: 'transparent',
   textDecorationLine: 'underline' as TextDecorationLine,
 };

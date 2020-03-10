@@ -18,16 +18,7 @@ import { fmaPickerData } from './fmaPickerData';
 
 const VSpace = () => <View style={{ height: 20 }} />;
 
-const iconNames = [
-  'cube',
-  'construct',
-  'cloud',
-  'trophy',
-  'rocket',
-  'planet',
-  'logo-game-controller-b',
-  'logo-tux',
-];
+const iconNames = ['cube', 'construct', 'cloud', 'trophy', 'rocket', 'planet', 'game', 'tux'];
 
 const niceColors = ['#99B898', '#FECEAB', '#FF847C', '#E84A5F', '#2A363B'];
 
