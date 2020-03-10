@@ -67,6 +67,8 @@ export const PickerTypeA: React.FC<IPickerTypeAProps> = ({
   suffixPaddingRight = defaultStyleTypeA.suffixPaddingRight,
   marginVert = defaultStyleTypeA.marginVert,
   fontSize = defaultStyleTypeA.fontSize,
+  fontFamily = defaultStyleTypeA.fontFamily,
+  fontWeight = defaultStyleTypeA.fontWeight,
   labelScale = defaultStyleTypeA.labelScale,
   factorFontsize2width = defaultStyleTypeA.factorFontsize2width,
 
@@ -130,6 +132,8 @@ export const PickerTypeA: React.FC<IPickerTypeAProps> = ({
     inputText: {
       color,
       fontSize,
+      fontFamily,
+      fontWeight,
       maxWidth: textMaxWidth,
     },
 
@@ -150,6 +154,7 @@ export const PickerTypeA: React.FC<IPickerTypeAProps> = ({
 
     label: {
       fontSize: fontSize * labelScale,
+      fontFamily,
       color: mutedColor,
     },
 

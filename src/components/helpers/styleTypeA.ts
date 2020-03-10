@@ -1,3 +1,5 @@
+import { FontWeight } from '../types';
+
 export interface IStyleTypeA {
   // dimensions
   height?: number;
@@ -7,6 +9,8 @@ export interface IStyleTypeA {
   suffixPaddingRight?: number;
   marginVert?: number;
   fontSize?: number;
+  fontFamily?: string;
+  fontWeight?: FontWeight;
   labelScale?: number;
   factorFontsize2width?: number;
   durationMS?: number;
@@ -36,6 +40,8 @@ export const defaultStyleTypeA = {
   suffixPaddingRight: 20,
   marginVert: undefined,
   fontSize: 18,
+  fontFamily: undefined,
+  fontWeight: undefined,
   labelScale: 0.8,
   factorFontsize2width: 0.65,
   durationMS: 300,
