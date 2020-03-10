@@ -7,6 +7,8 @@ const cacheRoot = '/tmp/rollup_typescript_cache';
 const external = [
   'react-native-vector-icons/MaterialIcons',
   'react-native-vector-icons/Ionicons',
+  'react-native-vector-icons/SimpleLineIcons',
+  'react-native-vector-icons/Feather',
   ...Object.keys(pkg.dependencies || {}),
   ...Object.keys(pkg.peerDependencies || {}),
 ];

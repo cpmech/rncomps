@@ -123,7 +123,7 @@ export const BaseIcon: React.FC<IProps> = ({
   }
 
   if (k === 'ion' && !fixed) {
-    n = Platform.select({ ios: `ios-${n}`, android: `md-${n}` });
+    n = Platform.select({ ios: `ios-${n}`, android: `md-${n}` }) || n;
   }
 
   // material
