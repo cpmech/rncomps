@@ -32,6 +32,8 @@ export const InputTypeA: React.FC<IInputTypeAProps> = ({
   suffixPaddingRight = defaultStyleTypeA.suffixPaddingRight,
   marginVert = defaultStyleTypeA.marginVert,
   fontSize = defaultStyleTypeA.fontSize,
+  fontFamily = defaultStyleTypeA.fontFamily,
+  fontWeight = defaultStyleTypeA.fontWeight,
   labelScale = defaultStyleTypeA.labelScale,
   factorFontsize2width = defaultStyleTypeA.factorFontsize2width,
   durationMS = defaultStyleTypeA.durationMS,
@@ -105,6 +107,8 @@ export const InputTypeA: React.FC<IInputTypeAProps> = ({
       borderTopRightRadius: flatRight ? 0 : radius,
       borderBottomRightRadius: flatRight ? 0 : radius,
       fontSize,
+      fontFamily,
+      fontWeight,
       paddingLeft: paddingHoriz,
       color: textMode ? mutedColor : color,
       backgroundColor: bgColor,
@@ -127,6 +131,7 @@ export const InputTypeA: React.FC<IInputTypeAProps> = ({
 
     label: {
       fontSize,
+      fontFamily,
       color: colors.label,
     },
 
