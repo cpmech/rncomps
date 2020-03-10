@@ -6,19 +6,21 @@ import SimpleLineIcons from 'react-native-vector-icons/SimpleLineIcons';
 import Feather from 'react-native-vector-icons/Feather';
 import { IStyle } from './types';
 
-interface IProps {
+export type IconKind = 'ion' | 'mat' | 'line' | 'feather';
+
+export interface IBaseIconProps {
   name: string;
   style?: IStyle;
   color?: string;
   size?: number;
-  kind?: 'ion' | 'mat' | 'line' | 'feather';
+  kind?: IconKind;
 }
 
 // references:
 //  https://oblador.github.io/react-native-vector-icons/
 //  https://feathericons.com/
 
-export const BaseIcon: React.FC<IProps> = ({
+export const BaseIcon: React.FC<IBaseIconProps> = ({
   name,
   style,
   color = '#343434',

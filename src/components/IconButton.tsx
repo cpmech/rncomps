@@ -1,18 +1,15 @@
 import React from 'react';
 import { TouchableHighlight, View, Text, GestureResponderEvent } from 'react-native';
-import { BaseIcon } from './BaseIcon';
+import { BaseIcon, IBaseIconProps } from './BaseIcon';
 
-export interface IBaseIconProps {
+export interface IIconButtonProps extends IBaseIconProps {
   onPress: (event: GestureResponderEvent) => void;
-  name: string;
-  size?: number;
-  color?: string;
   underlayColor?: string;
   paddingLeft?: number;
   paddingRight?: number;
 }
 
-export const IconButton: React.FC<IBaseIconProps> = ({
+export const IconButton: React.FC<IIconButtonProps> = ({
   onPress,
   name,
   size = 24,
