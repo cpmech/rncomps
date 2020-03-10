@@ -8,6 +8,8 @@ export interface IBaseIconProps {
   size?: number;
   color?: string;
   underlayColor?: string;
+  paddingLeft?: number;
+  paddingRight?: number;
 }
 
 export const IconButton: React.FC<IBaseIconProps> = ({
@@ -16,6 +18,8 @@ export const IconButton: React.FC<IBaseIconProps> = ({
   size = 24,
   color = '#484848',
   underlayColor = 'transparent',
+  paddingLeft,
+  paddingRight,
 }) => (
   <View
     style={{
@@ -23,6 +27,8 @@ export const IconButton: React.FC<IBaseIconProps> = ({
       flexDirection: 'row',
       alignItems: 'center',
       justifyContent: 'center',
+      paddingLeft,
+      paddingRight,
     }}
   >
     <TouchableHighlight onPress={onPress} underlayColor={underlayColor}>

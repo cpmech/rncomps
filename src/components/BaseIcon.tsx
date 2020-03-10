@@ -2,6 +2,8 @@ import React from 'react';
 import { Platform } from 'react-native';
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
 import IonIcon from 'react-native-vector-icons/Ionicons';
+import SimpleLineIcons from 'react-native-vector-icons/SimpleLineIcons';
+import Feather from 'react-native-vector-icons/Feather';
 import { IStyle } from './types';
 
 interface IProps {
@@ -9,8 +11,12 @@ interface IProps {
   style?: IStyle;
   color?: string;
   size?: number;
-  kind?: string; // ion [default], material
+  kind?: 'ion' | 'mat' | 'line' | 'feather';
 }
+
+// references:
+//  https://oblador.github.io/react-native-vector-icons/
+//  https://feathericons.com/
 
 export const BaseIcon: React.FC<IProps> = ({
   name,
@@ -19,25 +25,122 @@ export const BaseIcon: React.FC<IProps> = ({
   size = 26,
   kind = 'ion',
 }) => {
-  let n = Platform.select({ ios: `ios-${name}`, android: `md-${name}` });
-  if (n === undefined) {
-    n = 'happy-outline';
+  // aliases
+  let n = name;
+  let k = kind;
+  let fixed = false;
+  switch (name) {
+    case 'tux':
+      n = 'logo-tux';
+      k = 'ion';
+      fixed = true;
+      break;
+
+    case 'game':
+      n = kind === 'line' || kind === 'feather' ? 'game-controller' : 'logo-game-controller-b';
+      k = kind === 'feather' ? 'line' : kind === 'mat' ? 'ion' : kind;
+      fixed = true;
+      break;
+
+    case 'pencil':
+      n = kind === 'feather' ? 'edit-2' : name;
+      k = kind === 'mat' || kind === 'ion' ? 'line' : kind;
+      break;
+
+    case 'eye-off':
+      k = kind === 'line' ? 'feather' : kind === 'mat' ? 'ion' : kind;
+      break;
+
+    case 'cube':
+      n = kind === 'line' || kind === 'feather' ? 'box' : name;
+      k = kind === 'line' ? 'feather' : kind === 'mat' ? 'ion' : kind;
+      break;
+
+    case 'info':
+      n = kind === 'ion' ? 'information-circle' : name;
+      break;
+
+    case 'contract':
+    case 'expand':
+    case 'happy':
+    case 'construct':
+    case 'planet':
+    case 'paper':
+      k = 'ion';
+      break;
+
+    case 'eye':
+    case 'calendar':
+    case 'heart':
+      k = kind === 'mat' ? 'ion' : kind;
+      break;
+
+    case 'bulb':
+    case 'rocket':
+    case 'trophy':
+      k = kind === 'feather' ? 'line' : kind === 'mat' ? 'ion' : kind;
+      break;
+
+    case 'more':
+    case 'ellipsis':
+    case 'ellipsis-v':
+      n = kind === 'mat' ? 'more-vert' : 'more';
+      k = kind === 'line' || kind === 'feather' ? 'ion' : kind;
+      break;
+
+    case 'cloud':
+      k = kind === 'line' ? 'feather' : kind;
+      break;
+
+    case 'chart':
+      n =
+        kind === 'ion' || kind === 'mat' ? 'insert-chart' : kind === 'feather' ? 'bar-chart' : name;
+      k = kind === 'ion' ? 'mat' : kind;
+      break;
+
+    case 'bubbles':
+      n = kind === 'ion' ? 'chatbubbles' : kind === 'mat' ? 'chat-bubble' : name;
+      k = kind === 'feather' ? 'line' : kind;
+      break;
+
+    case 'arrow-next':
+      n = 'ios-arrow-forward';
+      k = 'ion';
+      fixed = true;
+      break;
+
+    case 'arrow-picker':
+      n = 'ios-arrow-down';
+      k = 'ion';
+      fixed = true;
+      break;
+
+    case 'arrow-picker-up':
+      n = 'ios-arrow-up';
+      k = 'ion';
+      fixed = true;
+      break;
   }
-  if (name === 'logo-tux' || name === 'logo-game-controller-b') {
-    n = name;
+
+  if (k === 'ion' && !fixed) {
+    n = Platform.select({ ios: `ios-${n}`, android: `md-${n}` });
   }
-  if (name === 'arrow-next') {
-    n = 'ios-arrow-forward';
+
+  // material
+  if (k === 'mat') {
+    return <MaterialIcon name={n} size={size} color={color} style={style} />;
   }
-  if (name === 'arrow-picker') {
-    n = 'ios-arrow-down';
+
+  // line
+  if (k === 'line') {
+    return <SimpleLineIcons name={n} size={size} color={color} style={style} />;
   }
-  if (name === 'arrow-picker-up') {
-    n = 'ios-arrow-up';
+
+  // feather
+  if (k === 'feather') {
+    return <Feather name={n} size={size} color={color} style={style} />;
   }
-  switch (kind) {
-    case 'material':
-      return <MaterialIcon name={n} size={size} color={color} style={style} />;
-  }
+
+  // ion
   return <IonIcon name={n} size={size} color={color} style={style} />;
 };
