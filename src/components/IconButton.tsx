@@ -18,17 +18,18 @@ export const IconButton: React.FC<IIconButtonProps> = ({
   paddingLeft,
   paddingRight,
 }) => (
-  <View
-    style={{
-      flex: 1,
-      flexDirection: 'row',
-      alignItems: 'center',
-      justifyContent: 'center',
-      paddingLeft,
-      paddingRight,
-    }}
-  >
-    <TouchableHighlight onPress={onPress} underlayColor={underlayColor}>
+  <TouchableHighlight onPress={onPress} underlayColor={underlayColor}>
+    <View
+      style={{
+        flex: 1,
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'center',
+        paddingLeft,
+        paddingRight,
+        backgroundColor: 'red',
+      }}
+    >
       <BaseIcon
         name={name}
         style={{
@@ -38,6 +39,6 @@ export const IconButton: React.FC<IIconButtonProps> = ({
         color={color}
         size={size}
       />
-    </TouchableHighlight>
-  </View>
+    </View>
+  </TouchableHighlight>
 );
