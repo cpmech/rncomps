@@ -10,9 +10,10 @@ interface IProps extends IStyleLink {
 export const BaseLink: React.FC<IProps> = ({
   onPress,
   message,
-  fontSize = defaultStyleLink.fontSize,
-  fontWeight = defaultStyleLink.fontWeight,
   color = defaultStyleLink.color,
+  fontSize = defaultStyleLink.fontSize,
+  fontFamily = defaultStyleLink.fontFamily,
+  fontWeight = defaultStyleLink.fontWeight,
   colorHover = defaultStyleLink.colorHover,
   darkBackground = defaultStyleLink.darkBackground,
   textDecorationLine = defaultStyleLink.textDecorationLine,
@@ -24,9 +25,10 @@ export const BaseLink: React.FC<IProps> = ({
     >
       <Text
         style={{
-          fontSize,
           color,
+          fontSize,
           fontWeight,
+          fontFamily,
           textDecorationLine,
         }}
       >
