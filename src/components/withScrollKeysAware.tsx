@@ -9,19 +9,19 @@ import { ScrollView } from 'react-native-gesture-handler';
 export const withScrollKeysAware = <P extends object>(
   Comp: React.ComponentType<P>,
   {
+    backgroundColor,
     minHeight, // e.g. 800
     contentMaxHeight, // e.g. 500
     contentMaxWidth, // e.g. 340
-    backgroundColor,
     paddingTop,
     paddingHoriz,
   }: {
-    minHeight: number;
-    contentMaxHeight: number;
-    contentMaxWidth: number;
     backgroundColor: string;
-    paddingTop: number;
-    paddingHoriz: number;
+    minHeight?: number;
+    contentMaxHeight?: number;
+    contentMaxWidth?: number;
+    paddingTop?: number;
+    paddingHoriz?: number;
   },
   kasvProps?: KeyboardAwareScrollViewProps,
 ): React.FC<P> => ({ ...props }) => (
