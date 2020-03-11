@@ -17,6 +17,7 @@ export const IconButton: React.FC<IIconButtonProps> = ({
   underlayColor = 'transparent',
   paddingLeft,
   paddingRight,
+  ...rest
 }) => (
   <TouchableHighlight onPress={onPress} underlayColor={underlayColor}>
     <View
@@ -37,6 +38,7 @@ export const IconButton: React.FC<IIconButtonProps> = ({
         }}
         color={color}
         size={size}
+        {...rest}
       />
     </View>
   </TouchableHighlight>
