@@ -47,7 +47,7 @@ const Comp: React.FC<IProps> = ({ navigation }) => {
 
   return (
     <View>
-      <Text style={s.text}>BaseDialog</Text>
+      <Text style={s.text}>BaseModal</Text>
       <BaseModal
         title="My Modal Window"
         visible={dialogVisible}
@@ -149,6 +149,15 @@ const Comp: React.FC<IProps> = ({ navigation }) => {
         iconName="cube"
         backgroundColor="#ffbe88"
       />
+      <VSpace />
+      <View style={{ flex: 1, flexDirection: 'row' }}>
+        <View style={{ flex: 1 }}>
+          <BaseButton text="Press Me" onPress={() => console.log('button pressed')} />
+        </View>
+        <View style={{ flex: 1 }}>
+          <BaseButton text="Press Me" onPress={() => console.log('button pressed')} />
+        </View>
+      </View>
 
       <Text style={s.text}>BaseCheckbox</Text>
       <BaseCheckbox
@@ -189,6 +198,25 @@ const Comp: React.FC<IProps> = ({ navigation }) => {
         value=""
         onChangeText={(v: string) => console.log(`changing value = ${v}`)}
       />
+      <VSpace />
+      <View style={{ flex: 1, flexDirection: 'row' }}>
+        <View style={{ flex: 1 }}>
+          <InputTypeA
+            label="Full name"
+            value=""
+            onChangeText={(v: string) => console.log(`changing value = ${v}`)}
+          />
+        </View>
+        <View style={{ width: 70 }}>
+          <InputTypeA
+            label="Sign"
+            value=""
+            onChangeText={(v: string) => console.log(`changing value = ${v}`)}
+            paddingHoriz={5}
+            borderRadius={4}
+          />
+        </View>
+      </View>
 
       <Text style={s.text}>BaseInfoTextScreen</Text>
       <BaseLink
