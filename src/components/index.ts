@@ -6,7 +6,6 @@ export * from './BaseHorizBar';
 export * from './BaseIcon';
 export * from './BaseImage';
 export * from './BaseInfoTextScreen';
-export * from './BaseInput';
 export * from './BaseLink';
 export * from './BaseModal';
 export * from './BasePicker';

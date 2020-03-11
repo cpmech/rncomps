@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { View, Text, Platform } from 'react-native';
 import { NavigationScreenProp, ScrollView } from 'react-navigation';
 import {
+  IStyles,
   withNTSV,
   BaseButton,
   BaseCheckbox,
@@ -10,9 +11,8 @@ import {
   BaseHorizBar,
   BaseIcon,
   BaseImage,
-  BaseInput,
   BasePicker,
-  IStyles,
+  InputTypeA,
 } from '../components';
 import { fmaPickerData } from './fmaPickerData';
 
@@ -183,23 +183,11 @@ const Comp: React.FC<IProps> = ({ navigation }) => {
       <Text style={s.text}>BaseImage</Text>
       <BaseImage image={img} />
 
-      <Text style={s.text}>BaseInput</Text>
-      <BaseInput
-        caption="PLEASE, TYPE IN YOUR NAME"
-        onChange={(value: string) => {
-          console.log(`changing value = ${value}`);
-        }}
-        onDone={(value: string) => {
-          console.log(`done: value = ${value}`);
-        }}
-        height={100}
-        fontSize={60}
-        captionColor="#ff6ada"
-        color="#d600a1"
-        placeholder="Name Here"
-        placeholderColor="#b39bad"
-        borderBottomColor="#8f3e7b"
-        borderBottomWidth={3}
+      <Text style={s.text}>InputTypeA</Text>
+      <InputTypeA
+        label="Full name"
+        value=""
+        onChangeText={(v: string) => console.log(`changing value = ${v}`)}
       />
 
       <Text style={s.text}>BaseInfoTextScreen</Text>

@@ -10,7 +10,6 @@ Components:
 - BaseIcon -- Icon from Material or Ion groups
 - BaseImage -- Image
 - BaseInfoTextScreen -- Screen to show some info text
-- BaseInput -- Text input
 - BaseLink -- Link
 - BaseModal -- Modal window
 - BasePicker -- Selection of items
