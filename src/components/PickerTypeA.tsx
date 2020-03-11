@@ -6,6 +6,21 @@ import { BaseIcon } from './BaseIcon';
 import { BaseModal } from './BaseModal';
 import { IPickerData } from './BasePicker';
 
+const renderUndefinedSelected = (width: string, borderRadius: number) => (
+  <View
+    style={{
+      backgroundColor: 'red',
+      width,
+      paddingHorizontal: 10,
+      paddingVertical: 7,
+      borderRadius,
+      borderWidth: 1,
+    }}
+  >
+    <Text>ERROR: selected value is NOT in data array</Text>
+  </View>
+);
+
 export interface IPickerTypeAProps extends IStyleTypeA {
   label?: string;
   prompt: string;
@@ -87,6 +102,10 @@ export const PickerTypeA: React.FC<IPickerTypeAProps> = ({
 }) => {
   const [showModal, setShowModal] = useState(false);
   const selected = data.find(d => d.value === selectedValue);
+
+  if (!selected) {
+    return renderUndefinedSelected(width, borderRadius);
+  }
 
   height = imageSize ? Math.max(height, imageSize + 7) : height;
   height += 2 * imageVertGap;

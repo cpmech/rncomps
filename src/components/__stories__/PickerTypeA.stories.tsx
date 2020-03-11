@@ -31,6 +31,7 @@ const styles = StyleSheet.create({
 });
 
 const Default = () => {
+  // const [character, setCharacter] = useState('profX'); // <<< selected doesn't exist
   const [character, setCharacter] = useState('prof');
   const [age, setAge] = useState('18');
   const [sex, setSex] = useState('female');
