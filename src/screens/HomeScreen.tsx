@@ -40,7 +40,7 @@ interface IProps {
 }
 
 const Comp: React.FC<IProps> = ({ navigation }) => {
-  const [dialogVisible, setDialogVisible] = useState(false);
+  const [showModal, setShowModal] = useState(false);
   const [checkboxChecked, setCheckboxChecked] = useState(false);
   const [checkboxChecked2, setCheckboxChecked2] = useState(false);
   const [pickerSelected, setPickerSelected] = useState('bender');
@@ -50,10 +50,11 @@ const Comp: React.FC<IProps> = ({ navigation }) => {
       <Text style={s.text}>BaseModal</Text>
       <BaseModal
         title="My Modal Window"
-        visible={dialogVisible}
-        onClose={() => setDialogVisible(false)}
+        visible={showModal}
+        onClose={() => setShowModal(false)}
+        width="80%"
       >
-        <View style={{ marginLeft: 10 }}>
+        <View>
           <Text>Hello, People!</Text>
           <Text>This is a Modal window</Text>
           <VSpace />
@@ -104,7 +105,7 @@ const Comp: React.FC<IProps> = ({ navigation }) => {
         </View>
       </BaseModal>
 
-      <BaseButton text="Show Dialog" onPress={() => setDialogVisible(true)} />
+      <BaseButton text="Show Modal" onPress={() => setShowModal(true)} />
 
       <Text style={s.text}>BasePicker</Text>
       <BasePicker

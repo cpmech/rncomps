@@ -25,6 +25,8 @@ interface IProps {
   colorButton?: string;
   colorButtonDisabled?: string;
   colorTitle?: string;
+
+  width?: string;
 }
 
 export const BaseModal: React.FC<IProps> = ({
@@ -45,6 +47,8 @@ export const BaseModal: React.FC<IProps> = ({
   colorButtonDisabled = '#cecece',
   colorTitle = '#343434',
 
+  width = '90%',
+
   children,
 }) => {
   const s: IStyles = {
@@ -54,16 +58,10 @@ export const BaseModal: React.FC<IProps> = ({
       justifyContent: 'center',
       backgroundColor: colorRootBackground,
     },
-    content: {
-      width: '90%',
-      backgroundColor: colorBackground,
-      borderRadius: 15,
-    },
     view: {
       paddingVertical: 20,
       paddingHorizontal: 20,
     },
-    container: {},
     separator: {
       width: '100%',
       height: 1,
@@ -106,7 +104,16 @@ export const BaseModal: React.FC<IProps> = ({
   return (
     <Modal visible={visible} onRequestClose={onClose} transparent={true}>
       <View style={s.root}>
-        <View style={[s.content, Platform.OS === 'android' ? { borderRadius: 2 } : {}]}>
+        <View
+          style={[
+            {
+              width,
+              backgroundColor: colorBackground,
+              borderRadius: 15,
+            },
+            Platform.OS === 'android' ? { borderRadius: 2 } : {},
+          ]}
+        >
           <View style={s.view}>
             <View style={s.textView}>
               <Text style={s.title}>{title}</Text>
