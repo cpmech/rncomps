@@ -1,10 +1,9 @@
 import React, { useState } from 'react';
-import { View, Keyboard, TouchableWithoutFeedback, StyleSheet } from 'react-native';
+import { View, Keyboard, TouchableWithoutFeedback, StyleSheet, ScrollView } from 'react-native';
 import { storiesOf } from '@storybook/react-native';
 import { PickerTypeA } from '../PickerTypeA';
 import { fmaPickerData } from '../../screens/fmaPickerData';
 import { defaultStyleTypeA } from '../helpers';
-import { ScrollView } from 'react-native-gesture-handler';
 
 const stories = storiesOf('PickerTypeA', module);
 
