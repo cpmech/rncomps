@@ -1,7 +1,7 @@
 import React from 'react';
-import { View, Switch, Text, StyleProp, TextStyle } from 'react-native';
+import { View, Switch, Text, StyleProp, TextStyle, SwitchProps } from 'react-native';
 
-interface IProps {
+interface IProps extends SwitchProps {
   on?: boolean;
   onPress?: (value: boolean) => void;
   textLeft?: string;
@@ -17,6 +17,7 @@ export const BaseSwitch: React.FC<IProps> = ({
   textRight,
   hgap = 5,
   textStyle,
+  ...rest
 }) => {
   return (
     <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center' }}>
@@ -25,7 +26,7 @@ export const BaseSwitch: React.FC<IProps> = ({
           <Text style={textStyle}>{textLeft}</Text>
         </View>
       )}
-      <Switch value={on} onValueChange={onPress} />
+      <Switch value={on} onValueChange={onPress} {...rest} />
       {textRight && (
         <View style={{ marginLeft: hgap }}>
           <Text style={textStyle}>{textRight}</Text>
