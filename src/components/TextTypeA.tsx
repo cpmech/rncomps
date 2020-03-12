@@ -14,7 +14,7 @@ export const TextTypeA: React.FC<ITextTypeAProps> = ({ label, value, ...rest }) 
       onChangeText={() => {
         /*do nothing*/
       }}
-      readOnly={true}
+      editable={false}
       {...rest}
     />
   );

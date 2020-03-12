@@ -9,7 +9,6 @@ export interface IInputTypeAProps extends IStyleTypeA, TextInputProps {
   onChangeText: (value: string) => void;
 
   suffix?: ReactNode;
-  readOnly?: boolean;
   textMode?: boolean;
   error?: boolean | string;
 }
@@ -20,7 +19,6 @@ export const InputTypeA: React.FC<IInputTypeAProps> = ({
   onChangeText,
 
   suffix,
-  readOnly = false,
   textMode = false,
   error = false,
 
