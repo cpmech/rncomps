@@ -40,6 +40,7 @@ export const InputNumber: React.FC<IInputNumberProps> = ({
       onChangeText={handleChange}
       suffix={suffix}
       suffixPaddingRight={suffixPaddingRight}
+      keyboardType="numeric"
       {...rest}
     />
   );
