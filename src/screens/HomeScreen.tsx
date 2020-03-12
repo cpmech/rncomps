@@ -13,6 +13,7 @@ import {
   BaseImage,
   BasePicker,
   InputTypeA,
+  SelfContainedImage,
 } from '../components';
 import { fmaPickerData } from './fmaPickerData';
 
@@ -192,6 +193,19 @@ const Comp: React.FC<IProps> = ({ navigation }) => {
 
       <Text style={s.text}>BaseImage</Text>
       <BaseImage image={img} />
+
+      <Text style={s.text}>SelfContainedImage</Text>
+      <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'center' }}>
+        <View
+          style={{
+            width: 200,
+            height: 200,
+            backgroundColor: '#cecece',
+          }}
+        >
+          <SelfContainedImage image={img} />
+        </View>
+      </View>
 
       <Text style={s.text}>InputTypeA</Text>
       <InputTypeA

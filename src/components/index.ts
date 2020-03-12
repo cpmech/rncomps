@@ -20,6 +20,7 @@ export * from './PickerTypeA';
 export * from './Popup';
 export * from './ProgressBar';
 export * from './ProgressLinear';
+export * from './SelfContainedImage';
 export * from './types';
 export * from './withBanner';
 export * from './withNavTitle';
