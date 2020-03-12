@@ -9,7 +9,6 @@ export interface IInputTypeAProps extends IStyleTypeA, TextInputProps {
   onChangeText: (value: string) => void;
 
   suffix?: ReactNode;
-  textMode?: boolean;
   error?: boolean | string;
 }
 
@@ -19,7 +18,6 @@ export const InputTypeA: React.FC<IInputTypeAProps> = ({
   onChangeText,
 
   suffix,
-  textMode = false,
   error = false,
 
   // dimensions
@@ -108,7 +106,7 @@ export const InputTypeA: React.FC<IInputTypeAProps> = ({
       fontFamily,
       fontWeight,
       paddingLeft: paddingHoriz,
-      color: textMode ? mutedColor : color,
+      color,
       backgroundColor: bgColor,
     },
 
