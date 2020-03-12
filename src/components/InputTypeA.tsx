@@ -82,7 +82,7 @@ export const InputTypeA: React.FC<IInputTypeAProps> = ({
   const styles: IStyles = {
     root: {
       width,
-      height: height + marginTop,
+      height: height + marginTop + 2,
     },
 
     container: {

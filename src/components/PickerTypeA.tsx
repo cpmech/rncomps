@@ -121,7 +121,7 @@ export const PickerTypeA: React.FC<IPickerTypeAProps> = ({
   const styles: IStyles = {
     root: {
       width,
-      height: height + (label ? marginTop : 0),
+      height: height + (label ? marginTop + 2 : 0),
     },
 
     container: {
