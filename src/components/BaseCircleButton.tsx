@@ -21,6 +21,7 @@ interface IProps {
   iconSize?: number;
   width?: number;
   iconLeftPadding?: number; // because arrow-dropright is not centered
+  iconRightPadding?: number; // because arrow-dropright is not centered
   iconTopPadding?: number; // because the icon is not centered on iOS
 }
 
@@ -36,6 +37,7 @@ export const BaseCircleButton: React.FC<IProps> = ({
   iconSize = 24,
   width = 40,
   iconLeftPadding = 0,
+  iconRightPadding = 0,
   iconTopPadding = 0,
 }) => (
   <TouchableHighlight
@@ -67,6 +69,7 @@ export const BaseCircleButton: React.FC<IProps> = ({
           alignItems: 'center',
           justifyContent: 'center',
           paddingLeft: iconLeftPadding,
+          paddingRight: iconRightPadding,
           paddingTop: iconTopPadding,
         }}
         color={outline ? bg : disabled ? fgDisabled : fg}
