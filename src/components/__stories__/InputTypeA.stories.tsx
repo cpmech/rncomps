@@ -13,8 +13,6 @@ import {
   TouchableHighlight,
 } from 'react-native';
 import { storiesOf } from '@storybook/react-native';
-import { XCentered } from '../XCentered';
-import { XColumn } from '../XColumn';
 import { BaseIcon } from '../BaseIcon';
 import { InputTypeA } from '../InputTypeA';
 import { useAnimation } from '../helpers';

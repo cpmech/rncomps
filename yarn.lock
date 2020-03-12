@@ -677,6 +677,18 @@
     exec-sh "^0.3.2"
     minimist "^1.2.0"
 
+"@cpmech/basic@^4.9.0":
+  version "4.9.0"
+  resolved "https://registry.yarnpkg.com/@cpmech/basic/-/basic-4.9.0.tgz#7bd59e5bffd5aef9e7ca92ce56d393459dd6bdb8"
+  integrity sha512-C2Xiw4pQaI5NO6JsWoZBcw6NOkewjKYKqmUAdU5cH6wL+DLF3w2RGeqedQKbk3C+A3hSC/fWjV0BuJ9/+yHhBg==
+
+"@cpmech/util@^1.11.0":
+  version "1.11.0"
+  resolved "https://registry.yarnpkg.com/@cpmech/util/-/util-1.11.0.tgz#4eff6ae32fe9d6e89d2878c9cef16918702acbe1"
+  integrity sha512-ph7C8XQOyoil0yV7aZUBfRh1ngudJ75ZrB2hGR+BCLff8sTUZ2FnscPS/Bw4xq1LYC01iNSYarU0qsqx+sIBDw==
+  dependencies:
+    "@cpmech/basic" "^4.9.0"
+
 "@egjs/hammerjs@^2.0.17":
   version "2.0.17"
   resolved "https://registry.yarnpkg.com/@egjs/hammerjs/-/hammerjs-2.0.17.tgz#5dc02af75a6a06e4c2db0202cae38c9263895124"

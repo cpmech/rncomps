@@ -15,6 +15,7 @@ export * from './BaseSpinner';
 export * from './BaseSwitch';
 export * from './FormErrorField';
 export * from './IconButton';
+export * from './InputNumber';
 export * from './InputTypeA';
 export * from './PickerTypeA';
 export * from './Popup';
