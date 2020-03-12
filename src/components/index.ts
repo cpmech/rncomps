@@ -22,6 +22,7 @@ export * from './Popup';
 export * from './ProgressBar';
 export * from './ProgressLinear';
 export * from './SelfContainedImage';
+export * from './TextTypeA';
 export * from './types';
 export * from './withBanner';
 export * from './withNavTitle';
