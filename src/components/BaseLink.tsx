@@ -5,6 +5,7 @@ import { defaultStyleLink, IStyleLink } from './helpers';
 interface IProps extends IStyleLink {
   onPress: (event: GestureResponderEvent) => void;
   message: string;
+  textAlign?: 'auto' | 'left' | 'right' | 'center' | 'justify';
 }
 
 export const BaseLink: React.FC<IProps> = ({
@@ -16,6 +17,7 @@ export const BaseLink: React.FC<IProps> = ({
   fontWeight = defaultStyleLink.fontWeight,
   underlayColor = defaultStyleLink.underlayColor,
   textDecorationLine = defaultStyleLink.textDecorationLine,
+  textAlign,
 }) => (
   <TouchableHighlight onPress={onPress} underlayColor={underlayColor}>
     <Text
@@ -25,6 +27,7 @@ export const BaseLink: React.FC<IProps> = ({
         fontWeight,
         fontFamily,
         textDecorationLine,
+        textAlign,
       }}
     >
       {message}
