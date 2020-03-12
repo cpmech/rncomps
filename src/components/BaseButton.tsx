@@ -34,7 +34,7 @@ export const BaseButton: React.FC<IBaseButtonProps> = ({
 }) => (
   <TouchableHighlight
     onPress={disabled ? () => {} : onPress}
-    underlayColor={color}
+    underlayColor={outline ? 'transparent' : color}
     style={{ borderRadius }}
   >
     <View
