@@ -1,9 +1,8 @@
 import React, { ReactNode } from 'react';
 import { formatNumber } from '@cpmech/util';
-import { IStyleTypeA } from './helpers';
-import { InputTypeA } from './InputTypeA';
+import { InputTypeA, IInputTypeAProps } from './InputTypeA';
 
-interface IInputNumberProps extends IStyleTypeA {
+interface IInputNumberProps extends IInputTypeAProps {
   label: string;
   value: string;
   onChangeText: (formattedValue: string) => void;

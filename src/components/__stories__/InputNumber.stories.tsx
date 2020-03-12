@@ -16,6 +16,7 @@ const Default = () => {
             value={value}
             onChangeText={v => setValue(v)}
             swapDotByComma={true}
+            error={''}
           />
         </View>
       </SafeAreaView>
