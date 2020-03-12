@@ -12,8 +12,8 @@ export const SelfContainedImage: React.FC<IProps> = ({ image }) => {
         resizeMode="contain"
         style={{
           flex: 1,
-          width: null,
-          height: null,
+          width: (null as unknown) as string,
+          height: (null as unknown) as string,
         }}
         source={image}
       />
