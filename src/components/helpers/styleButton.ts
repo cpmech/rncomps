@@ -15,6 +15,7 @@ export interface IStyleButton {
   height?: number;
   width?: number;
   minWidth?: number;
+  borderWidth?: number;
   borderRadius?: number;
   paddingVertical?: number;
   paddingHorizontal?: number;
@@ -35,6 +36,7 @@ export const defaultStyleButton = {
   height: 45,
   width: undefined,
   minWidth: undefined,
+  borderWidth: 1,
   borderRadius: 600,
   paddingVertical: 10,
   paddingHorizontal: 10,
