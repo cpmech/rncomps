@@ -1,21 +1,62 @@
 import React from 'react';
-import { Modal, View, Text, TouchableHighlight, Platform } from 'react-native';
-import { IStyles, FontWeight } from './types';
+import { Modal, View, Text, TouchableHighlight, Platform, StyleSheet } from 'react-native';
+import { FontWeight } from './types';
 
-interface IButtonData {
+const styles = StyleSheet.create({
+  root: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  view: {
+    paddingVertical: 20,
+    paddingHorizontal: 20,
+  },
+  separator: {
+    width: '100%',
+    height: 1,
+  },
+  touch: {
+    borderBottomLeftRadius: 15,
+    borderBottomRightRadius: 15,
+  },
+  buttonView: {
+    height: 50,
+    alignItems: 'flex-end',
+    justifyContent: 'center',
+    paddingLeft: 40,
+    paddingRight: 40,
+  },
+  textView: {
+    marginBottom: 10,
+  },
+  link: {},
+});
+
+export interface IButtonData {
   text: string;
   onPress: () => void;
   disabled?: boolean;
 }
 
-interface IProps {
+export interface IBaseModalProps {
   title: string;
   visible: boolean;
-  onClose?: () => void;
-  buttons?: IButtonData[];
+  onClose: () => void;
+  onYes?: () => void;
+
+  showCancelButton?: boolean;
+  textCancel?: string;
+  textOK?: string;
+
+  links?: IButtonData[];
   okDisabled?: boolean;
 
+  fontFamily?: string;
+  fontFamilyLink?: string;
   fontSizeTitle?: number;
+  fontSizeButton?: number;
+  fontSizeLink?: number;
   fontWeightTitle?: FontWeight;
 
   colorRootBackground?: string;
@@ -29,14 +70,24 @@ interface IProps {
   width?: string;
 }
 
-export const BaseModal: React.FC<IProps> = ({
+export const BaseModal: React.FC<IBaseModalProps> = ({
   title,
   visible,
   onClose,
-  buttons,
+  onYes,
+
+  showCancelButton,
+  textCancel = 'CANCEL',
+  textOK = 'OK',
+
+  links,
   okDisabled,
 
+  fontFamily,
+  fontFamilyLink,
   fontSizeTitle = 20,
+  fontSizeButton = 16,
+  fontSizeLink = 16,
   fontWeightTitle,
 
   colorRootBackground = '#00000090',
@@ -51,59 +102,9 @@ export const BaseModal: React.FC<IProps> = ({
 
   children,
 }) => {
-  const s: IStyles = {
-    root: {
-      flex: 1,
-      alignItems: 'center',
-      justifyContent: 'center',
-      backgroundColor: colorRootBackground,
-    },
-    view: {
-      paddingVertical: 20,
-      paddingHorizontal: 20,
-    },
-    separator: {
-      width: '100%',
-      height: 1,
-      backgroundColor: colorSeparator,
-    },
-    touch: {
-      borderBottomLeftRadius: 15,
-      borderBottomRightRadius: 15,
-    },
-    buttonViewIos: {
-      height: 50,
-      alignItems: 'center',
-      justifyContent: 'center',
-    },
-    buttonViewAndroid: {
-      height: 50,
-      alignItems: 'flex-end',
-      justifyContent: 'center',
-      paddingRight: 40,
-    },
-    textView: {
-      marginBottom: 10,
-    },
-    title: {
-      color: colorTitle,
-      fontSize: fontSizeTitle,
-      fontWeight: fontWeightTitle,
-    },
-    link: {
-      marginVertical: 10,
-      fontSize: 16,
-      color: colorButton,
-    },
-    button: {
-      fontSize: 16,
-      color: colorButton,
-    },
-  };
-
   return (
     <Modal visible={visible} onRequestClose={onClose} transparent={true}>
-      <View style={s.root}>
+      <View style={[styles.root, { backgroundColor: colorRootBackground }]}>
         <View
           style={[
             {
@@ -114,13 +115,22 @@ export const BaseModal: React.FC<IProps> = ({
             Platform.OS === 'android' ? { borderRadius: 2 } : {},
           ]}
         >
-          <View style={s.view}>
-            <View style={s.textView}>
-              <Text style={s.title}>{title}</Text>
+          <View style={styles.view}>
+            <View style={styles.textView}>
+              <Text
+                style={{
+                  color: colorTitle,
+                  fontSize: fontSizeTitle,
+                  fontWeight: fontWeightTitle,
+                  fontFamily,
+                }}
+              >
+                {title}
+              </Text>
             </View>
             {children}
-            {buttons &&
-              buttons.map(btn => (
+            {links &&
+              links.map(btn => (
                 <TouchableHighlight
                   key={btn.text}
                   onPress={() => btn.onPress()}
@@ -128,35 +138,75 @@ export const BaseModal: React.FC<IProps> = ({
                   disabled={btn.disabled}
                 >
                   <View>
-                    <Text style={s.link} key={btn.text}>
+                    <Text
+                      key={btn.text}
+                      style={{
+                        fontFamily: fontFamilyLink,
+                        fontSize: fontSizeLink,
+                        color: colorButton,
+                        marginVertical: 10,
+                      }}
+                    >
                       {btn.text}
                     </Text>
                   </View>
                 </TouchableHighlight>
               ))}
           </View>
-          <View style={Platform.select({ ios: s.separator, android: null })} />
-          {onClose && (
+
+          {Platform.OS === 'ios' && (
+            <View style={[styles.separator, { backgroundColor: colorSeparator }]} />
+          )}
+
+          <View
+            style={{
+              flexDirection: 'row',
+              justifyContent: showCancelButton ? 'space-between' : 'flex-end',
+            }}
+          >
+            {showCancelButton && (
+              <TouchableHighlight
+                onPress={onClose}
+                underlayColor="transparent"
+                disabled={okDisabled}
+              >
+                <View style={styles.buttonView}>
+                  <Text
+                    style={{
+                      fontFamily,
+                      fontSize: fontSizeButton,
+                      color: okDisabled ? colorButtonDisabled : colorButton,
+                    }}
+                  >
+                    {textCancel}
+                  </Text>
+                </View>
+              </TouchableHighlight>
+            )}
+
             <TouchableHighlight
-              onPress={onClose}
-              style={Platform.select({ ios: s.touchIos, android: null })}
-              underlayColor={Platform.select({ ios: colorHover, android: undefined })}
+              onPress={() => {
+                onClose();
+                if (onYes) {
+                  onYes();
+                }
+              }}
+              underlayColor="transparent"
               disabled={okDisabled}
             >
-              <View
-                style={Platform.select({
-                  ios: s.buttonViewIos,
-                  android: s.buttonViewAndroid,
-                })}
-              >
+              <View style={styles.buttonView}>
                 <Text
-                  style={{ ...s.button, color: okDisabled ? colorButtonDisabled : colorButton }}
+                  style={{
+                    fontFamily,
+                    fontSize: fontSizeButton,
+                    color: okDisabled ? colorButtonDisabled : colorButton,
+                  }}
                 >
-                  OK
+                  {textOK}
                 </Text>
               </View>
             </TouchableHighlight>
-          )}
+          </View>
         </View>
       </View>
     </Modal>
