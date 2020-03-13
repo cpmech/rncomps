@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, Image, ListView, StyleSheet, ScrollView } from 'react-native';
+import { View, Text, StyleSheet, ScrollView } from 'react-native';
 import { storiesOf } from '@storybook/react-native';
 import { BaseIcon } from '../BaseIcon';
 import { IStyle } from '../types';
