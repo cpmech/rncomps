@@ -1,12 +1,14 @@
 import React from 'react';
-import { TouchableHighlight, View, Text, GestureResponderEvent } from 'react-native';
+import { View, TouchableHighlight, GestureResponderEvent, Platform } from 'react-native';
 import { BaseIcon, IBaseIconProps } from './BaseIcon';
+import { TouchableNativeFeedback } from 'react-native-gesture-handler';
 
 export interface IIconButtonProps extends IBaseIconProps {
   onPress: (event: GestureResponderEvent) => void;
   underlayColor?: string;
-  paddingLeft?: number;
-  paddingRight?: number;
+  paddingHorizontal?: number;
+  paddingVertical?: number;
+  borderRadius?: number;
 }
 
 export const IconButton: React.FC<IIconButtonProps> = ({
@@ -15,31 +17,64 @@ export const IconButton: React.FC<IIconButtonProps> = ({
   size = 24,
   color = '#484848',
   underlayColor = 'transparent',
-  paddingLeft,
-  paddingRight,
+  paddingHorizontal = 5,
+  paddingVertical = 5,
+  borderRadius = 300,
   ...rest
-}) => (
-  <TouchableHighlight onPress={onPress} underlayColor={underlayColor}>
+}) => {
+  if (Platform.OS === 'android') {
+    return (
+      <View
+        style={{
+          width: size + 2 * paddingHorizontal,
+          height: size + 2 * paddingVertical,
+          borderRadius,
+          overflow: 'hidden',
+        }}
+      >
+        <TouchableNativeFeedback onPress={onPress} useForeground={true}>
+          <View
+            style={{
+              width: size + 2 * paddingHorizontal,
+              height: size + 2 * paddingVertical,
+              paddingHorizontal,
+              paddingVertical,
+              borderRadius,
+              justifyContent: 'center',
+              alignItems: 'center',
+            }}
+          >
+            <BaseIcon name={name} color={color} size={size} {...rest} />
+          </View>
+        </TouchableNativeFeedback>
+      </View>
+    );
+  }
+
+  return (
     <View
       style={{
-        flex: 1,
-        flexDirection: 'row',
-        alignItems: 'center',
-        justifyContent: 'center',
-        paddingLeft,
-        paddingRight,
+        width: size + 2 * paddingHorizontal,
+        height: size + 2 * paddingVertical,
+        borderRadius,
+        overflow: 'hidden',
       }}
     >
-      <BaseIcon
-        name={name}
-        style={{
-          alignItems: 'center',
-          justifyContent: 'center',
-        }}
-        color={color}
-        size={size}
-        {...rest}
-      />
+      <TouchableHighlight onPress={onPress} underlayColor="transparent">
+        <View
+          style={{
+            width: size + 2 * paddingHorizontal,
+            height: size + 2 * paddingVertical,
+            paddingHorizontal,
+            paddingVertical,
+            borderRadius,
+            justifyContent: 'center',
+            alignItems: 'center',
+          }}
+        >
+          <BaseIcon name={name} color={color} size={size} {...rest} />
+        </View>
+      </TouchableHighlight>
     </View>
-  </TouchableHighlight>
-);
+  );
+};
