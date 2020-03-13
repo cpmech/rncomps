@@ -11,6 +11,7 @@ import {
   StyleSheet,
   TextInput,
   TouchableHighlight,
+  ScrollView,
 } from 'react-native';
 import { storiesOf } from '@storybook/react-native';
 import { BaseIcon } from '../BaseIcon';
@@ -141,13 +142,11 @@ const Test = () => (
 stories.add('test', () => <Test />);
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
   inner: {
     padding: 24,
     flex: 1,
     justifyContent: 'flex-start',
+    minHeight: 800,
   },
   header: {
     fontSize: 36,
@@ -172,6 +171,7 @@ const Default = () => {
     password: '',
     age: '',
     sex: 'male',
+    message: '',
   });
   const [showPassword, setShowPassword] = useState(false);
 
@@ -183,65 +183,61 @@ const Default = () => {
 
   return (
     <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : null} style={{ flex: 1 }}>
-      <SafeAreaView style={styles.container}>
-        <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-          <View style={styles.inner}>
-            {/* <Text style={styles.header}>Header</Text>
-            <TextInput placeholder="Username" style={styles.input} />
-            <TextInput placeholder="Password" style={styles.input} />
-            <TextInput placeholder="Confrim Password" style={styles.input} />
-            <View style={styles.btnContainer}>
-              <Button title="Submit" onPress={() => null} />
-            </View>
-            <View style={{ flex: 1 }} /> */}
+      <ScrollView>
+        <View style={styles.inner}>
+          <InputTypeA
+            label="Message"
+            value={values.message}
+            onChangeText={v => setValues({ ...values, message: v })}
+            error="some error happened"
+          />
+          <InputTypeA
+            label="Fullname"
+            value={values.fullname}
+            onChangeText={v => setValues({ ...values, fullname: v })}
+            autoCorrect={false}
+          />
+          <InputTypeA
+            label="Email"
+            value={values.email}
+            onChangeText={v => setValues({ ...values, email: v })}
+            autoCompleteType="email"
+            keyboardType="email-address"
+            autoCapitalize="none"
+            autoCorrect={false}
+            textContentType="emailAddress"
+          />
+          <InputTypeA
+            label="Password"
+            value={values.password}
+            onChangeText={v => setValues({ ...values, password: v })}
+            autoCorrect={false}
+            textContentType="password"
+            secureTextEntry={!showPassword}
+            suffix={renderIcon}
+          />
+          <View style={{ flex: 1, flexDirection: 'row' }}>
             <InputTypeA
-              label="Fullname"
-              value={values.fullname}
-              onChangeText={v => setValues({ ...values, fullname: v })}
+              label="Age"
+              value={values.age}
+              onChangeText={v => setValues({ ...values, age: v })}
+              width="50%"
+              flatRight={true}
+              keyboardType="numeric"
               autoCorrect={false}
             />
             <InputTypeA
-              label="Email"
-              value={values.email}
-              onChangeText={v => setValues({ ...values, email: v })}
-              autoCompleteType="email"
-              keyboardType="email-address"
-              autoCapitalize="none"
-              autoCorrect={false}
-              textContentType="emailAddress"
+              label="Sex"
+              value={values.sex}
+              onChangeText={v => setValues({ ...values, sex: v })}
+              width="50%"
+              flatLeft={true}
+              noBorderLeft={true}
+              editable={false}
             />
-            <InputTypeA
-              label="Password"
-              value={values.password}
-              onChangeText={v => setValues({ ...values, password: v })}
-              autoCorrect={false}
-              textContentType="password"
-              secureTextEntry={!showPassword}
-              suffix={renderIcon}
-            />
-            <View style={{ flex: 1, flexDirection: 'row' }}>
-              <InputTypeA
-                label="Age"
-                value={values.age}
-                onChangeText={v => setValues({ ...values, age: v })}
-                width="50%"
-                flatRight={true}
-                keyboardType="numeric"
-                autoCorrect={false}
-              />
-              <InputTypeA
-                label="Sex"
-                value={values.sex}
-                onChangeText={v => setValues({ ...values, sex: v })}
-                width="50%"
-                flatLeft={true}
-                noBorderLeft={true}
-                editable={false}
-              />
-            </View>
           </View>
-        </TouchableWithoutFeedback>
-      </SafeAreaView>
+        </View>
+      </ScrollView>
     </KeyboardAvoidingView>
   );
 };

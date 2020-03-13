@@ -1,4 +1,4 @@
-import React, { ReactNode, useState, useRef } from 'react';
+import React, { ReactNode, useState, useRef, useEffect } from 'react';
 import { View, Text, TextInput, TouchableWithoutFeedback, TextInputProps } from 'react-native';
 import { IStyles } from './types';
 import { IStyleTypeA, defaultStyleTypeA, MoveAndScale } from './helpers';
@@ -51,20 +51,21 @@ export const InputTypeA: React.FC<IInputTypeAProps> = ({
 
   ...rest
 }) => {
-  if (error) {
-    color = errorColor;
-    hlColor = errorColor;
-    mutedColor = errorColor;
-    borderColor = errorColor;
-  }
-
-  const hasValue = !!value;
   const refInput = useRef<TextInput>(null);
-  const [anim, setAnim] = useState({ steady: hasValue, enabled: hasValue });
+  const [anim, setAnim] = useState(false);
   const [colors, setColors] = useState({
     border: borderColor,
     label: mutedColor,
   });
+
+  useEffect(() => {
+    if (value) {
+      setAnim(true);
+    }
+    if (error) {
+      setColors({ border: errorColor, label: errorColor });
+    }
+  }, [value, error, errorColor]);
 
   const radius = borderRadius > height / 2 ? height / 2 : borderRadius;
 
@@ -139,17 +140,21 @@ export const InputTypeA: React.FC<IInputTypeAProps> = ({
   };
 
   const onFocus = () => {
-    setColors({ border: hlColor, label: hlColor });
-    if (hasValue) {
+    if (!error) {
+      setColors({ border: hlColor, label: hlColor });
+    }
+    if (value) {
       return;
     }
-    setAnim({ steady: false, enabled: true });
+    setAnim(true);
   };
 
   const onBlur = () => {
-    setColors({ border: borderColor, label: mutedColor });
-    if (!hasValue) {
-      setAnim({ steady: false, enabled: false });
+    if (!error) {
+      setColors({ border: borderColor, label: mutedColor });
+    }
+    if (value === '') {
+      setAnim(false);
     }
   };
 
@@ -181,7 +186,8 @@ export const InputTypeA: React.FC<IInputTypeAProps> = ({
             width={labelWidthBefore}
             sFactor={labelScale}
             durationMS={durationMS}
-            {...anim}
+            steady={false}
+            enabled={anim}
           >
             <TouchableWithoutFeedback onPress={onPress}>
               <View style={styles.labelWrapper}>
