@@ -62,15 +62,6 @@ export const BaseIcon: React.FC<IBaseIconProps> = ({
       n = kind === 'ion' ? 'information-circle' : name;
       break;
 
-    case 'contract':
-    case 'expand':
-    case 'happy':
-    case 'construct':
-    case 'planet':
-    case 'paper':
-      k = 'ion';
-      break;
-
     case 'eye':
     case 'calendar':
     case 'heart':
@@ -105,22 +96,38 @@ export const BaseIcon: React.FC<IBaseIconProps> = ({
       k = kind === 'feather' ? 'line' : kind;
       break;
 
+    case 'chevron-next':
+      n = 'chevron-right';
+      k = 'feather';
+      break;
+
+    case 'chevron-back':
+      n = 'chevron-left';
+      k = 'feather';
+      break;
+
+    case 'chevron-next':
+    case 'chevron-back':
+    case 'chevron-down':
+    case 'chevron-up':
+      k = 'feather';
+      break;
+
     case 'arrow-next':
-      n = 'ios-arrow-forward';
+      n = 'arrow-forward';
       k = 'ion';
-      fixed = true;
       break;
 
-    case 'arrow-picker':
-      n = 'ios-arrow-down';
+    case 'arrow-back':
+    case 'arrow-down':
+    case 'arrow-up':
+    case 'contract':
+    case 'expand':
+    case 'happy':
+    case 'construct':
+    case 'planet':
+    case 'paper':
       k = 'ion';
-      fixed = true;
-      break;
-
-    case 'arrow-picker-up':
-      n = 'ios-arrow-up';
-      k = 'ion';
-      fixed = true;
       break;
   }
 

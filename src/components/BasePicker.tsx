@@ -172,11 +172,7 @@ export const BasePicker: React.FC<IBasePickerProps> = ({
             {selected && selected.image && !selectedHideImage
               ? renderSelectedWithImage()
               : renderSelectedText()}
-            <BaseIcon
-              color={color}
-              size={iconSize ? iconSize : fontSize + 5}
-              name={'arrow-picker'}
-            />
+            <BaseIcon color={color} size={iconSize ? iconSize : fontSize + 5} name="chevron-down" />
           </View>
         </View>
       </TouchableHighlight>

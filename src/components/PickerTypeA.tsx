@@ -265,7 +265,7 @@ export const PickerTypeA: React.FC<IPickerTypeAProps> = ({
           </TouchableHighlight>
           <View style={styles.suffix}>
             <TouchableHighlight onPress={() => setShowModal(true)} underlayColor={bgColor}>
-              <BaseIcon color={iconColor || mutedColor} size={iconHeight} name={'arrow-picker'} />
+              <BaseIcon color={iconColor || mutedColor} size={iconHeight} name="chevron-down" />
             </TouchableHighlight>
           </View>
           {renderLabel()}
