@@ -60,7 +60,8 @@ export const Popup: React.FC<IPopupProps> = ({
     <BaseModal
       title={title}
       visible={visible}
-      onClose={onClose}
+      onClose={onClose ? onClose : () => {}}
+      hideOkButton={onClose ? false : true}
       colorTitle={isError ? colorTitleError : isLoading ? colorTitleLoading : colorTitle}
       fontSizeTitle={fontSizeTitle}
       fontWeightTitle={fontWeightTitle}

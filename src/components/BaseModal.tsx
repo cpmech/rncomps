@@ -46,6 +46,7 @@ export interface IBaseModalProps {
   onYes?: () => void;
 
   showCancelButton?: boolean;
+  hideOkButton?: boolean;
   textCancel?: string;
   textOK?: string;
 
@@ -77,6 +78,7 @@ export const BaseModal: React.FC<IBaseModalProps> = ({
   onYes,
 
   showCancelButton,
+  hideOkButton,
   textCancel = 'CANCEL',
   textOK = 'OK',
 
@@ -184,28 +186,30 @@ export const BaseModal: React.FC<IBaseModalProps> = ({
               </TouchableHighlight>
             )}
 
-            <TouchableHighlight
-              onPress={() => {
-                onClose();
-                if (onYes) {
-                  onYes();
-                }
-              }}
-              underlayColor="transparent"
-              disabled={okDisabled}
-            >
-              <View style={styles.buttonView}>
-                <Text
-                  style={{
-                    fontFamily,
-                    fontSize: fontSizeButton,
-                    color: okDisabled ? colorButtonDisabled : colorButton,
-                  }}
-                >
-                  {textOK}
-                </Text>
-              </View>
-            </TouchableHighlight>
+            {!hideOkButton && (
+              <TouchableHighlight
+                onPress={() => {
+                  onClose();
+                  if (onYes) {
+                    onYes();
+                  }
+                }}
+                underlayColor="transparent"
+                disabled={okDisabled}
+              >
+                <View style={styles.buttonView}>
+                  <Text
+                    style={{
+                      fontFamily,
+                      fontSize: fontSizeButton,
+                      color: okDisabled ? colorButtonDisabled : colorButton,
+                    }}
+                  >
+                    {textOK}
+                  </Text>
+                </View>
+              </TouchableHighlight>
+            )}
           </View>
         </View>
       </View>
