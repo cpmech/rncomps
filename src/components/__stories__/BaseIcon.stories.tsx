@@ -49,6 +49,8 @@ const names = [
   'heart',
   'chart',
   'bubbles',
+  'solar-panel',
+  'user',
 ];
 
 const styles = StyleSheet.create({
@@ -122,6 +124,20 @@ const Example = () => (
         <View key={name} style={styles.boxStyle}>
           <View style={styles.content}>
             <BaseIcon name={name} kind="feather" />
+            <Text style={styles.text}>{name}</Text>
+          </View>
+        </View>
+      ))}
+    </View>
+
+    <View style={{ flex: 1, alignItems: 'center', marginTop: 20 }}>
+      <Text>Font Awesome 5</Text>
+    </View>
+    <View style={{ flex: 1, flexDirection: 'row', flexWrap: 'wrap' }}>
+      {names.map(name => (
+        <View key={name} style={styles.boxStyle}>
+          <View style={styles.content}>
+            <BaseIcon name={name} kind="fa5" />
             <Text style={styles.text}>{name}</Text>
           </View>
         </View>
