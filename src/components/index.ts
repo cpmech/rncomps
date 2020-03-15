@@ -17,6 +17,7 @@ export * from './FormErrorField';
 export * from './IconButton';
 export * from './InputNumber';
 export * from './InputTypeA';
+export * from './NavButton';
 export * from './PickerTypeA';
 export * from './Popup';
 export * from './ProgressBar';
