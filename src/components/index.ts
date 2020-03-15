@@ -13,6 +13,7 @@ export * from './BaseSpinnerOverlay';
 export * from './BaseSpinnerScreen';
 export * from './BaseSpinner';
 export * from './BaseSwitch';
+export * from './Card';
 export * from './FormErrorField';
 export * from './IconButton';
 export * from './InputNumber';
