@@ -9,6 +9,7 @@ const external = [
   'react-native-vector-icons/Ionicons',
   'react-native-vector-icons/SimpleLineIcons',
   'react-native-vector-icons/Feather',
+  'react-native-vector-icons/FontAwesome5',
   ...Object.keys(pkg.dependencies || {}),
   ...Object.keys(pkg.peerDependencies || {}),
 ];
