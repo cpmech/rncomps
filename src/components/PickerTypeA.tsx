@@ -56,7 +56,7 @@ export const PickerTypeA: React.FC<IPickerTypeAProps> = ({
   data,
 
   noSelectedText,
-  textMaxWidth: textMaxWidth,
+  textMaxWidth,
 
   itemsMaxWidth,
   itemsMaxHeight = 350,
