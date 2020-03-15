@@ -1,10 +1,10 @@
 import React from 'react';
-import { View, TouchableHighlight, GestureResponderEvent, Platform } from 'react-native';
+import { View } from 'react-native';
 import { BaseIcon, IBaseIconProps } from './BaseIcon';
-import { TouchableNativeFeedback } from 'react-native-gesture-handler';
+import { TH } from './helpers';
 
 export interface IIconButtonProps extends IBaseIconProps {
-  onPress: (event: GestureResponderEvent) => void;
+  onPress: () => void;
   underlayColor?: string;
   paddingHorizontal?: number;
   paddingVertical?: number;
@@ -22,35 +22,21 @@ export const IconButton: React.FC<IIconButtonProps> = ({
   borderRadius = 300,
   ...rest
 }) => {
-  if (Platform.OS === 'android') {
-    return (
-      <View
-        style={{
-          width: size + 2 * paddingHorizontal,
-          height: size + 2 * paddingVertical,
-          borderRadius,
-          overflow: 'hidden',
-        }}
-      >
-        <TouchableNativeFeedback onPress={onPress} useForeground={true}>
-          <View
-            style={{
-              width: size + 2 * paddingHorizontal,
-              height: size + 2 * paddingVertical,
-              paddingHorizontal,
-              paddingVertical,
-              borderRadius,
-              justifyContent: 'center',
-              alignItems: 'center',
-            }}
-          >
-            <BaseIcon name={name} color={color} size={size} {...rest} />
-          </View>
-        </TouchableNativeFeedback>
-      </View>
-    );
-  }
-
+  const children = (
+    <View
+      style={{
+        width: size + 2 * paddingHorizontal,
+        height: size + 2 * paddingVertical,
+        paddingHorizontal,
+        paddingVertical,
+        borderRadius,
+        justifyContent: 'center',
+        alignItems: 'center',
+      }}
+    >
+      <BaseIcon name={name} color={color} size={size} {...rest} />
+    </View>
+  );
   return (
     <View
       style={{
@@ -60,21 +46,7 @@ export const IconButton: React.FC<IIconButtonProps> = ({
         overflow: 'hidden',
       }}
     >
-      <TouchableHighlight onPress={onPress} underlayColor="transparent">
-        <View
-          style={{
-            width: size + 2 * paddingHorizontal,
-            height: size + 2 * paddingVertical,
-            paddingHorizontal,
-            paddingVertical,
-            borderRadius,
-            justifyContent: 'center',
-            alignItems: 'center',
-          }}
-        >
-          <BaseIcon name={name} color={color} size={size} {...rest} />
-        </View>
-      </TouchableHighlight>
+      {TH(onPress, children)}
     </View>
   );
 };
