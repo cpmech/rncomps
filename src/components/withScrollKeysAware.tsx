@@ -59,7 +59,8 @@ export const withScrollKeysAware = <P extends object>(
           <View
             style={{
               flex: 1,
-              flexDirection: 'column',
+              flexDirection: 'row',
+              justifyContent: 'center',
               minHeight: height,
             }}
           >
