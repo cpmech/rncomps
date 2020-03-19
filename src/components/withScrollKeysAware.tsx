@@ -17,6 +17,7 @@ export const withScrollKeysAware = <P extends object>(
     paddingTop,
     paddingBottom,
     paddingHoriz,
+    nestedScrollEnabled,
     justifyContent,
   }: {
     backgroundColor: string;
@@ -25,6 +26,7 @@ export const withScrollKeysAware = <P extends object>(
     paddingTop?: number;
     paddingBottom?: number;
     paddingHoriz?: number;
+    nestedScrollEnabled?: boolean;
     justifyContent?:
       | 'flex-start'
       | 'flex-end'
@@ -43,7 +45,7 @@ export const withScrollKeysAware = <P extends object>(
 
   return (
     <KeyboardAwareScrollView {...kasvProps}>
-      <ScrollView>
+      <ScrollView nestedScrollEnabled={nestedScrollEnabled}>
         <View
           style={{
             flex: 1,
