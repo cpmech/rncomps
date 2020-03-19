@@ -69,6 +69,7 @@ export interface IBaseModalProps {
   colorTitle?: string;
 
   width?: string;
+  maxWidth?: number;
 }
 
 export const BaseModal: React.FC<IBaseModalProps> = ({
@@ -101,6 +102,7 @@ export const BaseModal: React.FC<IBaseModalProps> = ({
   colorTitle = '#343434',
 
   width = '90%',
+  maxWidth,
 
   children,
 }) => {
@@ -111,6 +113,7 @@ export const BaseModal: React.FC<IBaseModalProps> = ({
           style={[
             {
               width,
+              maxWidth,
               backgroundColor: colorBackground,
               borderRadius: 15,
             },

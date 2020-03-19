@@ -28,6 +28,9 @@ export interface IPopupProps {
   vspaceBottomSpinner?: number;
 
   colorSpinner?: string;
+
+  width?: string;
+  maxWidth?: number;
 }
 
 export const Popup: React.FC<IPopupProps> = ({
@@ -54,6 +57,9 @@ export const Popup: React.FC<IPopupProps> = ({
 
   colorSpinner = '#236cd2',
 
+  width,
+  maxWidth,
+
   children,
 }) => {
   return (
@@ -65,6 +71,8 @@ export const Popup: React.FC<IPopupProps> = ({
       colorTitle={isError ? colorTitleError : isLoading ? colorTitleLoading : colorTitle}
       fontSizeTitle={fontSizeTitle}
       fontWeightTitle={fontWeightTitle}
+      width={width}
+      maxWidth={maxWidth}
     >
       <View
         style={{
