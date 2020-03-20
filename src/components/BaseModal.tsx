@@ -1,5 +1,6 @@
 import React from 'react';
-import { Modal, View, Text, TouchableHighlight, Platform, StyleSheet } from 'react-native';
+import { View, Text, TouchableHighlight, Platform, StyleSheet } from 'react-native';
+import Modal from 'react-native-modal';
 import { FontWeight } from './types';
 
 const styles = StyleSheet.create({
@@ -107,8 +108,8 @@ export const BaseModal: React.FC<IBaseModalProps> = ({
   children,
 }) => {
   return (
-    <Modal visible={visible} onRequestClose={onClose} transparent={true}>
-      <View style={[styles.root, { backgroundColor: colorRootBackground }]}>
+    <Modal isVisible={visible}>
+      <View style={styles.root}>
         <View
           style={[
             {
