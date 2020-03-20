@@ -5,6 +5,7 @@ import pkg from './package.json';
 const cacheRoot = '/tmp/rollup_typescript_cache';
 
 const external = [
+  '@react-native-community/hooks',
   'react-native-vector-icons/MaterialIcons',
   'react-native-vector-icons/Ionicons',
   'react-native-vector-icons/SimpleLineIcons',
