@@ -62,3 +62,8 @@ buck-out/
 
 storybook/storyLoader.js
 dist
+
+*.aab
+*.hprof
+
+ios/Build
