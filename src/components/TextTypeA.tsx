@@ -1,5 +1,5 @@
 import React, { ReactNode } from 'react';
-import { View, Text, TextInput } from 'react-native';
+import { View, Text } from 'react-native';
 import { IStyles } from './types';
 import { IStyleTypeA, defaultStyleTypeA } from './helpers';
 
@@ -8,6 +8,7 @@ export interface ITextTypeAProps extends IStyleTypeA {
   value: string;
   material?: boolean;
   suffix?: ReactNode;
+  textMaxWidth?: number;
 }
 
 export const TextTypeA: React.FC<ITextTypeAProps> = ({
@@ -15,6 +16,7 @@ export const TextTypeA: React.FC<ITextTypeAProps> = ({
   value,
   material,
   suffix,
+  textMaxWidth,
 
   // dimensions
   height = defaultStyleTypeA.height,
@@ -28,7 +30,6 @@ export const TextTypeA: React.FC<ITextTypeAProps> = ({
   fontWeight = defaultStyleTypeA.fontWeight,
   labelScale = defaultStyleTypeA.labelScale,
   factorFontsize2width = defaultStyleTypeA.factorFontsize2width,
-  durationMS = defaultStyleTypeA.durationMS,
 
   // border
   borderRadius = defaultStyleTypeA.borderRadius,
@@ -40,12 +41,8 @@ export const TextTypeA: React.FC<ITextTypeAProps> = ({
   // colors
   color = defaultStyleTypeA.color,
   bgColor = defaultStyleTypeA.bgColor,
-  hlColor = defaultStyleTypeA.hlColor,
-  errorColor = defaultStyleTypeA.errorColor,
   mutedColor = defaultStyleTypeA.mutedColor,
   borderColor = defaultStyleTypeA.borderColor,
-
-  ...rest
 }) => {
   if (material) {
     borderRadius = 0;
@@ -92,6 +89,17 @@ export const TextTypeA: React.FC<ITextTypeAProps> = ({
       paddingRight: paddingHoriz,
       color,
       backgroundColor: bgColor,
+      flex: 1,
+      flexDirection: 'column',
+      justifyContent: 'center',
+    },
+
+    inputText: {
+      color,
+      fontSize,
+      fontFamily,
+      fontWeight,
+      maxWidth: textMaxWidth,
     },
 
     animationWrapper: {
@@ -125,13 +133,9 @@ export const TextTypeA: React.FC<ITextTypeAProps> = ({
   return (
     <View style={styles.root}>
       <View style={styles.container}>
-        <TextInput
-          value={value}
-          style={styles.input}
-          underlineColorAndroid="transparent"
-          editable={false}
-          {...rest}
-        />
+        <View style={styles.input}>
+          <Text style={styles.inputText}>{value}</Text>
+        </View>
         {suffix && <View style={styles.suffix}>{suffix}</View>}
         <View style={styles.animationWrapper}>
           <View style={styles.labelWrapper}>
