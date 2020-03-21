@@ -107,7 +107,7 @@ export const BaseModal: React.FC<IBaseModalProps> = ({
   children,
 }) => {
   return (
-    <Modal visible={visible} onRequestClose={onClose} transparent={true}>
+    <Modal visible={visible} onRequestClose={onClose} transparent={true} animationType="none">
       <View style={[styles.root, { backgroundColor: colorRootBackground }]}>
         <View
           style={[
