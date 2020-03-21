@@ -89,6 +89,7 @@ export const TextTypeA: React.FC<ITextTypeAProps> = ({
       fontFamily,
       fontWeight,
       paddingLeft: paddingHoriz,
+      paddingRight: paddingHoriz,
       color,
       backgroundColor: bgColor,
     },

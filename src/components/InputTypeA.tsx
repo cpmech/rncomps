@@ -109,6 +109,7 @@ export const InputTypeA: React.FC<IInputTypeAProps> = ({
       fontFamily,
       fontWeight,
       paddingLeft: paddingHoriz,
+      paddingRight: paddingHoriz,
       color,
       backgroundColor: bgColor,
     },
