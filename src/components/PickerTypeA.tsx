@@ -46,6 +46,7 @@ export interface IPickerTypeAProps extends IStyleTypeA {
 
   iconSize?: number;
   iconColor?: string;
+  iconLeftMargin?: number;
 }
 
 export const PickerTypeA: React.FC<IPickerTypeAProps> = ({
@@ -73,6 +74,7 @@ export const PickerTypeA: React.FC<IPickerTypeAProps> = ({
 
   iconSize,
   iconColor,
+  iconLeftMargin = 10,
 
   // dimensions
   height = defaultStyleTypeA.height,
@@ -142,6 +144,7 @@ export const PickerTypeA: React.FC<IPickerTypeAProps> = ({
       borderTopRightRadius: flatRight ? 0 : radius,
       borderBottomRightRadius: flatRight ? 0 : radius,
       paddingLeft: paddingHoriz,
+      paddingRight: paddingHoriz + iconLeftMargin + iconHeight,
       backgroundColor: bgColor,
       flex: 1,
       flexDirection: 'column',

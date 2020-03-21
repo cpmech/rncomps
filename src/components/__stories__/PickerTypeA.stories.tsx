@@ -9,7 +9,7 @@ const stories = storiesOf('PickerTypeA', module);
 
 const styles = StyleSheet.create({
   inner: {
-    padding: 24,
+    padding: 30,
     flex: 1,
     justifyContent: 'flex-start',
   },
@@ -31,7 +31,7 @@ const styles = StyleSheet.create({
 
 const Default = () => {
   // const [character, setCharacter] = useState('profX'); // <<< selected doesn't exist
-  const [character, setCharacter] = useState('prof');
+  const [character, setCharacter] = useState('bender');
   const [age, setAge] = useState('18');
   const [sex, setSex] = useState('female');
 

@@ -51,7 +51,7 @@ const Default = () => {
           />
           <TextTypeA
             label="Preferred character"
-            value="Bender Rodriguez"
+            value="Bender Rodriguez With a Very Long Nameeeeee"
             factorFontsize2width={0.5}
             borderWidth={3}
           />
