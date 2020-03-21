@@ -86,6 +86,7 @@ export const BaseButton: React.FC<IBaseButtonProps> = ({
               fontFamily,
               fontWeight,
               fontSize,
+              textAlign: 'center',
             }}
           >
             {text}
