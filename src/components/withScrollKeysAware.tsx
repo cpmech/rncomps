@@ -18,7 +18,9 @@ export const withScrollKeysAware = <P extends object>(
     paddingBottom,
     paddingHoriz,
     nestedScrollEnabled,
+
     justifyContent,
+    alignItems,
   }: {
     backgroundColor: string;
     contentMaxHeight?: number;
@@ -27,6 +29,7 @@ export const withScrollKeysAware = <P extends object>(
     paddingBottom?: number;
     paddingHoriz?: number;
     nestedScrollEnabled?: boolean;
+
     justifyContent?:
       | 'flex-start'
       | 'flex-end'
@@ -34,6 +37,8 @@ export const withScrollKeysAware = <P extends object>(
       | 'space-between'
       | 'space-around'
       | 'space-evenly';
+
+    alignItems?: 'flex-start' | 'flex-end' | 'center' | 'stretch' | 'baseline';
   },
 
   kasvProps?: KeyboardAwareScrollViewProps,
@@ -63,6 +68,7 @@ export const withScrollKeysAware = <P extends object>(
               flex: 1,
               flexDirection: 'row',
               justifyContent: 'center',
+              alignItems,
               minHeight: height,
             }}
           >

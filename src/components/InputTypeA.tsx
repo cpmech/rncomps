@@ -7,6 +7,7 @@ export interface IInputTypeAProps extends IStyleTypeA, TextInputProps {
   label: string;
   value: string;
   onChangeText: (value: string) => void;
+  disabled?: boolean;
 
   suffix?: ReactNode;
   error?: boolean | string;
@@ -16,6 +17,7 @@ export const InputTypeA: React.FC<IInputTypeAProps> = ({
   label,
   value,
   onChangeText,
+  disabled,
 
   suffix,
   error = false,
@@ -176,6 +178,7 @@ export const InputTypeA: React.FC<IInputTypeAProps> = ({
           onFocus={onFocus}
           onBlur={onBlur}
           underlineColorAndroid="transparent"
+          editable={!disabled}
           {...rest}
         />
         {suffix && <View style={styles.suffix}>{suffix}</View>}
@@ -189,7 +192,7 @@ export const InputTypeA: React.FC<IInputTypeAProps> = ({
             steady={false}
             enabled={anim}
           >
-            <TouchableWithoutFeedback onPress={onPress}>
+            <TouchableWithoutFeedback disabled={disabled} onPress={onPress}>
               <View style={styles.labelWrapper}>
                 <Text style={styles.label} numberOfLines={1}>
                   {label}
