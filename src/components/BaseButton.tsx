@@ -1,5 +1,11 @@
 import React from 'react';
-import { TouchableHighlight, View, Text, GestureResponderEvent } from 'react-native';
+import {
+  TouchableHighlight,
+  View,
+  Text,
+  GestureResponderEvent,
+  ActivityIndicator,
+} from 'react-native';
 import { BaseIcon } from './BaseIcon';
 import { IStyleButton, defaultStyleButton } from './helpers';
 
@@ -7,12 +13,14 @@ export interface IBaseButtonProps extends IStyleButton {
   onPress: (event: GestureResponderEvent) => void;
   text?: string;
   iconName?: string;
+  spinning?: boolean;
 }
 
 export const BaseButton: React.FC<IBaseButtonProps> = ({
   onPress,
   text,
   iconName,
+  spinning,
   disabled = defaultStyleButton.disabled,
   outline = defaultStyleButton.outline,
   color = defaultStyleButton.color,
@@ -33,7 +41,8 @@ export const BaseButton: React.FC<IBaseButtonProps> = ({
   paddingHorizontal = defaultStyleButton.paddingHorizontal,
 }) => (
   <TouchableHighlight
-    onPress={disabled ? () => {} : onPress}
+    disabled={disabled || spinning}
+    onPress={onPress}
     underlayColor={outline ? 'transparent' : color}
     style={{ borderRadius }}
   >
@@ -58,7 +67,7 @@ export const BaseButton: React.FC<IBaseButtonProps> = ({
           justifyContent: 'center',
         }}
       >
-        {iconName && (
+        {!spinning && iconName && (
           <BaseIcon
             name={iconName}
             style={{
@@ -70,7 +79,7 @@ export const BaseButton: React.FC<IBaseButtonProps> = ({
             size={fontSize + iconDeltaSize}
           />
         )}
-        {text && (
+        {!spinning && text && (
           <Text
             style={{
               color: outline ? backgroundColor : disabled ? fgDisabled : color,
@@ -82,6 +91,7 @@ export const BaseButton: React.FC<IBaseButtonProps> = ({
             {text}
           </Text>
         )}
+        {spinning && <ActivityIndicator color={color} />}
       </View>
     </View>
   </TouchableHighlight>
