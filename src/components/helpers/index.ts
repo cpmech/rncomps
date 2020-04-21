@@ -1,3 +1,4 @@
+export * from './getBoxShadow';
 export * from './MoveAndScale';
 export * from './styleButton';
 export * from './styleLink';

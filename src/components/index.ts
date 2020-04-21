@@ -16,6 +16,7 @@ export * from './BaseSwitch';
 export * from './Card';
 export * from './FormErrorField';
 export * from './IconButton';
+export * from './InfoCard';
 export * from './InputNumber';
 export * from './InputTypeA';
 export * from './NavButton';
