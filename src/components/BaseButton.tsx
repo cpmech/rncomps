@@ -39,6 +39,8 @@ export const BaseButton: React.FC<IBaseButtonProps> = ({
   borderRadius = defaultStyleButton.borderRadius,
   paddingVertical = defaultStyleButton.paddingVertical,
   paddingHorizontal = defaultStyleButton.paddingHorizontal,
+  flatLeft = defaultStyleButton.flatLeft,
+  flatRight = defaultStyleButton.flatRight,
 }) => (
   <TouchableHighlight
     disabled={disabled || spinning}
@@ -57,6 +59,10 @@ export const BaseButton: React.FC<IBaseButtonProps> = ({
         borderColor: outline ? backgroundColor : 'transparent',
         paddingVertical,
         paddingHorizontal,
+        borderTopLeftRadius: flatLeft ? 0 : undefined,
+        borderBottomLeftRadius: flatLeft ? 0 : undefined,
+        borderTopRightRadius: flatRight ? 0 : undefined,
+        borderBottomRightRadius: flatRight ? 0 : undefined,
       }}
     >
       <View

@@ -19,6 +19,8 @@ export interface IStyleButton {
   borderRadius?: number;
   paddingVertical?: number;
   paddingHorizontal?: number;
+  flatLeft?: boolean;
+  flatRight?: boolean;
 }
 
 export const defaultStyleButton = {
@@ -40,4 +42,6 @@ export const defaultStyleButton = {
   borderRadius: 600,
   paddingVertical: 10,
   paddingHorizontal: 10,
+  flatLeft: undefined,
+  flatRight: undefined,
 };
