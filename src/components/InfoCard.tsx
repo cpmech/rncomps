@@ -83,6 +83,7 @@ export const InfoCard: React.FC<IInfoCardProps> = ({
             // header
             paddingLeft: paddingHoriz,
             backgroundColor: headerBgColor,
+            borderRadius,
           }}
         >
           <View
