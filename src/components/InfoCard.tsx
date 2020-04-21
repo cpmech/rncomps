@@ -51,7 +51,7 @@ export const InfoCard: React.FC<IInfoCardProps> = ({
   titleStyle = { fontWeight: 'bold', color: '#484848' },
 
   paddingHoriz = 20,
-  paddingVert = 10,
+  paddingVert = 20,
 
   heroBg = ['#ffffff', '#dfe9f3'],
   hero,
