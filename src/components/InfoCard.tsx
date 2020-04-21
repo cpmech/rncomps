@@ -23,6 +23,7 @@ export interface IInfoCardProps {
   titleBorderColor?: string;
   titleStyle?: TextStyle;
 
+  maxWidth?: number;
   paddingHoriz?: number;
   paddingVert?: number;
 
@@ -50,6 +51,7 @@ export const InfoCard: React.FC<IInfoCardProps> = ({
   title,
   titleStyle = { fontWeight: 'bold', color: '#484848' },
 
+  maxWidth,
   paddingHoriz = 20,
   paddingVert = 20,
 
@@ -65,12 +67,15 @@ export const InfoCard: React.FC<IInfoCardProps> = ({
   const { width } = useDimensions().window;
   const [show, setShow] = useState(initShow);
 
+  const w = width - 2 * paddingHoriz;
+  const ww = maxWidth ? Math.min(maxWidth - 2 * paddingHoriz, w) : w;
+
   return (
     <View
       style={{
         // root
         position: 'relative',
-        width: width - 2 * paddingHoriz,
+        width: ww,
         backgroundColor: bgColor,
         borderRadius,
         ...getBoxShadow(),
