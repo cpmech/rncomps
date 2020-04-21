@@ -46,7 +46,13 @@ export const BaseButton: React.FC<IBaseButtonProps> = ({
     disabled={disabled || spinning}
     onPress={onPress}
     underlayColor={outline ? 'transparent' : color}
-    style={{ borderRadius }}
+    style={{
+      borderRadius,
+      borderTopLeftRadius: flatLeft ? 0 : undefined,
+      borderBottomLeftRadius: flatLeft ? 0 : undefined,
+      borderTopRightRadius: flatRight ? 0 : undefined,
+      borderBottomRightRadius: flatRight ? 0 : undefined,
+    }}
   >
     <View
       style={{
